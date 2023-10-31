@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, startTransition } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -7,91 +7,121 @@ import {
   SubMenu,
   sidebarClasses,
 } from "react-pro-sidebar";
+import Navbar from "./Navbar";
 
 const Home = () => {
   const [clpSidebar, setClpSidebar] = useState(false);
 
   function handleSidebar() {
-    setClpSidebar(!clpSidebar);
+    startTransition(() => {
+      setClpSidebar(!clpSidebar);
+    });
   }
 
-  return (
-    <div className="h-[100vh] flex from-indigo-400">
-      <Sidebar
-        collapsed={clpSidebar}
-        rootStyles={{
-          [`.${sidebarClasses.container}`]: {
-            backgroundImage:
-              "linear-gradient(white, rgb(231, 215, 247), rgb(215, 187, 242));",
-          },
-        }}
-      >
-        {/* <div onClick={handleSidebar} className="mx-[10px] my-[30px]">
-          {clpSidebar ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          )}
-        </div> */}
-        <Menu>
-          <MenuItem
-            icon={
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 14.212A5.25 5.25 0 1117.25 10.5"
-                />
-              </svg>
-            }
-            component={<Link to="dashboard" />}
-            className="text-primary-0"
-          >
-            {" "}
-            Dashboard
-          </MenuItem>
-          <MenuItem component={<Link to="employee" />}> Employee</MenuItem>
-          <MenuItem component={<Link to="error" />}> Error</MenuItem>
-        </Menu>
-      </Sidebar>
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 768) {
+        handleSidebar();
+      }
+    }
 
-      <main>
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <section className="w-full flex">
+      <div className="h-[100vh] flex ">
+        <Sidebar
+          collapsed={clpSidebar}
+          rootStyles={{
+            [`.${sidebarClasses.container}`]: {
+              backgroundColor: "rgb(72, 76, 127)",
+            },
+          }}
+        >
+          <aside className="flex items-center text-white font-semibold">
+            <div
+              onClick={handleSidebar}
+              className="cursor-pointer mx-[14px] my-[30px]"
+            >
+              <div className="inline-block rounded-full bg-white">
+                <img
+                  src="/logo_nobg.png"
+                  alt="logo"
+                  className="h-10 w-18 rounded-full"
+                />
+              </div>
+            </div>
+            {clpSidebar ? "" : <p className="text-lg">E management</p>}
+          </aside>
+          <Menu>
+            <MenuItem
+              icon={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                  />
+                </svg>
+              }
+              component={<Link to="dashboard" />}
+              className="text-white hover:text-tim-color"
+            >
+              <p>Dashboard</p>
+            </MenuItem>
+            <SubMenu
+              label="Employees"
+              className="text-white hover:text-black hover:bg-tim-color"
+              icon={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                  />
+                </svg>
+              }
+            >
+              <MenuItem
+                component={<Link to="/employee/department" />}
+                className="bg-tim-color text-white hover:text-tim-color"
+              >
+                <p>Department</p>
+              </MenuItem>
+              <MenuItem className="bg-tim-color text-white hover:text-tim-color">
+                <p>2</p>
+              </MenuItem>
+            </SubMenu>
+          </Menu>
+        </Sidebar>
+      </div>
+
+      <main className="pt-[1rem] md:px-6 w-full">
+        <Navbar />
         <Outlet />
       </main>
-    </div>
+    </section>
   );
 };
 
