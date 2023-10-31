@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ChangeRoleModal from "./ChangeRoleModal";
 
 const AvatarGroup = () => {
