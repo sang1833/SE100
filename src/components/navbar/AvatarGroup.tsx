@@ -43,7 +43,7 @@ const AvatarGroup = () => {
           <span>+</span>
         </div>
       </div>
-      <ChangeRoleModal showModal={showModal} />
+      <ChangeRoleModal />
     </div>
   );
 };

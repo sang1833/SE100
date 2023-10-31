@@ -1,9 +1,6 @@
 import EmployeeTable from "./EmployeeTable";
 
-interface ChangeRoleModalProps {
-  showModal: () => void;
-}
-const ChangeRoleModal = ({ showModal }: ChangeRoleModalProps) => {
+const ChangeRoleModal = () => {
   return (
     <div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}

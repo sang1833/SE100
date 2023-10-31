@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 const AdminProfile = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
   return (
     <>
       <div className="flex">
