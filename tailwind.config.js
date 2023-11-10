@@ -9,6 +9,7 @@ export default {
       },
       colors: {
         "tim-color": "rgb(72, 76, 127)",
+        "tim-color-1": "#353966",
         "primary-1": "#00CCCD",
         "secondary-0": "#FFC107",
         "do-color": "#DC3545",

@@ -9,27 +9,27 @@ const AvatarGroup = () => {
   }
   return (
     <div>
-      <div className="avatar-group -space-x-6 max-md:hidden">
+      <div className="avatar-group -space-x-4 max-md:hidden">
         <div className="avatar">
-          <div className="w-12 h-12">
-            <img src="/src/assets/man-avatar.png" />
+          <div className="w-8 h-8">
+            <img src="/man-avatar.png" />
           </div>
         </div>
         <div className="avatar">
-          <div className="w-12 h-12">
-            <img src="/src/assets/woman.png" />
+          <div className="w-8 h-8">
+            <img src="/woman.png" />
           </div>
         </div>
         <div className="avatar">
-          <div className="w-12 h-12">
-            <img src="/src/assets/man-avatar (1).png" />
+          <div className="w-8 h-8">
+            <img src="/man-avatar (1).png" />
           </div>
         </div>
         <div
           className="avatar placeholder hover:cursor-pointer"
           onClick={showModal}
         >
-          <div className="w-12 h-12 bg-neutral-focus text-neutral-content">
+          <div className="w-8 h-8 bg-neutral-focus text-neutral-content">
             <span>+</span>
           </div>
         </div>
