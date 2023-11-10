@@ -3,18 +3,12 @@ import { createReducer, createAction } from "@reduxjs/toolkit";
 // State
 interface IAuthState {
   currentUser: string;
-  id: string;
-  customerIdToken: string;
-  isLogin: boolean;
-  loginType: string;
+  name: string;
   avatar: string;
 }
 const initialState = {
   currentUser: "",
-  id: "",
-  customerIdToken: "",
-  isLogin: false,
-  loginType: "email",
+  name: "",
   avatar: "",
 } as IAuthState;
 
@@ -28,26 +22,17 @@ const authReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(login, (state, action) => {
       state.currentUser = action.payload.currentUser;
-      state.id = action.payload.id;
-      const user = action.payload.currentUser;
-      console.log("user", user);
-      state.customerIdToken = action.payload.customerIdToken;
-      state.isLogin = true;
+      state.name = action.payload.name;
+      state.avatar = action.payload.avatar;
     })
     .addCase(logout, (state) => {
       state.currentUser = "";
-      state.id = "";
-      state.customerIdToken = "";
-      state.isLogin = false;
+      state.name = "";
       state.avatar = "";
-      state.loginType = "email";
     })
     .addCase(gglogin, (state, action) => {
       state.currentUser = action.payload.currentUser;
-      state.id = action.payload.id;
-      state.customerIdToken = action.payload.customerIdToken;
-      state.isLogin = action.payload.isLogin;
-      state.loginType = "google";
+      state.name = action.payload.name;
       state.avatar = action.payload.avatar;
     });
 });

@@ -1,5 +1,5 @@
 import { useEffect, useState, startTransition } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, Navigate, useNavigate } from "react-router-dom";
 import {
   Sidebar,
   Menu,
@@ -8,11 +8,20 @@ import {
   sidebarClasses,
 } from "react-pro-sidebar";
 import Navbar from "./Navbar";
+import { FaHome } from "react-icons/fa";
+import { FaPeopleGroup } from "react-icons/fa6";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { MdArrowCircleRight, MdArrowCircleLeft } from "react-icons/md";
 
 const Home = () => {
-  const [clpSidebar, setClpSidebar] = useState(false);
+  const [clpSidebar, setClpSidebar] = useState(true);
+  const navigate = useNavigate();
+  const currentUser = useSelector((state: RootState) => state.auth.currentUser);
+  const [arrow, setArrow] = useState(false);
 
   function handleSidebar() {
+    setArrow(!arrow);
     startTransition(() => {
       setClpSidebar(!clpSidebar);
     });
@@ -34,9 +43,9 @@ const Home = () => {
     };
   }, []);
 
-  return (
-    <section className="w-full flex">
-      <div className="h-[100vh] flex ">
+  return currentUser ? (
+    <section className="w-full flex bg-[#fafafa]">
+      <div className="h-[100vh] flex fixed z-[1]">
         <Sidebar
           collapsed={clpSidebar}
           rootStyles={{
@@ -47,7 +56,7 @@ const Home = () => {
         >
           <aside className="flex items-center text-white font-semibold">
             <div
-              onClick={handleSidebar}
+              onClick={() => navigate("/")}
               className="cursor-pointer mx-[14px] my-[30px]"
             >
               <div className="inline-block rounded-full bg-white">
@@ -62,23 +71,8 @@ const Home = () => {
           </aside>
           <Menu>
             <MenuItem
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-                  />
-                </svg>
-              }
-              component={<Link to="dashboard" />}
+              icon={<FaHome />}
+              component={<Link to="/" />}
               className="text-white hover:text-tim-color"
             >
               <p>Dashboard</p>
@@ -86,22 +80,7 @@ const Home = () => {
             <SubMenu
               label="Employees"
               className="text-white hover:text-black hover:bg-tim-color"
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                  />
-                </svg>
-              }
+              icon={<FaPeopleGroup />}
             >
               <MenuItem
                 component={<Link to="/employee/department" />}
@@ -113,15 +92,33 @@ const Home = () => {
                 <p>2</p>
               </MenuItem>
             </SubMenu>
+            <div
+              className="bg-tim-color absolute bottom-0 left-0 w-full text-white text-center py-2 cursor-pointer"
+              onClick={handleSidebar}
+            >
+              {arrow ? (
+                <MdArrowCircleLeft className="w-8 h-8 inline-block" />
+              ) : (
+                <MdArrowCircleRight className="w-8 h-8 inline-block" />
+              )}
+            </div>
           </Menu>
         </Sidebar>
       </div>
 
-      <main className="pt-[1rem] md:px-6 w-full">
+      <main
+        className={`pt-[1rem] md:px-6 w-full overflow-y-scroll ${
+          clpSidebar ? "ml-[4rem]" : "ml-[14rem]"
+        }`}
+      >
         <Navbar />
-        <Outlet />
+        <div className="mx-2">
+          <Outlet />
+        </div>
       </main>
     </section>
+  ) : (
+    <Navigate to="/login" />
   );
 };
 

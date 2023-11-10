@@ -2,11 +2,17 @@ import { Link } from "react-router-dom";
 import SearchBar from "../components/navbar/SearchBar";
 import AvatarGroup from "../components/navbar/AvatarGroup";
 import { BellAlertIcon } from "@heroicons/react/20/solid";
+import { useDispatch } from "react-redux";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  function handleLogout(): void {
+    dispatch({ type: "LOGOUT" });
+  }
+
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar ">
         <section className="md:flex-1 max-md:hidden">
           {/* <input
             type="text"
@@ -16,7 +22,7 @@ const Navbar = () => {
           <SearchBar />
         </section>
         <section className="flex-none gap-2">
-          <div className="flex">
+          <div className="flex items-center">
             <div className="">
               <AvatarGroup />
             </div>
@@ -47,7 +53,7 @@ const Navbar = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-12 h-12 rounded-full">
-                <img src="/src/assets/woman (1).png" />
+                <img src="/woman (1).png" />
               </div>
             </label>
             <ul
@@ -61,7 +67,7 @@ const Navbar = () => {
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <a onClick={handleLogout}>Logout</a>
               </li>
             </ul>
           </div>
