@@ -148,7 +148,7 @@ export default function Login() {
           <button
             type="submit"
             onClick={handleSubmit(woosalSubmit)}
-            className="btn bg-tim-color text-white w-full"
+            className="btn bg-[#484c7f] text-white w-full"
           >
             Submit
           </button>
