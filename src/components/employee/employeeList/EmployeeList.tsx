@@ -1,30 +1,29 @@
 import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
-import AddDepartmentModal from "./AddDepartmentModal";
-import DeleteDepartmentModal from "./DeleteDepartmentModal";
-import ChangeDepartmentModal from "./ChangeDepartmentModal";
-
+import { useNavigate } from "react-router-dom";
 const department = [
   {
     id: 1,
+    name: "Nguyen Van A",
     description: "IT Department",
-    head: "Nguyen Van A",
-    number: 10,
+    position: "IT Manager",
   },
   {
     id: 2,
+    name: "Nguyen Van B",
     description: "HR Department",
-    head: "Nguyen Van B",
-    number: 8,
+    position: "HR Manager",
   },
   {
     id: 3,
+    name: "Nguyen Van C",
     description: "Marketing Department",
-    head: "Nguyen Van C",
-    number: 12,
+    position: "",
   },
 ];
 
-const Department = () => {
+const EmployeeList = () => {
+  const navigate = useNavigate();
+
   function showModal(type: string) {
     const modal = document.getElementById(type) as HTMLDialogElement;
     if (modal !== null) {
@@ -35,12 +34,12 @@ const Department = () => {
   return (
     <div className="flex flex-col gap-4">
       <section className="flex justify-between mt-8">
-        <h1 className="font-bold text-2xl text-gray-900">Departments</h1>
+        <h1 className="font-bold text-2xl text-gray-900">Employees</h1>
         <button
           className="btn bg-tim-color hover:text-black text-white"
           onClick={() => showModal("add_department_modal")}
         >
-          <p>Add Departments</p>
+          <p>Add Employees</p>
         </button>
       </section>
       <section className="bg-white border rounded-lg">
@@ -51,8 +50,8 @@ const Department = () => {
               <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Head</th>
-                <th>Number of Employees</th>
+                <th>Department</th>
+                <th>Position</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -61,14 +60,14 @@ const Department = () => {
               {department.map((item) => (
                 <tr key={item.id}>
                   <td>{item.id}</td>
+                  <td>{item.name}</td>
                   <td>{item.description}</td>
-                  <td>{item.head}</td>
-                  <td>{item.number}</td>
+                  <td>{item.position}</td>
                   <th className="flex gap-1">
                     <button
-                      className="btn btn-ghost btn-xs border border-gray-600"
+                      className="btn btn-ghost btn-xs border text-tim-color border-tim-color-1"
                       key={item.id}
-                      onClick={() => showModal("change_department_modal")}
+                      onClick={() => navigate(`/employee/${item.id}`)}
                     >
                       <MdOutlineEdit className="h-5 w-5" />
                     </button>
@@ -86,11 +85,8 @@ const Department = () => {
           </table>
         </div>
       </section>
-      <AddDepartmentModal />
-      <DeleteDepartmentModal />
-      <ChangeDepartmentModal />
     </div>
   );
 };
 
-export default Department;
+export default EmployeeList;

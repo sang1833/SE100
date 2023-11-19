@@ -12,7 +12,11 @@ import { FaHome } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { MdArrowCircleRight, MdArrowCircleLeft } from "react-icons/md";
+import {
+  MdArrowCircleRight,
+  MdArrowCircleLeft,
+  MdPayments,
+} from "react-icons/md";
 
 const Home = () => {
   const [clpSidebar, setClpSidebar] = useState(true);
@@ -82,16 +86,29 @@ const Home = () => {
               className="text-white hover:text-black hover:bg-tim-color"
               icon={<FaPeopleGroup />}
             >
+              <MenuItem className="bg-tim-color text-white hover:text-tim-color">
+                <p>Attendance</p>
+              </MenuItem>
               <MenuItem
                 component={<Link to="/employee/department" />}
                 className="bg-tim-color text-white hover:text-tim-color"
               >
                 <p>Department</p>
               </MenuItem>
-              <MenuItem className="bg-tim-color text-white hover:text-tim-color">
-                <p>2</p>
+              <MenuItem
+                component={<Link to="/employee/list" />}
+                className="bg-tim-color text-white hover:text-tim-color"
+              >
+                <p>Employee List</p>
               </MenuItem>
             </SubMenu>
+            <MenuItem
+              icon={<MdPayments />}
+              component={<Link to="/" />}
+              className="text-white hover:text-tim-color"
+            >
+              <p>Payroll</p>
+            </MenuItem>
             <div
               className="bg-tim-color absolute bottom-0 left-0 w-full text-white text-center py-2 cursor-pointer"
               onClick={handleSidebar}

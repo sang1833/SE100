@@ -50,9 +50,7 @@ export default function Login() {
           // onSubmit={handleSubmit(woosalSubmit)}
           className="max-w-md mx-auto md:mt-[100px] sm:shadow-2xl p-16 rounded-xl"
         >
-          <h1 className="text-3xl font-bold text-center my-6">
-            Login (Nhập bừa đi)
-          </h1>
+          <h1 className="text-3xl font-bold text-center my-6">Login</h1>
           <div className="mb-4">
             <label
               htmlFor="email"
@@ -66,6 +64,7 @@ export default function Login() {
               type="text"
               id="email"
               placeholder="hey@gmail.com"
+              value={"admin@gmail.com"}
               className={`block w-full bg-transparent outline-none border-b-2 py-2 px-4  placeholder-tim-color ${
                 errors.email
                   ? "text-do-color border-do-color"
@@ -94,6 +93,7 @@ export default function Login() {
                 type={passwordVisible ? "text" : "password"}
                 id="password"
                 placeholder="password"
+                value={"123456"}
                 className={`block w-full bg-transparent outline-none border-b-2 py-2 px-4 text-black placeholder-tim-color ${
                   errors.password ? "border-do-color" : "border-tim-color"
                 }`}
