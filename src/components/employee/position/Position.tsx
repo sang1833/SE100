@@ -1,30 +1,29 @@
 import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
-import DeleteProfile from "./DeleteProfile";
+import AddPositionModal from "./AddPositionModal";
+import ChangePositionModal from "./ChangePositionModal";
+
 const department = [
   {
     id: 1,
-    name: "Nguyen Van A",
-    description: "IT Department",
-    position: "IT Manager",
+    title: "Manager",
+    salaryCoefficient: 2,
+    department: "IT Department",
   },
   {
     id: 2,
-    name: "Nguyen Van B",
-    description: "HR Department",
-    position: "HR Manager",
+    title: "Accountant",
+    salaryCoefficient: 3.1,
+    department: "HR Department",
   },
   {
     id: 3,
-    name: "Nguyen Van C",
-    description: "Marketing Department",
-    position: "",
+    title: "Marketing",
+    salaryCoefficient: 2,
+    department: "Marketing Department",
   },
 ];
 
-const EmployeeList = () => {
-  const navigate = useNavigate();
-
+const Position = () => {
   function showModal(type: string) {
     const modal = document.getElementById(type) as HTMLDialogElement;
     if (modal !== null) {
@@ -35,12 +34,12 @@ const EmployeeList = () => {
   return (
     <div className="flex flex-col gap-4">
       <section className="flex justify-between mt-8">
-        <h1 className="font-bold text-2xl text-gray-900">Employees</h1>
+        <h1 className="font-bold text-2xl text-gray-900">Positions</h1>
         <button
           className="btn bg-tim-color hover:text-black text-white"
-          onClick={() => navigate("/employee/create")}
+          onClick={() => showModal("add_position_modal")}
         >
-          <p>Add Employees</p>
+          <p>Add Positions</p>
         </button>
       </section>
       <section className="bg-white border rounded-lg">
@@ -50,9 +49,9 @@ const EmployeeList = () => {
             <thead>
               <tr>
                 <th>#</th>
-                <th>Name</th>
+                <th>Title</th>
+                <th>Salary Coefficient</th>
                 <th>Department</th>
-                <th>Position</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -61,21 +60,21 @@ const EmployeeList = () => {
               {department.map((item) => (
                 <tr key={item.id}>
                   <td>{item.id}</td>
-                  <td>{item.name}</td>
-                  <td>{item.description}</td>
-                  <td>{item.position}</td>
+                  <td>{item.title}</td>
+                  <td>{item.salaryCoefficient}</td>
+                  <td>{item.department}</td>
                   <th className="flex gap-1">
                     <button
-                      className="btn btn-ghost btn-xs border text-tim-color border-tim-color-1"
+                      className="btn btn-ghost btn-xs border border-gray-600"
                       key={item.id}
-                      onClick={() => navigate(`/employee/${item.id}`)}
+                      onClick={() => showModal("change_position_modal")}
                     >
                       <MdOutlineEdit className="h-5 w-5" />
                     </button>
                     <button
                       className="btn btn-ghost btn-xs text-red-600 border border-red-600"
                       key={item.id}
-                      onClick={() => showModal("delete_profile_modal")}
+                      onClick={() => showModal("delete_department_modal")}
                     >
                       <MdOutlineDeleteForever className="h-5 w-5" />
                     </button>
@@ -86,9 +85,10 @@ const EmployeeList = () => {
           </table>
         </div>
       </section>
-      <DeleteProfile />
+      <AddPositionModal />
+      <ChangePositionModal />
     </div>
   );
 };
 
-export default EmployeeList;
+export default Position;

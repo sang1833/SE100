@@ -16,12 +16,14 @@ import {
   MdArrowCircleRight,
   MdArrowCircleLeft,
   MdPayments,
+  MdAccountCircle,
+  MdCheckCircle,
 } from "react-icons/md";
 
 const Home = () => {
   const [clpSidebar, setClpSidebar] = useState(true);
   const navigate = useNavigate();
-  const currentUser = useSelector((state: RootState) => state.auth.currentUser);
+  const currentUser = useSelector((state: RootState) => state.auth._id);
   const [arrow, setArrow] = useState(false);
 
   function handleSidebar() {
@@ -86,14 +88,17 @@ const Home = () => {
               className="text-white hover:text-black hover:bg-tim-color"
               icon={<FaPeopleGroup />}
             >
-              <MenuItem className="bg-tim-color text-white hover:text-tim-color">
-                <p>Attendance</p>
-              </MenuItem>
               <MenuItem
                 component={<Link to="/employee/department" />}
                 className="bg-tim-color text-white hover:text-tim-color"
               >
                 <p>Department</p>
+              </MenuItem>
+              <MenuItem
+                component={<Link to="/employee/position" />}
+                className="bg-tim-color text-white hover:text-tim-color"
+              >
+                <p>Position</p>
               </MenuItem>
               <MenuItem
                 component={<Link to="/employee/list" />}
@@ -103,11 +108,25 @@ const Home = () => {
               </MenuItem>
             </SubMenu>
             <MenuItem
+              icon={<MdCheckCircle />}
+              component={<Link to="/attendance" />}
+              className="text-white hover:text-tim-color"
+            >
+              <p>Attendance</p>
+            </MenuItem>
+            <MenuItem
               icon={<MdPayments />}
-              component={<Link to="/" />}
+              component={<Link to="/payroll" />}
               className="text-white hover:text-tim-color"
             >
               <p>Payroll</p>
+            </MenuItem>
+            <MenuItem
+              icon={<MdAccountCircle />}
+              component={<Link to="/account" />}
+              className="text-white hover:text-tim-color"
+            >
+              <p>Account</p>
             </MenuItem>
             <div
               className="bg-tim-color absolute bottom-0 left-0 w-full text-white text-center py-2 cursor-pointer"

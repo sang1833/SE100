@@ -17,6 +17,10 @@ import Dashboard from "./pages/Dashboard";
 import ChangePassword from "./pages/ChangePassword";
 import EmployeeList from "./components/employee/employeeList/EmployeeList";
 import EmployeeProfile from "./components/employee/employeeProfile/EmployeeProfile";
+import CreateEmployee from "./components/employee/employeeCreate/CreateEmployee";
+import Position from "./components/employee/position/Position";
+import Account from "./pages/Account";
+import Attendance from "./pages/Attendance";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,7 +36,11 @@ const router = createBrowserRouter(
           <Route path=":id" element={<EmployeeProfile />}></Route>
           <Route path="department" element={<Department />} />
           <Route path="list" element={<EmployeeList />} />
+          <Route path="create" element={<CreateEmployee />} />
+          <Route path="position" element={<Position />} />
         </Route>
+        <Route path="attendance" element={<Attendance />} />
+        <Route path="account" element={<Account />} />
       </Route>
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />

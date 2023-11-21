@@ -4,6 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Login } from "./../apis/api_function";
+// import { IAuthState } from "./../types/Interface";
 
 interface FormValues {
   email: string;
@@ -12,10 +14,10 @@ interface FormValues {
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
-  password: yup.string().required().min(6),
+  password: yup.string().required().min(4),
 });
 
-export default function Login() {
+export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -29,11 +31,32 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
-  function woosalSubmit(data: FormValues) {
+  async function woosalSubmit(data: FormValues) {
     // handle submitting the form
-    console.log(data);
-    dispatch({ type: "LOGIN", payload: { currentUser: "test" } });
-    navigate("/");
+    try {
+      const response = await Login(data.email, data.password);
+      if (response.status === 400) {
+        console.log(response.data);
+      }
+      const responseData = await response.data.user;
+      const result = {
+        _id: responseData._id,
+        email: responseData.email,
+        password: responseData.password,
+        address: responseData.address,
+        age: responseData.age,
+        idNumber: responseData.idNumber,
+        gender: responseData.gender,
+        role: responseData.role,
+        avatar: responseData.avatar,
+        createAt: responseData.createAt,
+      };
+      console.log("rd", result);
+      dispatch({ type: "LOGIN", payload: result });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function togglePasswordVisibility(
@@ -93,7 +116,7 @@ export default function Login() {
                 type={passwordVisible ? "text" : "password"}
                 id="password"
                 placeholder="password"
-                value={"123456"}
+                value={"admin"}
                 className={`block w-full bg-transparent outline-none border-b-2 py-2 px-4 text-black placeholder-tim-color ${
                   errors.password ? "border-do-color" : "border-tim-color"
                 }`}
@@ -140,7 +163,7 @@ export default function Login() {
             </div>
             {errors.password && (
               <p className="text-do-color text-sm mt-2">
-                Your password must be at least 6 characters as well.
+                Your password must be at least 4 characters as well.
               </p>
             )}
           </div>
