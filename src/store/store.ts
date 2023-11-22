@@ -13,10 +13,12 @@ import storage from "redux-persist/lib/storage";
 import { PersistPartial } from "redux-persist/es/persistReducer";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import authReducer from "./reducers/auth_reducers";
+import notifyReducer from "./reducers/notify_reducers";
 
 // Define your root reducer
 const rootReducer = combineReducers({
   auth: authReducer,
+  notify: notifyReducer,
 });
 
 // Define your persist config

@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import SearchBar from "../components/navbar/SearchBar";
 import AvatarGroup from "../components/navbar/AvatarGroup";
 import { BellAlertIcon } from "@heroicons/react/20/solid";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const currentUser = useSelector((state: RootState) => state.auth);
   function handleLogout(): void {
     dispatch({ type: "LOGOUT" });
   }
@@ -38,7 +40,7 @@ const Navbar = () => {
                 className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <a>de sau di</a>
+                  <a>Item 1</a>
                 </li>
                 <li>
                   <a>Item 2</a>
@@ -47,7 +49,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="text-center">
-            <p>Hinata</p>
+            <p>{currentUser.email}</p>
             <p className="text-sm text-gray-500">Admin</p>
           </div>
           <div className="dropdown dropdown-end">

@@ -8,3 +8,13 @@ export const Login = (email: string, password: string) => {
     apiEndpoints.getLoginBody(email, password)
   );
 };
+
+//Get Department
+export const GetDepartment = () => {
+  return mainApi.get(apiEndpoints.GET_DEPARTMENT);
+};
+
+//Create Department
+export const CreateDepartment = (name: string) => {
+  return mainApi.post(apiEndpoints.CREATE_DEPARTMENT, { name: name });
+};

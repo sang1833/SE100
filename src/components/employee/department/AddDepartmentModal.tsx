@@ -1,4 +1,16 @@
+import { CreateDepartment } from "@/apis/api_function";
+import { useState } from "react";
 const AddDepartmentModal = () => {
+  const [departmentName, setDepartmentName] = useState("");
+  async function handleSubmit() {
+    try {
+      const res = await CreateDepartment(departmentName);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
@@ -15,6 +27,8 @@ const AddDepartmentModal = () => {
                 type="text"
                 placeholder="Department name"
                 className="input input-bordered w-full max-w-xs"
+                value={departmentName}
+                onChange={(e) => setDepartmentName(e.target.value)}
               />
             </div>
             <div className="flex gap-1 items-center justify-between">
@@ -47,7 +61,10 @@ const AddDepartmentModal = () => {
               {/* if there is a button in form, it will close the modal */}
               <div className="flex justify-center gap-1">
                 <button className="btn btn-error">Close</button>
-                <button className="btn bg-tim-color text-white hover:text-black">
+                <button
+                  className="btn bg-tim-color text-white hover:text-black"
+                  onClick={handleSubmit}
+                >
                   Submit
                 </button>
               </div>

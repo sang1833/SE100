@@ -7,3 +7,9 @@ export const getLoginBody = (email: string, password: string) => ({
 
 //Register
 export const REGISTER = "/user/register";
+
+//Get Department
+export const GET_DEPARTMENT = "/department/all";
+
+//Create Department
+export const CREATE_DEPARTMENT = "/department/create";

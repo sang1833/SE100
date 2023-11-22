@@ -1,7 +1,7 @@
 import { useState } from "react";
-import TimePicker from "react-time-picker";
-import "react-time-picker/dist/TimePicker.css";
-import "react-clock/dist/Clock.css";
+
+import { AttendanceTime } from "@/components/attendance/AttendanceTime";
+import { AttendanceTable } from "@/components/attendance/AttendanceTable";
 
 const Attendance = () => {
   const [value, onChangeValue] = useState("07:00");
@@ -14,30 +14,15 @@ const Attendance = () => {
         {/* <button className="btn bg-tim-color hover:text-black text-white">
           <p>Add Departments</p>
         </button> */}
+        <AttendanceTime
+          value={value}
+          onChangeValue={onChangeValue}
+          valueEnd={valueEnd}
+          onChangeValueEnd={onChangeValueEnd}
+        />
       </section>
-      <section className="flex gap-4">
-        <div>
-          <h1 className="text-xl m-2">Work start time: </h1>
-          <div className="bg-white border border-gray-300 rounded-md p-2 max-w-[10.7rem]">
-            <TimePicker
-              onChange={(value) => onChangeValue(value?.toString() as string)}
-              value={value}
-              className="text-xl border-none"
-            />
-          </div>
-        </div>
-        <div>
-          <h1 className="text-xl m-2">Work end time: </h1>
-          <div className="bg-white border border-gray-300 rounded-md p-2 max-w-[10.7rem]">
-            <TimePicker
-              onChange={(value) =>
-                onChangeValueEnd(value?.toString() as string)
-              }
-              value={valueEnd}
-              className="text-xl border-none"
-            />
-          </div>
-        </div>
+      <section>
+        <AttendanceTable />
       </section>
     </div>
   );
