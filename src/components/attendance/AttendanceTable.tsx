@@ -4,19 +4,19 @@ const department = [
   {
     id: 1,
     title: "Nguyen Van A",
-    salaryCoefficient: "22-11-2023",
+    salaryCoefficient: "x",
     department: "Absent",
   },
   {
     id: 2,
     title: "Nguyen Van B",
-    salaryCoefficient: "22-11-2023",
+    salaryCoefficient: "06:30",
     department: "Present",
   },
   {
     id: 3,
     title: "Nguyen Van C",
-    salaryCoefficient: "22-11-2023",
+    salaryCoefficient: "06:30",
     department: "Present",
   },
 ];
@@ -45,8 +45,17 @@ export const AttendanceTable = () => {
               <option>Newest</option>
             </select>
           </div>
+          <div className="mx-2">
+            <select className="select select-bordered w-full max-w-xs">
+              <option disabled selected>
+                Date
+              </option>
+              <option>21-11-2023</option>
+              <option>22-11-2023</option>
+            </select>
+          </div>
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 my-4">
           <div className="flex gap-2">
             <label className="flex items-center">
               <input
@@ -79,15 +88,6 @@ export const AttendanceTable = () => {
               <span className="ml-2 text-gray-700">Overtime</span>
             </label>
           </div>
-        </div>
-        <div className="my-2">
-          <select className="select select-bordered w-full max-w-xs">
-            <option disabled selected>
-              Date
-            </option>
-            <option>21-11-2023</option>
-            <option>22-11-2023</option>
-          </select>
         </div>
       </section>
 
