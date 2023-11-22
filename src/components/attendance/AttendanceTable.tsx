@@ -3,21 +3,21 @@ import { MdOutlineMoreVert } from "react-icons/md";
 const department = [
   {
     id: 1,
-    title: "Manager",
-    salaryCoefficient: 2,
-    department: "IT Department",
+    title: "Nguyen Van A",
+    salaryCoefficient: "22-11-2023",
+    department: "Absent",
   },
   {
     id: 2,
-    title: "Accountant",
-    salaryCoefficient: 3.1,
-    department: "HR Department",
+    title: "Nguyen Van B",
+    salaryCoefficient: "22-11-2023",
+    department: "Present",
   },
   {
     id: 3,
-    title: "Marketing",
-    salaryCoefficient: 2,
-    department: "Marketing Department",
+    title: "Nguyen Van C",
+    salaryCoefficient: "22-11-2023",
+    department: "Present",
   },
 ];
 
@@ -80,6 +80,15 @@ export const AttendanceTable = () => {
             </label>
           </div>
         </div>
+        <div className="my-2">
+          <select className="select select-bordered w-full max-w-xs">
+            <option disabled selected>
+              Date
+            </option>
+            <option>21-11-2023</option>
+            <option>22-11-2023</option>
+          </select>
+        </div>
       </section>
 
       <section className="bg-white border rounded-lg">
@@ -89,10 +98,10 @@ export const AttendanceTable = () => {
             <thead>
               <tr>
                 <th>#</th>
-                <th>Title</th>
-                <th>Salary Coefficient</th>
-                <th>Department</th>
-                <th>Action</th>
+                <th>Name</th>
+                <th>Time</th>
+                <th>State</th>
+                <th>View</th>
               </tr>
             </thead>
             <tbody>

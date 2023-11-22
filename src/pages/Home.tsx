@@ -16,7 +16,6 @@ import {
   MdArrowCircleRight,
   MdArrowCircleLeft,
   MdPayments,
-  MdAccountCircle,
   MdCheckCircle,
 } from "react-icons/md";
 
@@ -121,13 +120,13 @@ const Home = () => {
             >
               <p>Payroll</p>
             </MenuItem>
-            <MenuItem
+            {/* <MenuItem
               icon={<MdAccountCircle />}
               component={<Link to="/account" />}
               className="text-white hover:text-tim-color"
             >
               <p>Account</p>
-            </MenuItem>
+            </MenuItem> */}
             <div
               className="bg-tim-color absolute bottom-0 left-0 w-full text-white text-center py-2 cursor-pointer"
               onClick={handleSidebar}
