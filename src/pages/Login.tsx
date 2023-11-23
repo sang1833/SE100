@@ -12,6 +12,8 @@ interface FormValues {
   password: string;
 }
 
+const classLoad = "loading loading-dots loading-xs";
+
 const schema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().required().min(4),
@@ -20,6 +22,7 @@ const schema = yup.object().shape({
 export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const {
@@ -33,6 +36,9 @@ export default function LoginPage() {
 
   async function woosalSubmit(data: FormValues) {
     // handle submitting the form
+    if (loading) return;
+    setLoading(true);
+
     try {
       const response = await Login(data.email, data.password);
       if (response.status === 400) {
@@ -53,9 +59,15 @@ export default function LoginPage() {
       };
       console.log("rd", result);
       dispatch({ type: "LOGIN", payload: result });
+      setLoading(false);
       navigate("/");
     } catch (error) {
       console.log(error);
+      dispatch({
+        type: "NOTIFY",
+        payload: { type: "error", message: "Please check your input" },
+      });
+      setLoading(false);
     }
   }
 
@@ -171,8 +183,10 @@ export default function LoginPage() {
           <button
             type="submit"
             onClick={handleSubmit(woosalSubmit)}
-            className="btn bg-[#484c7f] text-white w-full"
+            className={`btn bg-[#484c7f] text-white w-full `}
+            disabled={loading}
           >
+            {loading && <span className={classLoad}></span>}
             Submit
           </button>
         </form>

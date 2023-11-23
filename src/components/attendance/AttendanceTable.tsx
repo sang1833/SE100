@@ -1,4 +1,6 @@
 import { MdOutlineMoreVert } from "react-icons/md";
+import { useState } from "react";
+import { AttendanceTime } from "@/components/attendance/AttendanceTime";
 
 const department = [
   {
@@ -22,10 +24,18 @@ const department = [
 ];
 
 export const AttendanceTable = () => {
+  const [value, onChangeValue] = useState("07:00");
+  const [valueEnd, onChangeValueEnd] = useState("17:00");
   return (
     <div>
-      <section>
-        <div className="flex justify-start items-center mb-2">
+      <AttendanceTime
+        value={value}
+        onChangeValue={onChangeValue}
+        valueEnd={valueEnd}
+        onChangeValueEnd={onChangeValueEnd}
+      />
+      <section className="my-2 pt-2 flex justify-start items-center ">
+        <div className="flex justify-start items-center ">
           <p>Filter by:</p>
           <div className="mx-2">
             <select className="select select-bordered w-full max-w-xs">

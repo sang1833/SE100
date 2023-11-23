@@ -18,3 +18,10 @@ export const GetDepartment = () => {
 export const CreateDepartment = (name: string) => {
   return mainApi.post(apiEndpoints.CREATE_DEPARTMENT, { name: name });
 };
+
+//Get Position by department id
+export const GetPositionByDepartmentId = (departmentId: string) => {
+  return mainApi.post(apiEndpoints.GET_POSITION_BY_DEPARTMENT_ID, {
+    departmentId: departmentId,
+  });
+};

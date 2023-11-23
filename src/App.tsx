@@ -21,6 +21,7 @@ import CreateEmployee from "./components/employee/employeeCreate/CreateEmployee"
 import Position from "./components/employee/position/Position";
 import Account from "./pages/Account";
 import Attendance from "./pages/Attendance";
+import Payroll from "./pages/Payroll";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,13 +35,14 @@ const router = createBrowserRouter(
         <Route path="adminprofile" element={<AdminProfile />} />
         <Route path="employee" element={<Employee />}>
           <Route path=":id" element={<EmployeeProfile />}></Route>
-          <Route path="department" element={<Department />} />
+          <Route path="department" element={<Department />}></Route>
           <Route path="list" element={<EmployeeList />} />
           <Route path="create" element={<CreateEmployee />} />
-          <Route path="position" element={<Position />} />
         </Route>
         <Route path="attendance" element={<Attendance />} />
+        <Route path="payroll" element={<Payroll />} />
         <Route path="account" element={<Account />} />
+        <Route path="position/:id" element={<Position />} />
       </Route>
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />

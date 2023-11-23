@@ -94,12 +94,6 @@ const Home = () => {
                 <p>Department</p>
               </MenuItem>
               <MenuItem
-                component={<Link to="/employee/position" />}
-                className="bg-tim-color text-white hover:text-tim-color"
-              >
-                <p>Position</p>
-              </MenuItem>
-              <MenuItem
                 component={<Link to="/employee/list" />}
                 className="bg-tim-color text-white hover:text-tim-color"
               >

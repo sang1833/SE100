@@ -1,9 +1,9 @@
-import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
 import AddDepartmentModal from "./AddDepartmentModal";
 import DeleteDepartmentModal from "./DeleteDepartmentModal";
 import ChangeDepartmentModal from "./ChangeDepartmentModal";
 import { GetDepartment } from "@/apis/api_function";
 import { useEffect, useState } from "react";
+import { DepartmentRow } from "./DepartmentRow";
 
 // const department = [
 //   {
@@ -39,6 +39,13 @@ const Department = () => {
     if (modal !== null) {
       modal.showModal();
     }
+  }
+
+  function ShowChangeModal() {
+    showModal("change_department_modal");
+  }
+  function ShowDeleteModal() {
+    showModal("delete_department_modal");
   }
 
   useEffect(() => {
@@ -77,29 +84,12 @@ const Department = () => {
             <tbody>
               {/* rows */}
               {department.map((item) => (
-                <tr key={item._id}>
-                  <td>{item._id}</td>
-                  <td>{item.departmentName}</td>
-                  <td>{item.idBoss}</td>
-                  <td>0</td>
-                  <td>{item.lastUpdate.toString().split("T")[0]}</td>
-                  <th className="flex gap-1">
-                    <button
-                      className="btn btn-ghost btn-xs border border-gray-600"
-                      key={item._id}
-                      onClick={() => showModal("change_department_modal")}
-                    >
-                      <MdOutlineEdit className="h-5 w-5" />
-                    </button>
-                    <button
-                      className="btn btn-ghost btn-xs text-red-600 border border-red-600"
-                      key={item._id}
-                      onClick={() => showModal("delete_department_modal")}
-                    >
-                      <MdOutlineDeleteForever className="h-5 w-5" />
-                    </button>
-                  </th>
-                </tr>
+                <DepartmentRow
+                  key={item._id}
+                  item={item}
+                  ShowChangeModal={ShowChangeModal}
+                  ShowDeleteModal={ShowDeleteModal}
+                />
               ))}
             </tbody>
           </table>
