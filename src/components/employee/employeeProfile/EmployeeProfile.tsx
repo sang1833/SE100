@@ -209,6 +209,8 @@ const EmployeeProfile = () => {
                       type="file"
                       className="file-input w-full max-w-xs"
                       onChange={handleFileChange}
+                      multiple
+                      accept="image/*"
                     />
                   </div>
                   <h1 className="text-xl font-bold text-center">

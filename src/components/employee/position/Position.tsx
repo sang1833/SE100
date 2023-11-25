@@ -1,9 +1,9 @@
-import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
 import AddPositionModal from "./AddPositionModal";
 import ChangePositionModal from "./ChangePositionModal";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GetPositionByDepartmentId } from "@/apis/api_function";
+import { PositionRow } from "./PositionRow";
 
 const departments = [
   {
@@ -18,11 +18,20 @@ const Position = () => {
   const location = useLocation();
   const departmentId = location.pathname.split("/")[2];
   const [department, setDepartment] = useState(departments);
+
   function showModal(type: string) {
     const modal = document.getElementById(type) as HTMLDialogElement;
     if (modal !== null) {
       modal.showModal();
     }
+  }
+
+  function ShowChangeModal() {
+    showModal("change_position_modal");
+  }
+
+  function ShowDeleteModal() {
+    showModal("delete_position_modal");
   }
 
   useEffect(() => {
@@ -61,34 +70,18 @@ const Position = () => {
             <tbody>
               {/* rows */}
               {department.map((item) => (
-                <tr key={item._id}>
-                  <td>{item._id}</td>
-                  <td>{item.title}</td>
-                  <td>{item.departmentId}</td>
-                  <td>{item.coef}</td>
-                  <th className="flex gap-1">
-                    <button
-                      className="btn btn-ghost btn-xs border border-gray-600"
-                      key={item._id}
-                      onClick={() => showModal("change_position_modal")}
-                    >
-                      <MdOutlineEdit className="h-5 w-5" />
-                    </button>
-                    <button
-                      className="btn btn-ghost btn-xs text-red-600 border border-red-600"
-                      key={item._id}
-                      onClick={() => showModal("delete_department_modal")}
-                    >
-                      <MdOutlineDeleteForever className="h-5 w-5" />
-                    </button>
-                  </th>
-                </tr>
+                <PositionRow
+                  key={item._id}
+                  item={item}
+                  ShowChangeModal={ShowChangeModal}
+                  ShowDeleteModal={ShowDeleteModal}
+                />
               ))}
             </tbody>
           </table>
         </div>
       </section>
-      <AddPositionModal />
+      <AddPositionModal departmentId={departmentId} />
       <ChangePositionModal />
     </div>
   );

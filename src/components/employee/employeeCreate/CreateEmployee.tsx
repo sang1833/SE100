@@ -172,6 +172,8 @@ const CreateEmployee = () => {
                     type="file"
                     className="file-input w-full max-w-xs"
                     onChange={handleFileChange}
+                    multiple
+                    accept="image/*"
                   />
                 </div>
                 <div className="grid grid-cols-2 items-center mx-2">

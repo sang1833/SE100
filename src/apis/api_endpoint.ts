@@ -19,3 +19,15 @@ export const GET_POSITION_BY_DEPARTMENT_ID = "/position/getByDepartmentId";
 export const getPositionByDepartmentIdBody = (departmentId: string) => ({
   departmentId: departmentId,
 });
+
+//New Position
+export const NEW_POSITION = "/position/new";
+export const newPositionBody = (
+  title: string,
+  departmentId: string,
+  coef: number
+) => ({
+  title: title,
+  departmentId: departmentId,
+  coef: coef,
+});

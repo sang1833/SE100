@@ -25,3 +25,15 @@ export const GetPositionByDepartmentId = (departmentId: string) => {
     departmentId: departmentId,
   });
 };
+
+//New Position
+export const NewPosition = (
+  name: string,
+  departmentId: string,
+  coef: number
+) => {
+  return mainApi.post(
+    apiEndpoints.NEW_POSITION,
+    apiEndpoints.newPositionBody(name, departmentId, coef)
+  );
+};

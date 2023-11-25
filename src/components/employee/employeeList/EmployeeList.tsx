@@ -1,6 +1,8 @@
 import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import DeleteProfile from "./DeleteProfile";
+import { AddEmpolyeeExcel } from "./AddEmpolyeeExcel";
+
 const department = [
   {
     id: 1,
@@ -36,12 +38,16 @@ const EmployeeList = () => {
     <div className="flex flex-col gap-4">
       <section className="flex justify-between mt-8">
         <h1 className="font-bold text-2xl text-gray-900">Employees</h1>
-        <button
-          className="btn bg-tim-color hover:text-black text-white"
-          onClick={() => navigate("/employee/create")}
-        >
-          <p>Add Employees</p>
-        </button>
+
+        <div className="flex justify-center">
+          <button
+            className="btn bg-tim-color hover:text-black text-white"
+            onClick={() => navigate("/employee/create")}
+          >
+            <p>Add Employees</p>
+          </button>
+          <AddEmpolyeeExcel />
+        </div>
       </section>
       <section className="bg-white border rounded-lg">
         <div className="overflow-x-auto">
