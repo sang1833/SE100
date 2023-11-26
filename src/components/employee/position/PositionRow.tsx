@@ -16,7 +16,6 @@ export const PositionRow = ({
     <tr>
       <td>{item._id}</td>
       <td>{item.title}</td>
-      <td>{item.departmentId}</td>
       <td>{item.coef}</td>
       <th className="flex gap-1">
         <button

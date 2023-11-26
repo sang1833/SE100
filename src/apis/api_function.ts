@@ -9,6 +9,13 @@ export const Login = (email: string, password: string) => {
   );
 };
 
+//Import user by excel
+export const ImportUser = (file: File) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  return mainApi.post(apiEndpoints.IMPORT_USER, formData);
+};
+
 //Get Department
 export const GetDepartment = () => {
   return mainApi.get(apiEndpoints.GET_DEPARTMENT);

@@ -1,7 +1,7 @@
 import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import DeleteProfile from "./DeleteProfile";
-import { AddEmpolyeeExcel } from "./AddEmpolyeeExcel";
+import { AddEmployeeExcel } from "./AddEmployeeExcel";
 
 const department = [
   {
@@ -46,7 +46,7 @@ const EmployeeList = () => {
           >
             <p>Add Employees</p>
           </button>
-          <AddEmpolyeeExcel />
+          <AddEmployeeExcel />
         </div>
       </section>
       <section className="bg-white border rounded-lg">

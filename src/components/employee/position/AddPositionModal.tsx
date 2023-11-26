@@ -29,7 +29,14 @@ const PositionModal = ({ departmentId }: Props) => {
 
   function Done(data: FormValues) {
     try {
-      NewPosition(data.title, departmentId, data.coefficent);
+      try {
+        NewPosition(data.title, departmentId, data.coefficent);
+        // click button close
+        document.getElementById("btn-close")?.click();
+        window.location.reload();
+      } catch (error) {
+        console.log(error);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -80,7 +87,9 @@ const PositionModal = ({ departmentId }: Props) => {
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
               <div className="flex justify-center gap-1">
-                <button className="btn btn-error">Close</button>
+                <button id="btn-close" className="btn btn-error">
+                  Close
+                </button>
                 <button
                   className="btn bg-tim-color text-white hover:text-black"
                   onClick={handleSubmit(Done)}

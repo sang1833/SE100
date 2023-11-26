@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GetPositionByDepartmentId } from "@/apis/api_function";
 import { PositionRow } from "./PositionRow";
+import { MdKeyboardBackspace } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const departments = [
   {
@@ -16,7 +18,9 @@ const departments = [
 
 const Position = () => {
   const location = useLocation();
-  const departmentId = location.pathname.split("/")[2];
+  const navigate = useNavigate();
+  const departmentId = location.pathname.split("/")[3];
+  const departmentName = location.pathname.split("/")[2];
   const [department, setDepartment] = useState(departments);
 
   function showModal(type: string) {
@@ -44,8 +48,21 @@ const Position = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <section className="flex justify-between mt-8">
-        <h1 className="font-bold text-2xl text-gray-900">Positions</h1>
+      <div className="flex justify-start">
+        <button
+          onClick={() => {
+            navigate("/employee/department");
+          }}
+          className="flex btn btn-link items-center gap-2"
+        >
+          <MdKeyboardBackspace />
+          <p>Back</p>
+        </button>
+      </div>
+      <section className="flex justify-between mt-4">
+        <h1 className="font-bold text-2xl text-gray-900">
+          Positions in {departmentName}
+        </h1>
         <button
           className="btn bg-tim-color hover:text-black text-white"
           onClick={() => showModal("add_position_modal")}
@@ -62,7 +79,6 @@ const Position = () => {
                 {/* <th>#</th> */}
                 <th>Id</th>
                 <th>Title</th>
-                <th>Department</th>
                 <th>Coefficient</th>
                 <th>Action</th>
               </tr>

@@ -8,6 +8,9 @@ export const getLoginBody = (email: string, password: string) => ({
 //Register
 export const REGISTER = "/user/register";
 
+//Import user by excel
+export const IMPORT_USER = "/user/importToExcel";
+
 //Get Department
 export const GET_DEPARTMENT = "/department/all";
 

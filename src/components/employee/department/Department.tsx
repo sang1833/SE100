@@ -50,8 +50,12 @@ const Department = () => {
 
   useEffect(() => {
     const getDepartment = async () => {
-      const res = await GetDepartment();
-      setDepartment(res.data.departments);
+      try {
+        const res = await GetDepartment();
+        setDepartment(res.data.departments);
+      } catch (error) {
+        console.log(error);
+      }
     };
     getDepartment();
   }, []);

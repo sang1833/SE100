@@ -1,6 +1,6 @@
 import AddByExcelModal from "./AddByExcelModal";
 
-export const AddEmpolyeeExcel = () => {
+export const AddEmployeeExcel = () => {
   function showModal(type: string) {
     const modal = document.getElementById(type) as HTMLDialogElement;
     if (modal !== null) {
@@ -22,3 +22,5 @@ export const AddEmpolyeeExcel = () => {
     </div>
   );
 };
+
+export default AddEmployeeExcel;

@@ -1,15 +1,38 @@
 import { useState } from "react";
+import { ImportUser } from "@/apis/api_function";
+import { useDispatch } from "react-redux";
 
 const AddByExcelModal = () => {
   const [file, setFile] = useState<File>();
+  const dispatch = useDispatch();
 
   const handleFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFile(event.target.files?.[0]);
   };
 
-  function Done() {
+  async function Done() {
     try {
-      console.log(file);
+      if (file === undefined) {
+        dispatch({
+          type: "NOTIFY",
+          payload: {
+            type: "error",
+            message: "Please choose a file",
+          },
+        });
+        return;
+      }
+      const Res = await ImportUser(file);
+      dispatch({
+        type: "NOTIFY",
+        payload: {
+          type: "success",
+          message: Res.data.message,
+        },
+      });
+      // click button close
+      document.getElementById("btn-close")?.click();
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
