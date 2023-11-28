@@ -8,29 +8,25 @@ import { RootState } from "@/store/store";
 const Root = () => {
   const dispatch = useDispatch();
   const notify = useSelector((state: RootState) => state.notify);
-  useEffect(
-    () => {
-      if (notify) {
-        const { type, message } = notify;
-        switch (type) {
-          case "success":
-            toast.success(message);
-            break;
-          case "error":
-            toast.error(message);
-            break;
-          case "warning":
-            toast.warning(message);
-            break;
-          default:
-            break;
-        }
-        dispatch({ type: "UN_NOTIFY", payload: null });
+  useEffect(() => {
+    if (notify) {
+      const { type, message } = notify;
+      switch (type) {
+        case "success":
+          toast.success(message);
+          break;
+        case "error":
+          toast.error(message);
+          break;
+        case "warning":
+          toast.warning(message);
+          break;
+        default:
+          break;
       }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [notify]
-  );
+      dispatch({ type: "UN_NOTIFY", payload: null });
+    }
+  }, [dispatch, notify]);
   return (
     <div>
       <Outlet />

@@ -1,4 +1,8 @@
-import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
+import {
+  MdOutlineDeleteForever,
+  MdOutlineEdit,
+  MdOutlineAttachMoney,
+} from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import DeleteProfile from "./DeleteProfile";
 import { AddEmployeeExcel } from "./AddEmployeeExcel";
@@ -71,6 +75,13 @@ const EmployeeList = () => {
                   <td>{item.description}</td>
                   <td>{item.position}</td>
                   <th className="flex gap-1">
+                    <button
+                      className="btn btn-ghost btn-xs border text-green-800 border-green-800"
+                      key={item.id}
+                      onClick={() => navigate(`/employee/${item.id}`)}
+                    >
+                      <MdOutlineAttachMoney className="h-5 w-5" />
+                    </button>
                     <button
                       className="btn btn-ghost btn-xs border text-tim-color border-tim-color-1"
                       key={item.id}

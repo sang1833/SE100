@@ -8,19 +8,21 @@ import { useNavigate } from "react-router-dom";
 
 interface DepartmentRowProps {
   item: DepartmentType;
+  itemIndex: number;
   ShowChangeModal: () => void;
   ShowDeleteModal: () => void;
 }
 
 export const DepartmentRow = ({
   item,
+  itemIndex,
   ShowChangeModal,
   ShowDeleteModal,
 }: DepartmentRowProps) => {
   const navigate = useNavigate();
   return (
     <tr>
-      <td>{item._id}</td>
+      <td>{itemIndex + 1}</td>
       <td>{item.departmentName}</td>
       <td>{item.idBoss}</td>
       <td>0</td>

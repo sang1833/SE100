@@ -17,6 +17,7 @@ import {
   MdArrowCircleLeft,
   MdPayments,
   MdCheckCircle,
+  MdSettings,
 } from "react-icons/md";
 
 const Home = () => {
@@ -113,6 +114,13 @@ const Home = () => {
               className="text-white hover:text-tim-color"
             >
               <p>Payroll</p>
+            </MenuItem>
+            <MenuItem
+              icon={<MdSettings />}
+              component={<Link to="/setting" />}
+              className="text-white hover:text-tim-color"
+            >
+              <p>Setting</p>
             </MenuItem>
             {/* <MenuItem
               icon={<MdAccountCircle />}

@@ -9,13 +9,6 @@ export const Login = (email: string, password: string) => {
   );
 };
 
-//Import user by excel
-export const ImportUser = (file: File) => {
-  const formData = new FormData();
-  formData.append("file", file);
-  return mainApi.post(apiEndpoints.IMPORT_USER, formData);
-};
-
 //Get Department
 export const GetDepartment = () => {
   return mainApi.get(apiEndpoints.GET_DEPARTMENT);
@@ -42,5 +35,13 @@ export const NewPosition = (
   return mainApi.post(
     apiEndpoints.NEW_POSITION,
     apiEndpoints.newPositionBody(name, departmentId, coef)
+  );
+};
+
+//import to excel
+export const ImportToExcel = (file: File, departmentId: string) => {
+  return mainApi.post(
+    apiEndpoints.IMPORT_TO_EXCEL,
+    apiEndpoints.importToExcelBody(file, departmentId)
   );
 };

@@ -1,13 +1,30 @@
 import { CreateDepartment } from "@/apis/api_function";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 const AddDepartmentModal = () => {
+  const dispatch = useDispatch();
   const [departmentName, setDepartmentName] = useState("");
   async function handleSubmit() {
     try {
       const res = await CreateDepartment(departmentName);
+      dispatch({
+        type: "NOTIFY",
+        payload: {
+          type: "success",
+          message: res.data.message,
+        },
+      });
       console.log(res);
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       console.log(error);
+      dispatch({
+        type: "NOTIFY",
+        payload: {
+          type: "error",
+          message: error.response.data.message,
+        },
+      });
     }
   }
 
@@ -31,14 +48,14 @@ const AddDepartmentModal = () => {
                 onChange={(e) => setDepartmentName(e.target.value)}
               />
             </div>
-            <div className="flex gap-1 items-center justify-between">
+            {/* <div className="flex gap-1 items-center justify-between">
               <label htmlFor="">Department Head: </label>
               <input
                 type="text"
                 placeholder="Department head"
                 className="input input-bordered w-full max-w-xs"
               />
-            </div>
+            </div> */}
             {/* <div className="flex flex-col">
               <div className="flex gap-1 items-center justify-between">
                 <label htmlFor="">Employee: </label>

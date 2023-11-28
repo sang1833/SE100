@@ -76,8 +76,7 @@ const Position = () => {
             {/* head */}
             <thead>
               <tr>
-                {/* <th>#</th> */}
-                <th>Id</th>
+                <th>#</th>
                 <th>Title</th>
                 <th>Coefficient</th>
                 <th>Action</th>
@@ -85,10 +84,11 @@ const Position = () => {
             </thead>
             <tbody>
               {/* rows */}
-              {department.map((item) => (
+              {department.map((item, index) => (
                 <PositionRow
                   key={item._id}
                   item={item}
+                  index={index}
                   ShowChangeModal={ShowChangeModal}
                   ShowDeleteModal={ShowDeleteModal}
                 />

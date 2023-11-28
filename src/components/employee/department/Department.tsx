@@ -5,26 +5,6 @@ import { GetDepartment } from "@/apis/api_function";
 import { useEffect, useState } from "react";
 import { DepartmentRow } from "./DepartmentRow";
 
-// const department = [
-//   {
-//     id: 1,
-//     description: "IT Department",
-//     head: "Nguyen Van A",
-//     number: 10,
-//   },
-//   {
-//     id: 2,
-//     description: "HR Department",
-//     head: "Nguyen Van B",
-//     number: 8,
-//   },
-//   {
-//     id: 3,
-//     description: "Marketing Department",
-//     head: "Nguyen Van C",
-//     number: 12,
-//   },
-// ];
 export interface DepartmentType {
   _id: string;
   departmentName: string;
@@ -77,7 +57,7 @@ const Department = () => {
             {/* head */}
             <thead>
               <tr>
-                <th>Id</th>
+                <th>#</th>
                 <th>Name</th>
                 <th>Head</th>
                 <th>Number of Employees</th>
@@ -87,10 +67,11 @@ const Department = () => {
             </thead>
             <tbody>
               {/* rows */}
-              {department.map((item) => (
+              {department?.map((item, index) => (
                 <DepartmentRow
                   key={item._id}
                   item={item}
+                  itemIndex={index}
                   ShowChangeModal={ShowChangeModal}
                   ShowDeleteModal={ShowDeleteModal}
                 />

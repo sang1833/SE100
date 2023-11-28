@@ -34,3 +34,12 @@ export const newPositionBody = (
   departmentId: departmentId,
   coef: coef,
 });
+
+//import to excel
+export const IMPORT_TO_EXCEL = "/user/importToExcel";
+export const importToExcelBody = (file: File, departmentId: string) => {
+  const formData = new FormData();
+  formData.append("import", file);
+  formData.append("departmentID", departmentId);
+  return formData;
+};

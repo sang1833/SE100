@@ -3,18 +3,20 @@ import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
 interface PositionRowProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   item: any;
+  index: number;
   ShowChangeModal: () => void;
   ShowDeleteModal: () => void;
 }
 
 export const PositionRow = ({
   item,
+  index,
   ShowChangeModal,
   ShowDeleteModal,
 }: PositionRowProps) => {
   return (
     <tr>
-      <td>{item._id}</td>
+      <td>{index + 1}</td>
       <td>{item.title}</td>
       <td>{item.coef}</td>
       <th className="flex gap-1">

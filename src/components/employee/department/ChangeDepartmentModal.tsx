@@ -16,14 +16,14 @@ const ChangeDepartmentModal = () => {
                 className="input input-bordered w-full max-w-xs"
               />
             </div>
-            <div className="flex gap-1 items-center justify-between">
+            {/* <div className="flex gap-1 items-center justify-between">
               <label htmlFor="">Department Head: </label>
               <input
                 type="text"
                 placeholder="Department head"
                 className="input input-bordered w-full max-w-xs"
               />
-            </div>
+            </div> */}
             {/* <div className="flex flex-col">
               <div className="flex gap-1 items-center justify-between">
                 <label htmlFor="">Employee: </label>

@@ -57,6 +57,17 @@ export default function LoginPage() {
         avatar: responseData.avatar,
         createAt: responseData.createAt,
       };
+      if (result.role === "Nhân viên") {
+        dispatch({
+          type: "NOTIFY",
+          payload: {
+            type: "error",
+            message: "You don't have permission to access this page",
+          },
+        });
+        setLoading(false);
+        return;
+      }
       console.log("rd", result);
       dispatch({ type: "LOGIN", payload: result });
       setLoading(false);
@@ -99,7 +110,6 @@ export default function LoginPage() {
               type="text"
               id="email"
               placeholder="hey@gmail.com"
-              value={"admin@gmail.com"}
               className={`block w-full bg-transparent outline-none border-b-2 py-2 px-4  placeholder-tim-color ${
                 errors.email
                   ? "text-do-color border-do-color"
@@ -128,7 +138,6 @@ export default function LoginPage() {
                 type={passwordVisible ? "text" : "password"}
                 id="password"
                 placeholder="password"
-                value={"admin"}
                 className={`block w-full bg-transparent outline-none border-b-2 py-2 px-4 text-black placeholder-tim-color ${
                   errors.password ? "border-do-color" : "border-tim-color"
                 }`}

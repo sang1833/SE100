@@ -12,6 +12,7 @@ import Error from "./pages/Error";
 import Home from "./pages/Home";
 import Employee from "./pages/Employee";
 import Department from "./components/employee/department/Department";
+import EmployeeDepartment from "./components/employee/department/employee/Employee";
 import AdminProfile from "./pages/AdminProfile";
 import Dashboard from "./pages/Dashboard";
 import ChangePassword from "./pages/ChangePassword";
@@ -38,6 +39,7 @@ const router = createBrowserRouter(
           <Route path="department" element={<Department />}></Route>
           <Route path="list" element={<EmployeeList />} />
           <Route path="create" element={<CreateEmployee />} />
+          <Route path="department/:id/:id" element={<EmployeeDepartment />} />
         </Route>
         <Route path="attendance" element={<Attendance />} />
         <Route path="payroll" element={<Payroll />} />
