@@ -10,8 +10,8 @@ import { useNavigate } from "react-router-dom";
 const departments = [
   {
     _id: 1,
-    title: "Manager",
-    departmentId: "5862",
+    title: "...",
+    departmentId: "...",
     coef: 2,
   },
 ];
@@ -20,7 +20,9 @@ const Position = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const departmentId = location.pathname.split("/")[3];
-  const departmentName = location.pathname.split("/")[2];
+  const name = location.pathname.split("/")[2];
+  const departmentName = name.replace(/%20/g, " ");
+
   const [department, setDepartment] = useState(departments);
 
   function showModal(type: string) {
@@ -41,6 +43,7 @@ const Position = () => {
   useEffect(() => {
     async function getPosition() {
       const res = await GetPositionByDepartmentId(departmentId);
+      console.log(res);
       setDepartment(res.data.positions);
     }
     getPosition();
@@ -60,8 +63,9 @@ const Position = () => {
         </button>
       </div>
       <section className="flex justify-between mt-4">
-        <h1 className="font-bold text-2xl text-gray-900">
-          Positions in {departmentName}
+        <h1 className="font-bold text-2xl text-gray-900 flex gap-2">
+          <p>Positions in</p>
+          <p>{departmentName}</p>
         </h1>
         <button
           className="btn bg-tim-color hover:text-black text-white"

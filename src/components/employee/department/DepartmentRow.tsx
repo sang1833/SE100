@@ -24,8 +24,8 @@ export const DepartmentRow = ({
     <tr>
       <td>{itemIndex + 1}</td>
       <td>{item.departmentName}</td>
-      <td>{item.idBoss}</td>
-      <td>0</td>
+      <td>{item.nameBoss}</td>
+      <td>{item.numberEmployee}</td>
       <td>{item.lastUpdate.toString().split("T")[0]}</td>
       <th className="flex gap-1">
         <button

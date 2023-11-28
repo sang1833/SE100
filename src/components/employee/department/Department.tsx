@@ -1,19 +1,34 @@
+import { useEffect, useState } from "react";
 import AddDepartmentModal from "./AddDepartmentModal";
 import DeleteDepartmentModal from "./DeleteDepartmentModal";
 import ChangeDepartmentModal from "./ChangeDepartmentModal";
 import { GetDepartment } from "@/apis/api_function";
-import { useEffect, useState } from "react";
 import { DepartmentRow } from "./DepartmentRow";
+import { useDispatch } from "react-redux";
 
 export interface DepartmentType {
   _id: string;
   departmentName: string;
   idBoss: string;
+  nameBoss: string;
   lastUpdate: string;
+  numberEmployee: number;
 }
 
+const example = [
+  {
+    _id: "...",
+    departmentName: "...",
+    idBoss: "...",
+    nameBoss: "...",
+    lastUpdate: "...",
+    numberEmployee: 0,
+  },
+];
+
 const Department = () => {
-  const [department, setDepartment] = useState<DepartmentType[]>([]);
+  const dispatch = useDispatch();
+  const [department, setDepartment] = useState<DepartmentType[]>(example);
   function showModal(type: string) {
     const modal = document.getElementById(type) as HTMLDialogElement;
     if (modal !== null) {
@@ -32,7 +47,18 @@ const Department = () => {
     const getDepartment = async () => {
       try {
         const res = await GetDepartment();
-        setDepartment(res.data.departments);
+        if (res.data.list_dto.length === 0) {
+          dispatch({
+            type: "NOTIFY",
+            payload: {
+              type: "error",
+              message: "Server error!",
+            },
+          });
+          return;
+        }
+        setDepartment(res.data.list_dto);
+        console.log("dp", department);
       } catch (error) {
         console.log(error);
       }
@@ -66,8 +92,7 @@ const Department = () => {
               </tr>
             </thead>
             <tbody>
-              {/* rows */}
-              {department?.map((item, index) => (
+              {department.map((item, index) => (
                 <DepartmentRow
                   key={item._id}
                   item={item}

@@ -1,4 +1,4 @@
-import { useEffect, useState, startTransition } from "react";
+import { useEffect, useState, startTransition, Suspense } from "react";
 import { Outlet, Link, Navigate, useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -19,6 +19,7 @@ import {
   MdCheckCircle,
   MdSettings,
 } from "react-icons/md";
+import Loading from "@/utils/Loading";
 
 const Home = () => {
   const [clpSidebar, setClpSidebar] = useState(true);
@@ -149,9 +150,11 @@ const Home = () => {
         }`}
       >
         <Navbar />
-        <div className="mx-2">
-          <Outlet />
-        </div>
+        <Suspense fallback={<Loading />}>
+          <div className="mx-2">
+            <Outlet />
+          </div>
+        </Suspense>
       </main>
     </section>
   ) : (

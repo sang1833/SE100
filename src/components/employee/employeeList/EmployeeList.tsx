@@ -6,30 +6,27 @@ import {
 import { useNavigate } from "react-router-dom";
 import DeleteProfile from "./DeleteProfile";
 import { AddEmployeeExcel } from "./AddEmployeeExcel";
+import { useState, useEffect } from "react";
 
-const department = [
+const employeeArray = [
   {
     id: 1,
-    name: "Nguyen Van A",
-    description: "IT Department",
-    position: "IT Manager",
-  },
-  {
-    id: 2,
-    name: "Nguyen Van B",
-    description: "HR Department",
-    position: "HR Manager",
-  },
-  {
-    id: 3,
-    name: "Nguyen Van C",
-    description: "Marketing Department",
-    position: "",
+    name: "...",
+    description: "...",
+    position: "...",
   },
 ];
 
 const EmployeeList = () => {
   const navigate = useNavigate();
+  const [employee, setEmployee] = useState(employeeArray);
+
+  useEffect(() => {
+    async function getEmployee() {
+      setEmployee(employeeArray);
+    }
+    getEmployee();
+  }, []);
 
   function showModal(type: string) {
     const modal = document.getElementById(type) as HTMLDialogElement;
@@ -68,7 +65,7 @@ const EmployeeList = () => {
             </thead>
             <tbody>
               {/* rows */}
-              {department.map((item) => (
+              {employee.map((item) => (
                 <tr key={item.id}>
                   <td>{item.id}</td>
                   <td>{item.name}</td>

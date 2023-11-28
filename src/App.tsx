@@ -11,7 +11,10 @@ const Signup = lazy(() => import("./pages/Signup"));
 import Error from "./pages/Error";
 import Home from "./pages/Home";
 import Employee from "./pages/Employee";
-import Department from "./components/employee/department/Department";
+// import Department from "./components/employee/department/Department";
+const Department = lazy(
+  () => import("./components/employee/department/Department")
+);
 import EmployeeDepartment from "./components/employee/department/employee/Employee";
 import AdminProfile from "./pages/AdminProfile";
 import Dashboard from "./pages/Dashboard";
