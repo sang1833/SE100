@@ -16,8 +16,7 @@ const Setting = () => {
           <img
             src={officeImage}
             alt="office"
-            className="absolute object-cover w-full h-full"
-            style={{ filter: "blur(1px)" }}
+            className="absolute object-cover w-full h-[21rem]"
           />
         </div>
       </div>
