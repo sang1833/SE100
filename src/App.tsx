@@ -26,6 +26,7 @@ import Position from "./components/employee/position/Position";
 import Account from "./pages/Account";
 import Attendance from "./pages/Attendance";
 import Payroll from "./pages/Payroll";
+import Setting from "./pages/Setting";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -48,6 +49,7 @@ const router = createBrowserRouter(
         <Route path="payroll" element={<Payroll />} />
         <Route path="account" element={<Account />} />
         <Route path="position/:id/:id" element={<Position />} />
+        <Route path="setting" element={<Setting />} />
       </Route>
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />

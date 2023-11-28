@@ -45,14 +45,19 @@ export const data = {
   labels,
   datasets: [
     {
-      label: "Total Employee",
+      label: "On time",
       data: labels.map(() => Math.floor(Math.random() * 10)),
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
+      backgroundColor: "rgb(0, 204, 153)",
     },
     {
-      label: "Attendance",
+      label: "Late",
       data: labels.map(() => Math.floor(Math.random() * 10)),
       backgroundColor: "rgba(53, 162, 235, 0.5)",
+    },
+    {
+      label: "Absent",
+      data: labels.map(() => Math.floor(Math.random() * 10)),
+      backgroundColor: "rgba(255, 99, 132, 0.5)",
     },
   ],
 };
