@@ -11,7 +11,7 @@ export const PayrollTable = () => {
 
   return (
     <div>
-      <div className="my-4 flex justify-start items-center gap-4">
+      <div className="mb-4 flex justify-start items-center gap-4">
         <div className="min-w-[4rem]">
           <span>Filter by: </span>
         </div>

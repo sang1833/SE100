@@ -1,13 +1,13 @@
 import AddPositionModal from "./AddPositionModal";
 import ChangePositionModal from "./ChangePositionModal";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GetPositionByDepartmentId } from "@/apis/api_function";
 import { PositionRow } from "./PositionRow";
 import { MdKeyboardBackspace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-const departments = [
+const positionArray = [
   {
     _id: 1,
     title: "...",
@@ -22,8 +22,9 @@ const Position = () => {
   const departmentId = location.pathname.split("/")[3];
   const name = location.pathname.split("/")[2];
   const departmentName = name.replace(/%20/g, " ");
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
-  const [department, setDepartment] = useState(departments);
+  const [positions, setPositions] = useState(positionArray);
 
   function showModal(type: string) {
     const modal = document.getElementById(type) as HTMLDialogElement;
@@ -33,22 +34,29 @@ const Position = () => {
   }
 
   function ShowChangeModal() {
+    setShowCreateModal(true);
     showModal("change_position_modal");
   }
 
   function ShowDeleteModal() {
+    setShowCreateModal(true);
     showModal("delete_position_modal");
+  }
+
+  function closeModal() {
+    setShowCreateModal(false);
   }
 
   useEffect(() => {
     async function getPosition() {
       const res = await GetPositionByDepartmentId(departmentId);
       console.log(res);
-      setDepartment(res.data.positions);
+      setPositions(res.data.positions);
     }
     getPosition();
-  }, [departmentId]);
+  }, [departmentId, showCreateModal]);
 
+  if (name === "...") return <Navigate to="/employee/department" />;
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-start">
@@ -88,9 +96,9 @@ const Position = () => {
             </thead>
             <tbody>
               {/* rows */}
-              {department.map((item, index) => (
+              {positions.map((item, index) => (
                 <PositionRow
-                  key={item._id}
+                  key={item?._id}
                   item={item}
                   index={index}
                   ShowChangeModal={ShowChangeModal}
@@ -101,7 +109,7 @@ const Position = () => {
           </table>
         </div>
       </section>
-      <AddPositionModal departmentId={departmentId} />
+      <AddPositionModal departmentId={departmentId} closeModal={closeModal} />
       <ChangePositionModal />
     </div>
   );

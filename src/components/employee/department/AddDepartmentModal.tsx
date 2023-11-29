@@ -4,7 +4,11 @@ import { useDispatch } from "react-redux";
 const AddDepartmentModal = () => {
   const dispatch = useDispatch();
   const [departmentName, setDepartmentName] = useState("");
+  const [Loading, setLoading] = useState(false);
+
   async function handleSubmit() {
+    if (Loading) return;
+    setLoading(true);
     try {
       const res = await CreateDepartment(departmentName);
       dispatch({
@@ -15,6 +19,9 @@ const AddDepartmentModal = () => {
         },
       });
       console.log(res);
+      setLoading(false);
+      window.location.reload();
+      document.getElementById("btn-close")?.click();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log(error);
@@ -25,6 +32,9 @@ const AddDepartmentModal = () => {
           message: error.response.data.message,
         },
       });
+      setLoading(false);
+      window.location.reload();
+      document.getElementById("btn-close")?.click();
     }
   }
 
@@ -81,7 +91,14 @@ const AddDepartmentModal = () => {
                 <button
                   className="btn bg-tim-color text-white hover:text-black"
                   onClick={handleSubmit}
+                  disabled={Loading}
                 >
+                  {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    Loading && (
+                      <span className="loading loading-infinity loading-md"></span>
+                    )
+                  }
                   Submit
                 </button>
               </div>

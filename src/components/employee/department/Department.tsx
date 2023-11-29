@@ -5,6 +5,7 @@ import ChangeDepartmentModal from "./ChangeDepartmentModal";
 import { GetDepartment } from "@/apis/api_function";
 import { DepartmentRow } from "./DepartmentRow";
 import { useDispatch } from "react-redux";
+import Loading from "@/utils/Loading";
 
 export interface DepartmentType {
   _id: string;
@@ -29,6 +30,8 @@ const example = [
 const Department = () => {
   const dispatch = useDispatch();
   const [department, setDepartment] = useState<DepartmentType[]>(example);
+  const [loading, setLoading] = useState(false);
+
   function showModal(type: string) {
     const modal = document.getElementById(type) as HTMLDialogElement;
     if (modal !== null) {
@@ -45,6 +48,7 @@ const Department = () => {
 
   useEffect(() => {
     const getDepartment = async () => {
+      setLoading(true);
       try {
         const res = await GetDepartment();
         if (res.data.list_dto.length === 0) {
@@ -55,17 +59,32 @@ const Department = () => {
               message: "Server error!",
             },
           });
+          setLoading(false);
           return;
         }
         setDepartment(res.data.list_dto);
-        console.log("dp", department);
+        setLoading(false);
       } catch (error) {
+        dispatch({
+          type: "NOTIFY",
+          payload: {
+            type: "error",
+            message: "Server error!",
+          },
+        });
+        setLoading(false);
         console.log(error);
       }
     };
     getDepartment();
   }, []);
 
+  if (loading)
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   return (
     <div className="flex flex-col gap-4">
       <section className="flex justify-between mt-8">

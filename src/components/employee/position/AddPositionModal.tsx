@@ -2,22 +2,26 @@ import { NewPosition } from "@/apis/api_function";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 interface FormValues {
   title: string;
-  coefficent: number;
+  coefficient: number;
 }
 
 interface Props {
   departmentId: string;
+  closeModal: () => void;
 }
 
 const schema = yup.object().shape({
   title: yup.string().required(),
-  coefficent: yup.number().required(),
+  coefficient: yup.number().required(),
 });
 
-const PositionModal = ({ departmentId }: Props) => {
+const PositionModal = ({ departmentId, closeModal }: Props) => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -27,18 +31,26 @@ const PositionModal = ({ departmentId }: Props) => {
     resolver: yupResolver(schema),
   });
 
-  function Done(data: FormValues) {
+  const [Loading, setLoading] = useState(false);
+
+  async function Done(data: FormValues) {
+    if (Loading) return;
+    setLoading(true);
     try {
-      try {
-        NewPosition(data.title, departmentId, data.coefficent);
-        // click button close
-        document.getElementById("btn-close")?.click();
+      const res = await NewPosition(data.title, departmentId, data.coefficient);
+      if (res.status === 200) {
+        setLoading(false);
+        dispatch({ type: "SET_SUCCESS", payload: "Add position success" });
+        closeModal();
         window.location.reload();
-      } catch (error) {
-        console.log(error);
+        document.getElementById("btn-close")?.click();
       }
     } catch (error) {
+      dispatch({ type: "NOTIFY", payload: error });
       console.log(error);
+      setLoading(false);
+      window.location.reload();
+      document.getElementById("btn-close")?.click();
     }
   }
 
@@ -70,11 +82,11 @@ const PositionModal = ({ departmentId }: Props) => {
                 type="number"
                 placeholder="Position Coefficient"
                 className="input input-bordered w-full max-w-xs"
-                {...register("coefficent")}
+                {...register("coefficient")}
               />
             </div>
-            {errors.coefficent && (
-              <span className="text-red-600">{errors.coefficent.message}</span>
+            {errors.coefficient && (
+              <span className="text-red-600">{errors.coefficient.message}</span>
             )}
           </div>
           <div className="modal-action flex justify-center">
@@ -93,7 +105,11 @@ const PositionModal = ({ departmentId }: Props) => {
                 <button
                   className="btn bg-tim-color text-white hover:text-black"
                   onClick={handleSubmit(Done)}
+                  disabled={Loading}
                 >
+                  {Loading && (
+                    <span className="loading loading-infinity loading-md"></span>
+                  )}
                   Submit
                 </button>
               </div>
