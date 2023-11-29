@@ -20,7 +20,7 @@ export const PayrollTable = () => {
             onChange={(e) => {
               setYear(e.target.value);
             }}
-            className="select select-bordered w-full max-w-xs"
+            className="select select-bordered w-full min-w-fit max-w-xs"
           >
             <option disabled selected>
               Year
@@ -28,14 +28,14 @@ export const PayrollTable = () => {
             <option>2023</option>
             <option>2022</option>
           </select>
-          <select className="select select-bordered w-full max-w-xs">
+          <select className="select select-bordered w-full min-w-fit max-w-xs">
             <option disabled selected>
               Month
             </option>
             <option>11</option>
             <option>12</option>
           </select>
-          <select className="select select-bordered w-full max-w-xs">
+          <select className="select select-bordered w-full min-w-fit max-w-xs">
             <option disabled selected>
               Department
             </option>

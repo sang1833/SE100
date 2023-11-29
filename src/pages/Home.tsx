@@ -111,11 +111,29 @@ const Home = () => {
             </MenuItem>
             <MenuItem
               icon={<MdPayments />}
-              component={<Link to="/payroll" />}
+              component={<Link to="/payroll/department" />}
               className="text-white hover:text-tim-color"
             >
               <p>Payroll</p>
             </MenuItem>
+            {/* <SubMenu
+              label="Payrolls"
+              className="text-white hover:text-black hover:bg-tim-color"
+              icon={<MdPayments />}
+            >
+              <MenuItem
+                component={<Link to="/payroll/department" />}
+                className="bg-tim-color text-white hover:text-tim-color"
+              >
+                <p>By Department</p>
+              </MenuItem>
+              <MenuItem
+                component={<Link to="/payroll/company" />}
+                className="bg-tim-color text-white hover:text-tim-color"
+              >
+                <p>Analysis</p>
+              </MenuItem>
+            </SubMenu> */}
             <MenuItem
               icon={<MdSettings />}
               component={<Link to="/setting" />}
