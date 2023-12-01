@@ -42,6 +42,7 @@ export const PayrollTable = () => {
             <option>IT</option>
             <option>Marketing</option>
           </select>
+          {/*  */}
           <button className="btn bg-tim-color hover:text-black text-white ">
             <span>Apply</span>
           </button>
