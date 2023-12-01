@@ -8,6 +8,7 @@ import officeImage from "/office.jpg";
 const Setting = () => {
   const [value, onChange] = useState("10:00");
   const [startDate, setStartDate] = useState(new Date());
+  const [disabled, setDisabled] = useState(true);
 
   return (
     <section className="relative">
@@ -29,7 +30,11 @@ const Setting = () => {
             <div className="flex justify-between gap-2 items-center">
               <p className="text-2xl">Start time: </p>
               <div className="input input-bordered w-full max-w-[8rem] flex justify-center items-center">
-                <SettingTime onChange={onChange} value={value} />
+                <SettingTime
+                  onChange={onChange}
+                  value={value}
+                  disabled={disabled}
+                />
               </div>
             </div>
             <div className="flex justify-between gap-2 items-center">
@@ -38,6 +43,7 @@ const Setting = () => {
                 type="number"
                 className="input input-bordered w-full max-w-[14rem]"
                 placeholder="Salary per Coefficient"
+                disabled={disabled}
               />
             </div>
             <div className="flex justify-between gap-2 items-center">
@@ -46,10 +52,29 @@ const Setting = () => {
                 <DatePicker
                   selected={startDate}
                   onChange={(date) => setStartDate(date as Date)}
+                  disabled={disabled}
                 />
                 <MdOutlineCalendarMonth className="absolute right-2 text-2xl" />
               </div>
             </div>
+          </section>
+          <section className="flex justify-center mt-8 gap-4">
+            <button
+              className={`btn  hover:text-black  ${
+                disabled ? "bg-tim-color text-white" : "text-black"
+              }`}
+              onClick={() => {
+                setDisabled(!disabled);
+              }}
+            >
+              <p>{disabled ? "Edit" : "Cancel"}</p>
+            </button>
+            <button
+              className="btn bg-tim-color hover:text-black text-white min-w-md"
+              disabled={disabled}
+            >
+              <p>Save</p>
+            </button>
           </section>
         </div>
       </div>

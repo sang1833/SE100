@@ -25,6 +25,7 @@ const Home = () => {
   const [clpSidebar, setClpSidebar] = useState(true);
   const navigate = useNavigate();
   const currentUser = useSelector((state: RootState) => state.auth._id);
+  // const currentUser = true;
   const [arrow, setArrow] = useState(false);
 
   function handleSidebar() {
