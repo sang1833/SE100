@@ -15,3 +15,8 @@ export interface IAuthState {
   avatar: string;
   createAt: string;
 }
+
+export interface ICurrentState {
+  currentPage: string;
+  dataPage: string;
+}

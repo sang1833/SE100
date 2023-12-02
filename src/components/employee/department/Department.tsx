@@ -4,6 +4,7 @@ import { GetDepartment } from "@/apis/api_function";
 import { DepartmentRow } from "./DepartmentRow";
 import { useDispatch } from "react-redux";
 import Loading from "@/utils/Loading";
+import React from "react";
 
 // export interface DepartmentType {
 //   _id: string;
@@ -124,13 +125,14 @@ const Department = () => {
             </thead>
             <tbody>
               {department.map((item, index) => (
-                <DepartmentRow
-                  key={item.id}
-                  item={item}
-                  itemIndex={index}
-                  ShowChangeModal={ShowChangeModal}
-                  ShowDeleteModal={ShowDeleteModal}
-                />
+                <React.Fragment key={item.id}>
+                  <DepartmentRow
+                    item={item}
+                    itemIndex={index}
+                    ShowChangeModal={ShowChangeModal}
+                    ShowDeleteModal={ShowDeleteModal}
+                  />
+                </React.Fragment>
               ))}
             </tbody>
           </table>

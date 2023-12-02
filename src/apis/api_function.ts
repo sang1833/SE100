@@ -25,14 +25,17 @@ export const CreateDepartment = (name: string, code: string) => {
 //Update Department
 export const UpdateDepartment = (id: string, name: string, code: string) => {
   return mainApi.put(
-    apiEndpoints.UPDATE_DEPARTMENT(id),
-    apiEndpoints.updateDepartmentBody(name, code)
+    apiEndpoints.UPDATE_DEPARTMENT,
+    apiEndpoints.updateDepartmentBody(name, code),
+    { params: { id: id } }
   );
 };
 
 //Delete Department
 export const DeleteDepartment = (code: string) => {
-  return mainApi.delete(apiEndpoints.DELETE_DEPARTMENT(code));
+  return mainApi.delete(apiEndpoints.DELETE_DEPARTMENT, {
+    params: { code: code },
+  });
 };
 
 //Get Position by department id

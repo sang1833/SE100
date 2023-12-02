@@ -2,6 +2,7 @@ import {
   MdOutlineSouth,
   MdOutlineNorth,
   MdOutlineLegendToggle,
+  MdDvr,
 } from "react-icons/md";
 
 const salary = [
@@ -19,6 +20,11 @@ const salary = [
     name: "Max",
     icon: <MdOutlineNorth className="w-6 h-6 " />,
     value: 1500,
+  },
+  {
+    name: "Total",
+    icon: <MdDvr className="w-6 h-6 " />,
+    value: 100.522,
   },
 ];
 

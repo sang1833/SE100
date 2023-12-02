@@ -1,50 +1,56 @@
-import { UpdateDepartment } from "@/apis/api_function";
-import { MouseEvent, useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useState } from "react";
+// import { useDispatch } from "react-redux";
 
 interface ChangeDepartmentModalProps {
-  name: string;
-  id: string;
+  handleSubmitChange: () => void;
+  departmentName: string;
+  setDepartmentName: (value: string) => void;
+  departmentCode: string;
+  setDepartmentCode: (value: string) => void;
 }
 
-const ChangeDepartmentModal = ({ name, id }: ChangeDepartmentModalProps) => {
-  const dispatch = useDispatch();
-  const [departmentName, setDepartmentName] = useState(name);
-  const [departmentCode, setDepartmentCode] = useState(""); // eslint-disable-line @typescript-eslint/no-unused-vars
-  const [Loading, setLoading] = useState(false);
+const ChangeDepartmentModal = ({
+  handleSubmitChange,
+  departmentName,
+  setDepartmentName,
+  departmentCode,
+  setDepartmentCode,
+}: ChangeDepartmentModalProps) => {
+  // const dispatch = useDispatch();
+  // const [Loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    if (Loading) return;
-    setLoading(true);
-    try {
-      const res = await UpdateDepartment(id, departmentName, departmentCode);
-      dispatch({
-        type: "NOTIFY",
-        payload: {
-          type: "success",
-          message: res.data.message,
-        },
-      });
-      console.log(res);
-      setLoading(false);
-      window.location.reload();
-      document.getElementById("btn-close")?.click();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      console.log(error);
-      dispatch({
-        type: "NOTIFY",
-        payload: {
-          type: "error",
-          message: error.response.data.message,
-        },
-      });
-      setLoading(false);
-      window.location.reload();
-      document.getElementById("btn-close")?.click();
-    }
-  }
+  // async function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
+  //   e.preventDefault();
+  //   if (Loading) return;
+  //   setLoading(true);
+  //   try {
+  //     const res = await UpdateDepartment(id, departmentName, departmentCode);
+  //     dispatch({
+  //       type: "NOTIFY",
+  //       payload: {
+  //         type: "success",
+  //         message: res.data.message,
+  //       },
+  //     });
+  //     console.log(res);
+  //     setLoading(false);
+  //     window.location.reload();
+  //     document.getElementById("btn-close")?.click();
+  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   } catch (error: any) {
+  //     console.log(error);
+  //     dispatch({
+  //       type: "NOTIFY",
+  //       payload: {
+  //         type: "error",
+  //         message: error.response.data.message,
+  //       },
+  //     });
+  //     setLoading(false);
+  //     window.location.reload();
+  //     document.getElementById("btn-close")?.click();
+  //   }
+  // }
 
   return (
     <div>
@@ -89,7 +95,7 @@ const ChangeDepartmentModal = ({ name, id }: ChangeDepartmentModalProps) => {
                 <button className="btn btn-error">Close</button>
                 <button
                   className="btn bg-tim-color text-white hover:text-black"
-                  onClick={handleSubmit}
+                  onClick={handleSubmitChange}
                 >
                   Submit
                 </button>

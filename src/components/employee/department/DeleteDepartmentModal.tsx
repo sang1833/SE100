@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { DeleteDepartment } from "@/apis/api_function";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 interface DeleteDepartmentModalProps {
@@ -8,14 +8,13 @@ interface DeleteDepartmentModalProps {
 
 const DeleteDepartmentModal = ({ code }: DeleteDepartmentModalProps) => {
   const dispatch = useDispatch();
-  // const [departmentCode, setDepartmentCode] = useState(""); // eslint-disable-line @typescript-eslint/no-unused-vars
   const [Loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
+  async function handleSubmitDelete() {
     if (Loading) return;
     setLoading(true);
     try {
+      console.log("code", code);
       const res = await DeleteDepartment(code);
       dispatch({
         type: "NOTIFY",
@@ -26,7 +25,7 @@ const DeleteDepartmentModal = ({ code }: DeleteDepartmentModalProps) => {
       });
       console.log(res);
       setLoading(false);
-      window.location.reload();
+      // window.location.reload();
       document.getElementById("btn-close")?.click();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -39,7 +38,7 @@ const DeleteDepartmentModal = ({ code }: DeleteDepartmentModalProps) => {
         },
       });
       setLoading(false);
-      window.location.reload();
+      // window.location.reload();
       document.getElementById("btn-close")?.click();
     }
   }
@@ -68,7 +67,7 @@ const DeleteDepartmentModal = ({ code }: DeleteDepartmentModalProps) => {
                 <button className="btn">No</button>
                 <button
                   className="btn btn-error text-white hover:text-black"
-                  onClick={handleSubmit}
+                  onClick={handleSubmitDelete}
                 >
                   Yes
                 </button>

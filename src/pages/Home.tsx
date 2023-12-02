@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState, startTransition, Suspense } from "react";
 import { Outlet, Link, Navigate, useNavigate } from "react-router-dom";
 import {
@@ -24,8 +25,8 @@ import Loading from "@/utils/Loading";
 const Home = () => {
   const [clpSidebar, setClpSidebar] = useState(true);
   const navigate = useNavigate();
-  const currentUser = useSelector((state: RootState) => state.auth._id);
-  // const currentUser = true;
+  // const currentUser = useSelector((state: RootState) => state.auth._id);
+  const currentUser = true;
   const [arrow, setArrow] = useState(false);
 
   function handleSidebar() {

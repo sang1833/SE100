@@ -22,15 +22,14 @@ export const createDepartmentBody = (name: string, code: string) => ({
 });
 
 //Update Department
-export const UPDATE_DEPARTMENT = (id: string) => `/Department/updateOne/${id}`;
+export const UPDATE_DEPARTMENT = `/Department/updateOne`;
 export const updateDepartmentBody = (name: string, code: string) => ({
   name: name,
   code: code,
 });
 
 //Delete Department
-export const DELETE_DEPARTMENT = (code: string) =>
-  `/Department/deleteOne/${code}`;
+export const DELETE_DEPARTMENT = `/Department/deleteOne`;
 
 //Get Position by department id
 export const GET_POSITION_BY_DEPARTMENT_ID = "/position/getByDepartmentId";
