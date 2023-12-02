@@ -4,13 +4,14 @@ import { useDispatch } from "react-redux";
 const AddDepartmentModal = () => {
   const dispatch = useDispatch();
   const [departmentName, setDepartmentName] = useState("");
+  const [departmentCode, setDepartmentCode] = useState(""); // eslint-disable-line @typescript-eslint/no-unused-vars
   const [Loading, setLoading] = useState(false);
 
   async function handleSubmit() {
     if (Loading) return;
     setLoading(true);
     try {
-      const res = await CreateDepartment(departmentName);
+      const res = await CreateDepartment(departmentName, departmentCode);
       dispatch({
         type: "NOTIFY",
         payload: {
@@ -56,6 +57,16 @@ const AddDepartmentModal = () => {
                 className="input input-bordered w-full max-w-xs"
                 value={departmentName}
                 onChange={(e) => setDepartmentName(e.target.value)}
+              />
+            </div>
+            <div className="flex gap-1 items-center justify-between">
+              <label htmlFor="">Department Code: </label>
+              <input
+                type="text"
+                placeholder="Department code"
+                className="input input-bordered w-full max-w-xs"
+                value={departmentCode}
+                onChange={(e) => setDepartmentCode(e.target.value)}
               />
             </div>
             {/* <div className="flex gap-1 items-center justify-between">

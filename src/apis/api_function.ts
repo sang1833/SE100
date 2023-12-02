@@ -15,8 +15,24 @@ export const GetDepartment = () => {
 };
 
 //Create Department
-export const CreateDepartment = (name: string) => {
-  return mainApi.post(apiEndpoints.CREATE_DEPARTMENT, { name: name });
+export const CreateDepartment = (name: string, code: string) => {
+  return mainApi.post(
+    apiEndpoints.CREATE_DEPARTMENT,
+    apiEndpoints.createDepartmentBody(name, code)
+  );
+};
+
+//Update Department
+export const UpdateDepartment = (id: string, name: string, code: string) => {
+  return mainApi.put(
+    apiEndpoints.UPDATE_DEPARTMENT(id),
+    apiEndpoints.updateDepartmentBody(name, code)
+  );
+};
+
+//Delete Department
+export const DeleteDepartment = (code: string) => {
+  return mainApi.delete(apiEndpoints.DELETE_DEPARTMENT(code));
 };
 
 //Get Position by department id

@@ -1,29 +1,41 @@
 import { useEffect, useState } from "react";
 import AddDepartmentModal from "./AddDepartmentModal";
-import DeleteDepartmentModal from "./DeleteDepartmentModal";
-import ChangeDepartmentModal from "./ChangeDepartmentModal";
 import { GetDepartment } from "@/apis/api_function";
 import { DepartmentRow } from "./DepartmentRow";
 import { useDispatch } from "react-redux";
 import Loading from "@/utils/Loading";
 
+// export interface DepartmentType {
+//   _id: string;
+//   departmentName: string;
+//   idBoss: string;
+//   nameBoss: string;
+//   lastUpdate: string;
+//   numberEmployee: number;
+// }
+
 export interface DepartmentType {
-  _id: string;
-  departmentName: string;
-  idBoss: string;
-  nameBoss: string;
-  lastUpdate: string;
-  numberEmployee: number;
+  id: string;
+  name: string;
+  code: string;
 }
+
+// const example = [
+//   {
+//     _id: "...",
+//     departmentName: "...",
+//     idBoss: "...",
+//     nameBoss: "...",
+//     lastUpdate: "...",
+//     numberEmployee: 0,
+//   },
+// ];
 
 const example = [
   {
-    _id: "...",
-    departmentName: "...",
-    idBoss: "...",
-    nameBoss: "...",
-    lastUpdate: "...",
-    numberEmployee: 0,
+    id: "...",
+    name: "...",
+    code: "...",
   },
 ];
 
@@ -51,7 +63,7 @@ const Department = () => {
       setLoading(true);
       try {
         const res = await GetDepartment();
-        if (res.data.list_dto.length === 0) {
+        if (res.data === 0) {
           dispatch({
             type: "NOTIFY",
             payload: {
@@ -62,7 +74,7 @@ const Department = () => {
           setLoading(false);
           return;
         }
-        setDepartment(res.data.list_dto);
+        setDepartment(res.data);
         setLoading(false);
       } catch (error) {
         dispatch({
@@ -113,7 +125,7 @@ const Department = () => {
             <tbody>
               {department.map((item, index) => (
                 <DepartmentRow
-                  key={item._id}
+                  key={item.id}
                   item={item}
                   itemIndex={index}
                   ShowChangeModal={ShowChangeModal}
@@ -125,8 +137,6 @@ const Department = () => {
         </div>
       </section>
       <AddDepartmentModal />
-      <DeleteDepartmentModal />
-      <ChangeDepartmentModal />
     </div>
   );
 };

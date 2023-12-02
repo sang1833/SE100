@@ -5,6 +5,8 @@ import {
 } from "react-icons/md";
 import { DepartmentType } from "./Department";
 import { useNavigate } from "react-router-dom";
+import DeleteDepartmentModal from "./DeleteDepartmentModal";
+import ChangeDepartmentModal from "./ChangeDepartmentModal";
 
 interface DepartmentRowProps {
   item: DepartmentType;
@@ -23,16 +25,14 @@ export const DepartmentRow = ({
   return (
     <tr>
       <td>{itemIndex + 1}</td>
-      <td>{item.departmentName}</td>
-      <td>{item.nameBoss}</td>
-      <td>{item.numberEmployee}</td>
-      <td>{item.lastUpdate.toString().split("T")[0]}</td>
+      <td>{item.name}</td>
+      <td>{item.code}</td>
+      {/* <td>{item.numberEmployee}</td>
+      <td>{item.lastUpdate.toString().split("T")[0]}</td> */}
       <th className="flex gap-1">
         <button
           className="btn btn-ghost btn-xs text-green-800 border border-green-800"
-          onClick={() =>
-            navigate(`/position/${item.departmentName}/${item._id}`)
-          }
+          onClick={() => navigate(`/position/${item.name}/${item.id}`)}
         >
           <MdOutlineFindInPage className="h-5 w-6" />
         </button>
@@ -49,6 +49,8 @@ export const DepartmentRow = ({
           <MdOutlineDeleteForever className="h-5 w-5" />
         </button>
       </th>
+      <DeleteDepartmentModal code={item.code} />
+      <ChangeDepartmentModal id={item.id} name={item.name} />
     </tr>
   );
 };

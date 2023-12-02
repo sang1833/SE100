@@ -12,10 +12,25 @@ export const REGISTER = "/user/register";
 export const IMPORT_USER = "/user/importToExcel";
 
 //Get Department
-export const GET_DEPARTMENT = "/department/all";
+export const GET_DEPARTMENT = "/Department/getAll";
 
 //Create Department
-export const CREATE_DEPARTMENT = "/department/create";
+export const CREATE_DEPARTMENT = "/Department/createNew";
+export const createDepartmentBody = (name: string, code: string) => ({
+  name: name,
+  code: code,
+});
+
+//Update Department
+export const UPDATE_DEPARTMENT = (id: string) => `/Department/updateOne/${id}`;
+export const updateDepartmentBody = (name: string, code: string) => ({
+  name: name,
+  code: code,
+});
+
+//Delete Department
+export const DELETE_DEPARTMENT = (code: string) =>
+  `/Department/deleteOne/${code}`;
 
 //Get Position by department id
 export const GET_POSITION_BY_DEPARTMENT_ID = "/position/getByDepartmentId";
