@@ -3,7 +3,6 @@ import { ICurrentState } from "../../types/Interface";
 // State
 
 const initialState: ICurrentState = {
-  currentPage: "Dashboard",
   dataPage: "",
 };
 
@@ -16,11 +15,9 @@ export const logout = createAction("UNCHANGE");
 const currentReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(login, (state, action) => {
-      state.currentPage = action.payload.currentPage;
       state.dataPage = action.payload.dataPage;
     })
     .addCase(logout, (state) => {
-      state.currentPage = "Dashboard";
       state.dataPage = "";
     });
   // .addCase(gglogin, (state, action) => {

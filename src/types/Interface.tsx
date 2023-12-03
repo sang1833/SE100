@@ -17,6 +17,5 @@ export interface IAuthState {
 }
 
 export interface ICurrentState {
-  currentPage: string;
   dataPage: string;
 }

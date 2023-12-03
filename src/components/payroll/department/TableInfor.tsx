@@ -79,8 +79,6 @@ const EmployeeList = () => {
                 <th>#</th>
                 <th>Name</th>
                 <th>Salary</th>
-                <th>Time</th>
-                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -90,8 +88,6 @@ const EmployeeList = () => {
                   <td>{item.id}</td>
                   <td>{item.name}</td>
                   <td>{item.salary}</td>
-                  <td>{item.time}</td>
-                  <td>{item.status}</td>
                   <th className="flex gap-1">
                     <button
                       className="btn btn-ghost btn-xs border text-green-800 border-green-800"

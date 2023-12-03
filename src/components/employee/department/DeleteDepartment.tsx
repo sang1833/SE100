@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { MdOutlineDeleteForever } from "react-icons/md";
-import DeleteDepartmentModal from "./DeleteDepartmentModal";
 
 import { DepartmentType } from "./Department";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 interface DeleteDepartmentProps {
   ShowDeleteModal: () => void;
@@ -14,21 +15,28 @@ const DeleteDepartmentItem = ({
   ShowDeleteModal,
   item,
 }: DeleteDepartmentProps) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const code = item.code;
   console.log("code", code);
 
   useEffect(() => {
-    console.log("item", item);
-  }, [item]);
+    dispatch({
+      type: "CHANGE",
+      payload: {
+        dataPage: code,
+      },
+    });
+  }, [code, dispatch]);
 
-  function showModal() {
-    const modal = document.getElementById(
-      "delete_department_modal"
-    ) as HTMLDialogElement;
-    if (modal !== null) {
-      modal.showModal();
-    }
-  }
+  // function showModal() {
+  //   const modal = document.getElementById(
+  //     "delete_department_modal"
+  //   ) as HTMLDialogElement;
+  //   if (modal !== null) {
+  //     modal.showModal();
+  //   }
+  // }
 
   //   async function handleSubmitDelete() {
   //     if (Loading) return;
@@ -67,11 +75,10 @@ const DeleteDepartmentItem = ({
     <>
       <button
         className="btn btn-ghost btn-xs text-red-600 border border-red-600"
-        onClick={showModal}
+        onClick={() => navigate(`/department/delete/${item.code}`)}
       >
         <MdOutlineDeleteForever className="h-5 w-5" />
       </button>
-      <DeleteDepartmentModal code={code} />
     </>
   );
 };

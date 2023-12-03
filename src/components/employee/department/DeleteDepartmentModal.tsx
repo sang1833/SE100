@@ -1,14 +1,12 @@
 import { DeleteDepartment } from "@/apis/api_function";
+import { RootState } from "@/store/store";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-interface DeleteDepartmentModalProps {
-  code: string;
-}
-
-const DeleteDepartmentModal = ({ code }: DeleteDepartmentModalProps) => {
+const DeleteDepartmentModal = () => {
   const dispatch = useDispatch();
   const [Loading, setLoading] = useState(false);
+  const code = useSelector((state: RootState) => state.current.dataPage);
 
   async function handleSubmitDelete() {
     if (Loading) return;
