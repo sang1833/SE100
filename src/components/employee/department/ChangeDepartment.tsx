@@ -1,18 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect } from "react";
-import { MdOutlineDeleteForever } from "react-icons/md";
+import { MdOutlineEdit } from "react-icons/md";
 
 import { DepartmentType } from "./Department";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface DeleteDepartmentProps {
-  ShowDeleteModal: () => void;
+  ShowChangeModal: () => void;
   item: DepartmentType;
 }
 
 const DeleteDepartmentItem = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ShowDeleteModal,
+  ShowChangeModal,
   item,
 }: DeleteDepartmentProps) => {
   const navigate = useNavigate();
@@ -73,12 +74,14 @@ const DeleteDepartmentItem = ({
 
   return (
     <>
-      <button
-        className="btn btn-ghost btn-xs text-red-600 border border-red-600"
-        onClick={() => navigate(`delete/${item.code}`)}
-      >
-        <MdOutlineDeleteForever className="h-5 w-5" />
-      </button>
+      <Link to={`change/${item.id}/${item.name}/${item.code}`}>
+        <button
+          className="btn btn-ghost btn-xs border border-gray-600"
+          // onClick={() => navigate(`change/${item.id}/${item.name}/${item.code}`)}
+        >
+          <MdOutlineEdit className="h-5 w-5" />
+        </button>
+      </Link>
     </>
   );
 };

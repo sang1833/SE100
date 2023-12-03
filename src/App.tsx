@@ -29,6 +29,8 @@ import PayrollDepartment from "./components/payroll/PayrollDepartment";
 import Payroll from "./pages/Payroll";
 import PayrollCompany from "./components/payroll/PayrollCompany";
 import Setting from "./pages/Setting";
+import DeleteDepartmentPage from "./components/employee/department/delete/DeletePage";
+import ChangeDepartmentPage from "./components/employee/department/change/ChangePage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,6 +48,14 @@ const router = createBrowserRouter(
           <Route path="list" element={<EmployeeList />} />
           <Route path="create" element={<CreateEmployee />} />
           <Route path="department/:id/:id" element={<EmployeeDepartment />} />
+          <Route
+            path="department/delete/:id"
+            element={<DeleteDepartmentPage />}
+          />
+          <Route
+            path="department/change/:id/:name/:code"
+            element={<ChangeDepartmentPage />}
+          />
         </Route>
         <Route path="attendance" element={<Attendance />} />
         <Route path="payroll" element={<Payroll />}>

@@ -1,56 +1,75 @@
-// import { useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { UpdateDepartment } from "@/apis/api_function";
+import { useNavigate, useParams } from "react-router-dom";
 
-interface ChangeDepartmentModalProps {
-  handleSubmitChange: () => void;
-  departmentName: string;
-  setDepartmentName: (value: string) => void;
-  departmentCode: string;
-  setDepartmentCode: (value: string) => void;
-}
+const ChangeDepartmentModal = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [Loading, setLoading] = useState(false);
+  const { id } = useParams();
+  const { code } = useParams();
+  const { name } = useParams();
 
-const ChangeDepartmentModal = ({
-  handleSubmitChange,
-  departmentName,
-  setDepartmentName,
-  departmentCode,
-  setDepartmentCode,
-}: ChangeDepartmentModalProps) => {
-  // const dispatch = useDispatch();
-  // const [Loading, setLoading] = useState(false);
+  const [departmentName, setDepartmentName] = useState(name);
+  const [departmentCode, setDepartmentCode] = useState(code);
 
-  // async function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
-  //   e.preventDefault();
-  //   if (Loading) return;
-  //   setLoading(true);
-  //   try {
-  //     const res = await UpdateDepartment(id, departmentName, departmentCode);
-  //     dispatch({
-  //       type: "NOTIFY",
-  //       payload: {
-  //         type: "success",
-  //         message: res.data.message,
-  //       },
-  //     });
-  //     console.log(res);
-  //     setLoading(false);
-  //     window.location.reload();
-  //     document.getElementById("btn-close")?.click();
-  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //   } catch (error: any) {
-  //     console.log(error);
-  //     dispatch({
-  //       type: "NOTIFY",
-  //       payload: {
-  //         type: "error",
-  //         message: error.response.data.message,
-  //       },
-  //     });
-  //     setLoading(false);
-  //     window.location.reload();
-  //     document.getElementById("btn-close")?.click();
-  //   }
-  // }
+  function returnToDepartment() {
+    navigate("/employee/department");
+  }
+
+  async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    if (Loading) return;
+    setLoading(true);
+    if (
+      id === undefined ||
+      departmentCode === undefined ||
+      departmentName === undefined
+    ) {
+      dispatch({
+        type: "NOTIFY",
+        payload: {
+          type: "error",
+          message: "Department code is undefined!",
+        },
+      });
+      setLoading(false);
+      document.getElementById("btn-close")?.click();
+      return;
+    }
+    try {
+      const res = await UpdateDepartment(
+        id.toString(),
+        departmentName.toString(),
+        departmentCode.toString()
+      );
+      dispatch({
+        type: "NOTIFY",
+        payload: {
+          type: "success",
+          message: res.data.message,
+        },
+      });
+      console.log(res);
+      setLoading(false);
+      returnToDepartment();
+      document.getElementById("btn-close")?.click();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.log(error);
+      dispatch({
+        type: "NOTIFY",
+        payload: {
+          type: "error",
+          message: error.response.data.message,
+        },
+      });
+      setLoading(false);
+      returnToDepartment();
+      document.getElementById("btn-close")?.click();
+    }
+  }
 
   return (
     <div>
@@ -92,10 +111,12 @@ const ChangeDepartmentModal = ({
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
               <div className="flex justify-center gap-1">
-                <button className="btn btn-error">Close</button>
+                <button className="btn btn-error" onClick={returnToDepartment}>
+                  Close
+                </button>
                 <button
                   className="btn bg-tim-color text-white hover:text-black"
-                  onClick={handleSubmitChange}
+                  onClick={(e) => handleSubmit(e)}
                 >
                   Submit
                 </button>

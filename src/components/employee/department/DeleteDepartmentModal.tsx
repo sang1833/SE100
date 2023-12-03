@@ -1,18 +1,37 @@
 import { DeleteDepartment } from "@/apis/api_function";
-import { RootState } from "@/store/store";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
 
 const DeleteDepartmentModal = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [Loading, setLoading] = useState(false);
-  const code = useSelector((state: RootState) => state.current.dataPage);
+  const code = id?.toString();
+
+  function returnToDepartment() {
+    navigate("/employee/department");
+  }
 
   async function handleSubmitDelete() {
     if (Loading) return;
     setLoading(true);
     try {
-      console.log("code", code);
+      console.log("codeDel", code);
+      if (code === undefined) {
+        dispatch({
+          type: "NOTIFY",
+          payload: {
+            type: "error",
+            message: "Department code is undefined!",
+          },
+        });
+        setLoading(false);
+        document.getElementById("btn-close")?.click();
+        returnToDepartment();
+        return;
+      }
       const res = await DeleteDepartment(code);
       dispatch({
         type: "NOTIFY",
@@ -25,6 +44,7 @@ const DeleteDepartmentModal = () => {
       setLoading(false);
       // window.location.reload();
       document.getElementById("btn-close")?.click();
+      returnToDepartment();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log(error);
@@ -38,6 +58,7 @@ const DeleteDepartmentModal = () => {
       setLoading(false);
       // window.location.reload();
       document.getElementById("btn-close")?.click();
+      returnToDepartment();
     }
   }
 
@@ -62,7 +83,9 @@ const DeleteDepartmentModal = () => {
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
               <div className="flex justify-center gap-1">
-                <button className="btn">No</button>
+                <button className="btn" onClick={returnToDepartment}>
+                  No
+                </button>
                 <button
                   className="btn btn-error text-white hover:text-black"
                   onClick={handleSubmitDelete}

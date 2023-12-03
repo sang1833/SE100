@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import DeleteDepartmentModal from "../DeleteDepartmentModal";
+import ChangeDepartmentModal from "../ChangeDepartmentModal";
 
-const DeletePage = () => {
+const ChangePage = () => {
   useEffect(() => {
     function showModal() {
       const modal = document.getElementById(
-        "delete_department_modal"
+        "change_department_modal"
       ) as HTMLDialogElement;
       if (modal !== null) {
         modal.showModal();
@@ -16,9 +16,9 @@ const DeletePage = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <DeleteDepartmentModal />
+      <ChangeDepartmentModal />
     </div>
   );
 };
 
-export default DeletePage;
+export default ChangePage;
