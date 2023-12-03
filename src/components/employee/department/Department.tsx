@@ -52,13 +52,6 @@ const Department = () => {
     }
   }
 
-  function ShowChangeModal() {
-    showModal("change_department_modal");
-  }
-  function ShowDeleteModal() {
-    showModal("delete_department_modal");
-  }
-
   useEffect(() => {
     const getDepartment = async () => {
       setLoading(true);
@@ -126,12 +119,7 @@ const Department = () => {
             <tbody>
               {department.map((item, index) => (
                 <React.Fragment key={item.id}>
-                  <DepartmentRow
-                    item={item}
-                    itemIndex={index}
-                    ShowChangeModal={ShowChangeModal}
-                    ShowDeleteModal={ShowDeleteModal}
-                  />
+                  <DepartmentRow item={item} itemIndex={index} />
                 </React.Fragment>
               ))}
             </tbody>

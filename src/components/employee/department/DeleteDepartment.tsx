@@ -6,15 +6,10 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 interface DeleteDepartmentProps {
-  ShowDeleteModal: () => void;
   item: DepartmentType;
 }
 
-const DeleteDepartmentItem = ({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ShowDeleteModal,
-  item,
-}: DeleteDepartmentProps) => {
+const DeleteDepartmentItem = ({ item }: DeleteDepartmentProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const code = item.code;

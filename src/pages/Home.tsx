@@ -11,8 +11,7 @@ import {
 import Navbar from "./Navbar";
 import { FaHome } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+
 import {
   MdArrowCircleRight,
   MdArrowCircleLeft,

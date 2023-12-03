@@ -4,19 +4,13 @@ import { MdOutlineEdit } from "react-icons/md";
 
 import { DepartmentType } from "./Department";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface DeleteDepartmentProps {
-  ShowChangeModal: () => void;
   item: DepartmentType;
 }
 
-const DeleteDepartmentItem = ({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ShowChangeModal,
-  item,
-}: DeleteDepartmentProps) => {
-  const navigate = useNavigate();
+const DeleteDepartmentItem = ({ item }: DeleteDepartmentProps) => {
   const dispatch = useDispatch();
   const code = item.code;
   console.log("code", code);

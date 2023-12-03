@@ -13,16 +13,9 @@ import ChangeDepartment from "./ChangeDepartment";
 interface DepartmentRowProps {
   item: DepartmentType;
   itemIndex: number;
-  ShowChangeModal: () => void;
-  ShowDeleteModal: () => void;
 }
 
-export const DepartmentRow = ({
-  item,
-  itemIndex,
-  ShowChangeModal,
-  ShowDeleteModal,
-}: DepartmentRowProps) => {
+export const DepartmentRow = ({ item, itemIndex }: DepartmentRowProps) => {
   const navigate = useNavigate();
   // const dispatch = useDispatch();
   // const [departmentCode, setDepartmentCode] = useState(""); // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -85,8 +78,8 @@ export const DepartmentRow = ({
             <MdOutlineFindInPage className="h-5 w-6" />
           </button>
 
-          <DeleteDepartment ShowDeleteModal={ShowDeleteModal} item={item} />
-          <ChangeDepartment ShowChangeModal={ShowChangeModal} item={item} />
+          <DeleteDepartment item={item} />
+          <ChangeDepartment item={item} />
         </th>
       </tr>
     </>
