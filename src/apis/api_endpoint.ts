@@ -31,23 +31,25 @@ export const updateDepartmentBody = (name: string, code: string) => ({
 //Delete Department
 export const DELETE_DEPARTMENT = `/Department/deleteOne`;
 
-//Get Position by department id
-export const GET_POSITION_BY_DEPARTMENT_ID = "/position/getByDepartmentId";
-export const getPositionByDepartmentIdBody = (departmentId: string) => ({
-  departmentId: departmentId,
+//Get Position by department code
+export const GET_POSITION_BY_DEPARTMENT_ID = "/Position/getByDepartmentCode";
+export const getPositionByDepartmentIdBody = (departmentCode: string) => ({
+  departmentCode: departmentCode,
 });
 
 //New Position
-export const NEW_POSITION = "/position/new";
-export const newPositionBody = (
-  title: string,
-  departmentId: string,
-  coef: number
-) => ({
+export const NEW_POSITION = "/Position/createNew";
+export const newPositionBody = (title: string, code: string, coef: number) => ({
   title: title,
-  departmentId: departmentId,
-  coef: coef,
+  code: code,
+  salary_coeffcient: coef,
 });
+
+//Update Position
+export const UPDATE_POSITION = "/Position/updateOne";
+
+//Delete Position
+export const DELETE_POSITION = "/Position/deleteOne";
 
 //import to excel
 export const IMPORT_TO_EXCEL = "/user/importToExcel";

@@ -1,25 +1,26 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import AddPositionModal from "./AddPositionModal";
 import ChangePositionModal from "./ChangePositionModal";
 import { Navigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { GetPositionByDepartmentId } from "@/apis/api_function";
+import { GetPositionByDepartmentCode } from "@/apis/api_function";
 import { PositionRow } from "./PositionRow";
 import { MdKeyboardBackspace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 const positionArray = [
   {
-    _id: 1,
+    id: 1,
     title: "...",
-    departmentId: "...",
-    coef: 2,
+    code: "...",
+    salary_coeffcient: 2,
   },
 ];
 
 const Position = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const departmentId = location.pathname.split("/")[3];
+  const departmentCode = location.pathname.split("/")[3];
   const name = location.pathname.split("/")[2];
   const departmentName = name.replace(/%20/g, " ");
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -33,28 +34,22 @@ const Position = () => {
     }
   }
 
-  function ShowChangeModal() {
-    setShowCreateModal(true);
-    showModal("change_position_modal");
-  }
-
-  function ShowDeleteModal() {
-    setShowCreateModal(true);
-    showModal("delete_position_modal");
-  }
-
   function closeModal() {
     setShowCreateModal(false);
   }
 
   useEffect(() => {
     async function getPosition() {
-      const res = await GetPositionByDepartmentId(departmentId);
-      console.log(res);
-      setPositions(res.data.positions);
+      try {
+        const res = await GetPositionByDepartmentCode(departmentCode);
+        console.log(res);
+        setPositions(res.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
     getPosition();
-  }, [departmentId, showCreateModal]);
+  }, [departmentCode, showCreateModal]);
 
   if (name === "...") return <Navigate to="/employee/department" />;
   return (
@@ -89,6 +84,7 @@ const Position = () => {
             <thead>
               <tr>
                 <th>#</th>
+                <th>Code</th>
                 <th>Title</th>
                 <th>Coefficient</th>
                 <th>Action</th>
@@ -96,20 +92,14 @@ const Position = () => {
             </thead>
             <tbody>
               {/* rows */}
-              {positions.map((item, index) => (
-                <PositionRow
-                  key={item?._id}
-                  item={item}
-                  index={index}
-                  ShowChangeModal={ShowChangeModal}
-                  ShowDeleteModal={ShowDeleteModal}
-                />
+              {positions?.map((item, index) => (
+                <PositionRow key={item.id} item={item} index={index} />
               ))}
             </tbody>
           </table>
         </div>
       </section>
-      <AddPositionModal departmentId={departmentId} closeModal={closeModal} />
+      <AddPositionModal departmentId={departmentCode} closeModal={closeModal} />
       <ChangePositionModal />
     </div>
   );

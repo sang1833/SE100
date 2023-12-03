@@ -7,6 +7,7 @@ import { useState } from "react";
 
 interface FormValues {
   title: string;
+  code: string;
   coefficient: number;
 }
 
@@ -17,6 +18,7 @@ interface Props {
 
 const schema = yup.object().shape({
   title: yup.string().required(),
+  code: yup.string().required(),
   coefficient: yup.number().required(),
 });
 
@@ -37,7 +39,12 @@ const PositionModal = ({ departmentId, closeModal }: Props) => {
     if (Loading) return;
     setLoading(true);
     try {
-      const res = await NewPosition(data.title, departmentId, data.coefficient);
+      const res = await NewPosition(
+        data.title,
+        data.code,
+        data.coefficient,
+        departmentId
+      );
       if (res.status === 200) {
         setLoading(false);
         dispatch({ type: "SET_SUCCESS", payload: "Add position success" });
@@ -75,6 +82,18 @@ const PositionModal = ({ departmentId, closeModal }: Props) => {
             </div>
             {errors.title && (
               <span className="text-red-600">{errors.title.message}</span>
+            )}
+            <div className="flex gap-1 items-center justify-between">
+              <label htmlFor="">Position Code: </label>
+              <input
+                type="text"
+                placeholder="Position Code"
+                className="input input-bordered w-full max-w-xs"
+                {...register("code")}
+              />
+            </div>
+            {errors.code && (
+              <span className="text-red-600">{errors.code.message}</span>
             )}
             <div className="flex gap-1 items-center justify-between">
               <label htmlFor="">Position Coefficient: </label>

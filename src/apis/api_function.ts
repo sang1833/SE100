@@ -1,5 +1,7 @@
 import { mainApi } from "./main_api";
 import * as apiEndpoints from "./api_endpoint";
+// import axios from "axios";
+// import { baseURL } from "./main_api";
 
 //Login
 export const Login = (email: string, password: string) => {
@@ -39,22 +41,50 @@ export const DeleteDepartment = (code: string) => {
 };
 
 //Get Position by department id
-export const GetPositionByDepartmentId = (departmentId: string) => {
-  return mainApi.post(apiEndpoints.GET_POSITION_BY_DEPARTMENT_ID, {
-    departmentId: departmentId,
+export const GetPositionByDepartmentCode = (departmentCode: string) => {
+  return mainApi.get(apiEndpoints.GET_POSITION_BY_DEPARTMENT_ID, {
+    params: { departmentCode: departmentCode },
   });
+  // return axios.get(baseURL, {
+  //   params: { departmentCode: departmentCode },
+  // });
 };
 
 //New Position
 export const NewPosition = (
-  name: string,
-  departmentId: string,
-  coef: number
+  title: string,
+  code: string,
+  coef: number,
+  dpCode: string
 ) => {
   return mainApi.post(
     apiEndpoints.NEW_POSITION,
-    apiEndpoints.newPositionBody(name, departmentId, coef)
+    apiEndpoints.newPositionBody(title, code, coef),
+    {
+      params: { departmentCode: dpCode },
+    }
   );
+};
+
+//Update Position
+export const UpdatePosition = (
+  id: string,
+  title: string,
+  code: string,
+  coef: number
+) => {
+  return mainApi.put(
+    apiEndpoints.UPDATE_POSITION,
+    apiEndpoints.newPositionBody(title, code, coef),
+    { params: { id: id } }
+  );
+};
+
+//Delete Position
+export const DeletePosition = (id: string) => {
+  return mainApi.delete(apiEndpoints.DELETE_POSITION, {
+    params: { id: id },
+  });
 };
 
 //import to excel

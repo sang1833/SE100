@@ -31,6 +31,8 @@ import PayrollCompany from "./components/payroll/PayrollCompany";
 import Setting from "./pages/Setting";
 import DeleteDepartmentPage from "./components/employee/department/delete/DeletePage";
 import ChangeDepartmentPage from "./components/employee/department/change/ChangePage";
+import DeletePositionPage from "./components/employee/position/page/DeletePage";
+import ChangePositionPage from "./components/employee/position/page/ChangePage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -63,7 +65,15 @@ const router = createBrowserRouter(
           <Route path="company" element={<PayrollCompany />} />
         </Route>
         <Route path="account" element={<Account />} />
-        <Route path="position/:id/:id" element={<Position />} />
+        <Route path="position/:name/:code" element={<Position />} />
+        <Route
+          path="position/:name/:code/delete/:id"
+          element={<DeletePositionPage />}
+        />
+        <Route
+          path="position/:name/:code/change/:id/:title/:code/:coefficient"
+          element={<ChangePositionPage />}
+        />
         <Route path="setting" element={<Setting />} />
       </Route>
       <Route path="login" element={<Login />} />

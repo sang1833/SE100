@@ -80,7 +80,7 @@ export const DepartmentRow = ({
         <th className="flex gap-1">
           <button
             className="btn btn-ghost btn-xs text-green-800 border border-green-800"
-            onClick={() => navigate(`/position/${item.name}/${item.id}`)}
+            onClick={() => navigate(`/position/${item.name}/${item.code}`)}
           >
             <MdOutlineFindInPage className="h-5 w-6" />
           </button>
