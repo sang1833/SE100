@@ -1,5 +1,5 @@
 //Login
-export const LOGIN = "/user/login";
+export const LOGIN = "/Employee/login";
 export const getLoginBody = (email: string, password: string) => ({
   email: email,
   password: password,
@@ -59,3 +59,31 @@ export const importToExcelBody = (file: File, departmentId: string) => {
   formData.append("departmentID", departmentId);
   return formData;
 };
+
+//get Employee by department code
+export const GET_EMPLOYEE_BY_DEPARTMENT_CODE = "/Employee/getByDepartmentCode";
+
+//get Employee role
+export const GET_EMPLOYEE_BY_ROLE = "/Employee/getRole";
+
+//create new employee
+export const CREATE_NEW_EMPLOYEE = "/Employee/createNew";
+export const createNewEmployeeBody = (
+  email: string,
+  fullName: string,
+  phoneNumber: string,
+  avatar: string,
+  birth_day: string,
+  gender: string,
+  cmnd: string,
+  address: string
+) => ({
+  email: email,
+  fullName: fullName,
+  phoneNumber: phoneNumber,
+  avatar: avatar,
+  birth_day: birth_day,
+  gender: gender,
+  cmnd: cmnd,
+  address: address,
+});

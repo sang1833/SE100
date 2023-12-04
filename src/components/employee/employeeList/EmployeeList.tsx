@@ -1,39 +1,68 @@
-import {
-  MdOutlineDeleteForever,
-  MdOutlineEdit,
-  MdOutlineAttachMoney,
-} from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import DeleteProfile from "./DeleteProfile";
 import { AddEmployeeExcel } from "./AddEmployeeExcel";
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction } from "react";
+import {
+  GetDepartment,
+  GetEmployeeByDepartmentCode,
+} from "@/apis/api_function";
+import { DepartmentType } from "../department/Department";
+import EmployeeTable from "./EmployeeTable";
 
-const employeeArray = [
-  {
-    id: 1,
-    name: "...",
-    description: "...",
-    position: "...",
-  },
-];
+export interface EmployeeProps {
+  id: number;
+  email: string;
+  fullName: string;
+  phoneNumber: string;
+  avatar: string;
+  birth_day: string;
+  gender: boolean;
+  cmnd: string;
+  address: string;
+}
 
 const EmployeeList = () => {
   const navigate = useNavigate();
-  const [employee, setEmployee] = useState(employeeArray);
+  const [employee, setEmployee] = useState<EmployeeProps[]>([]);
+  const [department, setDepartment] = useState<DepartmentType[]>([]);
+  const [currentDepartment, setCurrentDepartment] = useState("");
+
+  // function showModal(type: string) {
+  //   const modal = document.getElementById(type) as HTMLDialogElement;
+  //   if (modal !== null) {
+  //     modal.showModal();
+  //   }
+  // }
+
+  function getCurrentDepartment(event: {
+    target: { value: SetStateAction<string> };
+  }) {
+    setCurrentDepartment(event.target.value);
+  }
+
+  useEffect(() => {
+    async function getDepartment() {
+      try {
+        const res = await GetDepartment();
+        setDepartment(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getDepartment();
+  }, []);
 
   useEffect(() => {
     async function getEmployee() {
-      setEmployee(employeeArray);
+      try {
+        const res = await GetEmployeeByDepartmentCode(currentDepartment);
+        setEmployee(res.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
     getEmployee();
-  }, []);
-
-  function showModal(type: string) {
-    const modal = document.getElementById(type) as HTMLDialogElement;
-    if (modal !== null) {
-      modal.showModal();
-    }
-  }
+  }, [currentDepartment]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -50,56 +79,35 @@ const EmployeeList = () => {
           <AddEmployeeExcel />
         </div>
       </section>
-      <section className="bg-white border rounded-lg">
-        <div className="overflow-x-auto">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Department</th>
-                <th>Position</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* rows */}
-              {employee.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.name}</td>
-                  <td>{item.description}</td>
-                  <td>{item.position}</td>
-                  <th className="flex gap-1">
-                    <button
-                      className="btn btn-ghost btn-xs border text-green-800 border-green-800"
-                      key={item.id}
-                      onClick={() => navigate(`/employee/${item.id}`)}
-                    >
-                      <MdOutlineAttachMoney className="h-5 w-5" />
-                    </button>
-                    <button
-                      className="btn btn-ghost btn-xs border text-tim-color border-tim-color-1"
-                      key={item.id}
-                      onClick={() => navigate(`/employee/${item.id}`)}
-                    >
-                      <MdOutlineEdit className="h-5 w-5" />
-                    </button>
-                    <button
-                      className="btn btn-ghost btn-xs text-red-600 border border-red-600"
-                      key={item.id}
-                      onClick={() => showModal("delete_profile_modal")}
-                    >
-                      <MdOutlineDeleteForever className="h-5 w-5" />
-                    </button>
-                  </th>
-                </tr>
+      <section>
+        <div className="flex justify-start items-center ">
+          <p>Filter by:</p>
+          <div className="mx-2">
+            <select
+              id="department"
+              className="select select-bordered w-full max-w-xs"
+              onChange={getCurrentDepartment}
+            >
+              <option disabled selected>
+                Department
+              </option>
+              {department?.map((item: DepartmentType) => (
+                <option key={item.code} value={item.code}>
+                  {item.name}
+                </option>
               ))}
-            </tbody>
-          </table>
+            </select>
+          </div>
         </div>
       </section>
+      {employee.length === 0 ? (
+        <div className="flex justify-center items-center">
+          <p className="text-gray-400">Please choose a department</p>
+        </div>
+      ) : (
+        <EmployeeTable employee={employee} />
+      )}
+
       <DeleteProfile />
     </div>
   );

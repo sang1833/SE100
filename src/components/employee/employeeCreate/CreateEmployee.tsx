@@ -9,29 +9,30 @@ import { MdKeyboardBackspace } from "react-icons/md";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
+import { uploadFirebaseImage } from "@/apis/firebase";
 
 interface Employee {
-  name: string;
+  fullName: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
   address: string;
   age: string;
   gender: string;
 }
 
 const employee: Employee = {
-  name: "John Doe",
+  fullName: "John Doe",
   email: "johndoe@example.com",
-  phone: "123-456-7890",
+  phoneNumber: "123-456-7890",
   address: "1234 Main St",
   age: "30",
   gender: "Male",
 };
 
 const schema = yup.object().shape({
-  name: yup.string().required(),
+  fullName: yup.string().required(),
   email: yup.string().email().required(),
-  phone: yup.string().required(),
+  phoneNumber: yup.string().required(),
   address: yup.string().required(),
   age: yup.string().required(),
   gender: yup.string().required(),
@@ -48,24 +49,53 @@ const CreateEmployee = () => {
     resolver: yupResolver(schema),
   });
   const [startDate, setStartDate] = useState(new Date());
-  const [image, setImage] = useState("/man-avatar.png");
+  const [file, setFile] = useState<File | undefined>(undefined); // file state
+  const [image, setImage] = useState<string | undefined>(undefined);
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file) {
+    setFile(file);
+    if (file != null) {
       const reader = new FileReader();
       reader.onload = () => {
-        setImage(reader.result as string);
+        const fileData = reader.result as string;
+        setImage(fileData);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  function submit(data: Employee) {
+  async function submitImage() {
     // handle submitting the form
-    console.log(data);
-    if (errors) {
-      alert("Please check your input");
+    console.log("file", file);
+    if (file == null) {
+      console.log("null");
+      return;
     }
+    try {
+      const url = await uploadFirebaseImage(file);
+      console.log("url", url);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function submit(data: Employee) {
+    // handle submitting the form
+
+    console.log("dt", data);
+    // try {
+    //   if (file == null) {
+    //     console.log("null");
+    //     return;
+    //   }
+    //   const url = await uploadFirebaseImage(file);
+    //   console.log("url", url);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    // if (errors) {
+    //   alert("Please check your input");
+    // }
   }
 
   return (
@@ -93,10 +123,10 @@ const CreateEmployee = () => {
                     type="text"
                     placeholder="Position"
                     className="input input-bordered"
-                    defaultValue={employee.name}
-                    {...register("name")}
+                    defaultValue={employee.fullName}
+                    {...register("fullName")}
                   />
-                  {errors.name && (
+                  {errors.fullName && (
                     <p className="text-do-color text-sm mt-2">
                       Your password must be at least 6 characters as well.
                     </p>
@@ -118,8 +148,8 @@ const CreateEmployee = () => {
                     type="text"
                     placeholder="Phone"
                     className="input input-bordered"
-                    defaultValue={employee.phone}
-                    {...register("phone")}
+                    defaultValue={employee.phoneNumber}
+                    {...register("phoneNumber")}
                   />
                 </div>
                 <div className="grid grid-cols-2 items-center">
@@ -191,7 +221,11 @@ const CreateEmployee = () => {
               </div>
             </div>
             <div className="flex justify-center items-center mt-4">
-              <button className="btn bg-tim-color text-white hover:text-black ">
+              <button
+                className="btn bg-tim-color text-white hover:text-black"
+                type="submit"
+                onClick={submitImage}
+              >
                 Submit
               </button>
             </div>

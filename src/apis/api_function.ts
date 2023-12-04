@@ -94,3 +94,18 @@ export const ImportToExcel = (file: File, departmentId: string) => {
     apiEndpoints.importToExcelBody(file, departmentId)
   );
 };
+
+//get Employee by department code
+export const GetEmployeeByDepartmentCode = (departmentCode: string) => {
+  return mainApi.get(apiEndpoints.GET_EMPLOYEE_BY_DEPARTMENT_CODE, {
+    params: { departmentCode: departmentCode },
+  });
+};
+
+//create new employee
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const CreateNewEmployee = (departmentCode: string, data: any) => {
+  return mainApi.post(apiEndpoints.CREATE_NEW_EMPLOYEE, data, {
+    params: { departmentCode: departmentCode },
+  });
+};

@@ -150,7 +150,10 @@ const PositionModal = () => {
           </div>
           <div className="modal-action flex justify-center">
             <form method="dialog">
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              <button
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                onClick={returnToDepartment}
+              >
                 ✕
               </button>
             </form>
