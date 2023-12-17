@@ -18,7 +18,7 @@ export const removeDepartments = createAction("REMOVE_DEPARTMENTS");
 const departmentReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addDepartments, (state, action) => {
-      state = action.payload;
+      state.listDepartment = action.payload.listDepartment;
     })
     .addCase(removeDepartments, (state) => {
       state.listDepartment = [];
