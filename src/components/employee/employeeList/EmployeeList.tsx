@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import DeleteProfile from "./DeleteProfile";
-import { AddEmployeeExcel } from "./AddEmployeeExcel";
+// import { AddEmployeeExcel } from "./AddEmployeeExcel";
 import { useState, useEffect, SetStateAction } from "react";
 import {
   GetDepartment,
@@ -25,7 +25,9 @@ const EmployeeList = () => {
   const navigate = useNavigate();
   const [employee, setEmployee] = useState<EmployeeProps[]>([]);
   const [department, setDepartment] = useState<DepartmentType[]>([]);
-  const [currentDepartment, setCurrentDepartment] = useState("");
+  const [currentDepartment, setCurrentDepartment] = useState(
+    department[0]?.code
+  );
 
   // function showModal(type: string) {
   //   const modal = document.getElementById(type) as HTMLDialogElement;
@@ -76,26 +78,40 @@ const EmployeeList = () => {
           >
             <p>Add Employees</p>
           </button>
-          <AddEmployeeExcel />
+          {/* <AddEmployeeExcel /> */}
         </div>
       </section>
       <section>
         <div className="flex justify-start items-center ">
           <p>Filter by:</p>
-          <div className="mx-2">
+          <div className="mx-2 flex gap-2">
             <select
               id="department"
               className="select select-bordered w-full max-w-xs"
               onChange={getCurrentDepartment}
             >
-              <option disabled selected>
+              {/* <option disabled selected>
                 Department
-              </option>
+              </option> */}
               {department?.map((item: DepartmentType) => (
-                <option key={item.code} value={item.code}>
+                <option key={item.code} value={item.code} className="w-full">
                   {item.name}
                 </option>
               ))}
+            </select>
+            <select
+              id="position"
+              className="select select-bordered w-full max-w-xs"
+              onChange={getCurrentDepartment}
+            >
+              <option disabled selected>
+                Position
+              </option>
+              {/* {department?.map((item: DepartmentType) => (
+                <option key={item.code} value={item.code}>
+                  {item.name}
+                </option>
+              ))} */}
             </select>
           </div>
         </div>

@@ -1,13 +1,12 @@
 import SettingTime from "@/components/setting/SettingTime";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { MdOutlineCalendarMonth } from "react-icons/md";
 import officeImage from "/office.jpg";
 
 const Setting = () => {
   const [value, onChange] = useState("10:00");
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState("");
   const [disabled, setDisabled] = useState(true);
 
   return (
@@ -48,14 +47,22 @@ const Setting = () => {
             </div>
             <div className="flex justify-between gap-2 items-center">
               <p className="text-2xl">Payment date: </p>
-              <div className="relative input input-bordered w-full max-w-[14rem] flex justify-center items-center">
-                <DatePicker
+              {/* <div className="relative input input-bordered w-full max-w-[14rem] flex justify-center items-center"> */}
+              {/* <DatePicker
                   selected={startDate}
                   onChange={(date) => setStartDate(date as Date)}
                   disabled={disabled}
-                />
-                <MdOutlineCalendarMonth className="absolute right-2 text-2xl" />
-              </div>
+                /> */}
+              <input
+                type="number"
+                className="input input-bordered w-full max-w-[14rem]"
+                placeholder="Salary Date"
+                onChange={(e) => setStartDate(e.target.value)}
+                value={startDate}
+                disabled={disabled}
+              />
+              {/* <MdOutlineCalendarMonth className="absolute right-2 text-2xl" /> */}
+              {/* </div> */}
             </div>
           </section>
           <section className="flex justify-center mt-8 gap-4">

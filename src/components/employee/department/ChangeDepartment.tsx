@@ -13,7 +13,7 @@ interface DeleteDepartmentProps {
 const DeleteDepartmentItem = ({ item }: DeleteDepartmentProps) => {
   const dispatch = useDispatch();
   const code = item.code;
-  console.log("code", code);
+  // console.log("code", code);
 
   useEffect(() => {
     dispatch({

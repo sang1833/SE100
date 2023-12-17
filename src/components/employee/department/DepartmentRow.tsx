@@ -68,6 +68,9 @@ export const DepartmentRow = ({ item, itemIndex }: DepartmentRowProps) => {
         <td>{itemIndex + 1}</td>
         <td>{item.name}</td>
         <td>{item.code}</td>
+        <td>{item.nameBoss}</td>
+        <td>{item.numberEmployee}</td>
+
         {/* <td>{item.numberEmployee}</td>
       <td>{item.lastUpdate.toString().split("T")[0]}</td> */}
         <th className="flex gap-1">

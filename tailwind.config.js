@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        "tim-color": "rgb(72, 76, 127)",
+        "tim-color": "#484C7F",
+        // #484c7f
         "tim-color-1": "#353966",
         "primary-1": "#00CCCD",
         "secondary-0": "#FFC107",
@@ -37,8 +38,5 @@ export default {
   daisyui: {
     themes: ["light", "lofi"], // true: all themes | false: only light + dark | array: specific themes like this ["light", "dark", "cupcake"]
     darkTheme: "lofi", // name of one of the included themes for dark mode
-  },
-  corePlugins: {
-    preflight: false,
   },
 };

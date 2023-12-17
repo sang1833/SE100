@@ -47,9 +47,6 @@ export const AttendanceTable = () => {
           </div>
           <div className="mx-2">
             <select className="select select-bordered w-full max-w-xs">
-              <option disabled selected>
-                Date
-              </option>
               <option>21-11-2023</option>
               <option>22-11-2023</option>
             </select>

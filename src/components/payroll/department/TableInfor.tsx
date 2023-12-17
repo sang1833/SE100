@@ -79,6 +79,7 @@ const EmployeeList = () => {
                 <th>#</th>
                 <th>Name</th>
                 <th>Salary</th>
+                <th>Absent day</th>
               </tr>
             </thead>
             <tbody>

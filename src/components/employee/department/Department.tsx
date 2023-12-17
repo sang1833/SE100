@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import AddDepartmentModal from "./AddDepartmentModal";
 import { GetDepartment } from "@/apis/api_function";
 import { DepartmentRow } from "./DepartmentRow";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "@/utils/Loading";
 import React from "react";
+import { RootState } from "@/store/store";
 
 // export interface DepartmentType {
 //   _id: string;
@@ -16,9 +17,12 @@ import React from "react";
 // }
 
 export interface DepartmentType {
-  id: string;
+  id: number;
   name: string;
   code: string;
+  idBoss: number;
+  nameBoss: string;
+  numberEmployee: number;
 }
 
 // const example = [
@@ -32,17 +36,24 @@ export interface DepartmentType {
 //   },
 // ];
 
-const example = [
-  {
-    id: "...",
-    name: "...",
-    code: "...",
-  },
-];
+// const example = [
+//   {
+//     id: 0,
+//     name: "...",
+//     code: "...",
+//     idBoss: 0,
+//     nameBoss: "...",
+//     numberEmployee: 0,
+//   },
+// ];
 
 const Department = () => {
   const dispatch = useDispatch();
-  const [department, setDepartment] = useState<DepartmentType[]>(example);
+  const listDepartment = useSelector(
+    (state: RootState) => state.department.listDepartment
+  );
+  // const [department, setDepartment] = useState<DepartmentType[]>(example);
+  const departmentRef = useRef<DepartmentType[]>([]);
   const [loading, setLoading] = useState(false);
 
   function showModal(type: string) {
@@ -54,7 +65,7 @@ const Department = () => {
 
   useEffect(() => {
     const getDepartment = async () => {
-      setLoading(true);
+      // setLoading(true);
       try {
         const res = await GetDepartment();
         if (res.data === 0) {
@@ -68,7 +79,15 @@ const Department = () => {
           setLoading(false);
           return;
         }
-        setDepartment(res.data);
+        // setDepartment(res.data);
+        if (res.data > 0) {
+          departmentRef.current = res.data;
+          console.log("data", res.data);
+          dispatch({
+            type: "ADD_DEPARTMENTS",
+            payload: res.data,
+          });
+        }
         setLoading(false);
       } catch (error) {
         dispatch({
@@ -82,8 +101,9 @@ const Department = () => {
         console.log(error);
       }
     };
+    departmentRef.current = listDepartment;
     getDepartment();
-  }, []);
+  }, [listDepartment, dispatch]);
 
   if (loading)
     return (
@@ -110,14 +130,14 @@ const Department = () => {
               <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Head</th>
+                <th>Code</th>
+                <th>Boss</th>
                 <th>Number of Employees</th>
-                <th>Last update</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {department.map((item, index) => (
+              {departmentRef.current.map((item, index) => (
                 <React.Fragment key={item.id}>
                   <DepartmentRow item={item} itemIndex={index} />
                 </React.Fragment>

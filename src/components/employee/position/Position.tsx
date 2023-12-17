@@ -22,7 +22,8 @@ const Position = () => {
   const navigate = useNavigate();
   const departmentCode = location.pathname.split("/")[3];
   const name = location.pathname.split("/")[2];
-  const departmentName = name.replace(/%20/g, " ");
+  // const departmentName = name.replace(/%20/g, " ");
+  const departmentName = decodeURIComponent(name.replace(/%20/g, " "));
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   const [positions, setPositions] = useState(positionArray);

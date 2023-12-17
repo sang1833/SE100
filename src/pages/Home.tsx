@@ -22,7 +22,7 @@ import {
 import Loading from "@/utils/Loading";
 
 const Home = () => {
-  const [clpSidebar, setClpSidebar] = useState(true);
+  const [clpSidebar, setClpSidebar] = useState(false);
   const navigate = useNavigate();
   // const currentUser = useSelector((state: RootState) => state.auth._id);
   const currentUser = true;
@@ -62,21 +62,24 @@ const Home = () => {
             },
           }}
         >
-          <aside className="flex items-center text-white font-semibold">
-            <div
-              onClick={() => navigate("/")}
-              className="cursor-pointer mx-[14px] my-[30px]"
-            >
-              <div className="inline-block rounded-full bg-white">
+          <div className="flex flex-col text-white font-semibold my-8">
+            <div onClick={() => navigate("/")} className="cursor-pointer">
+              <div className="rounded-full flex justify-center">
                 <img
                   src="/logo_nobg.png"
                   alt="logo"
-                  className="h-10 w-18 rounded-full"
+                  className="w-12 rounded-full bg-white p-1"
                 />
               </div>
             </div>
-            {clpSidebar ? "" : <p className="text-lg">E management</p>}
-          </aside>
+            <div>
+              {clpSidebar ? (
+                ""
+              ) : (
+                <p className="text-lg text-center">Employee management</p>
+              )}
+            </div>
+          </div>
           <Menu>
             <MenuItem
               icon={<FaHome />}
