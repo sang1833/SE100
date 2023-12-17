@@ -68,7 +68,7 @@ const EmployeeList = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <section className="flex justify-between mt-8">
+      <section className="flex justify-between">
         <h1 className="font-bold text-2xl text-gray-900">Employees</h1>
 
         <div className="flex justify-center">

@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar ">
+      <div className="navbar py-4">
         <section className="md:flex-1 max-md:hidden">
           {/* <input
             type="text"

@@ -209,7 +209,6 @@ const CreateEmployee = () => {
                 <div className="grid grid-cols-2 items-center mx-2">
                   <span className="font-bold">Gender:</span>
                   <select
-                    placeholder="Gender"
                     className="input input-bordered"
                     defaultValue={employee.gender}
                   >

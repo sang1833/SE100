@@ -76,7 +76,9 @@ const Home = () => {
               {clpSidebar ? (
                 ""
               ) : (
-                <p className="text-lg text-center">Employee management</p>
+                <p className="mt-2 text-md text-center font-thin uppercase">
+                  Employee management
+                </p>
               )}
             </div>
           </div>
@@ -167,8 +169,8 @@ const Home = () => {
       </div>
 
       <main
-        className={`pt-[1rem] md:px-6 w-full overflow-y-scroll ${
-          clpSidebar ? "ml-[4rem]" : "ml-[14rem]"
+        className={`w-full overflow-y-scroll ${
+          clpSidebar ? "ml-[5rem]" : "ml-[16rem]"
         }`}
       >
         <Navbar />

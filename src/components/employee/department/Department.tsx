@@ -113,7 +113,7 @@ const Department = () => {
     );
   return (
     <div className="flex flex-col gap-4">
-      <section className="flex justify-between mt-8">
+      <section className="flex justify-between">
         <h1 className="font-bold text-2xl text-gray-900">Departments</h1>
         <button
           className="btn bg-tim-color hover:text-black text-white"

@@ -115,7 +115,6 @@ const EmployeeProfile = () => {
                 <div className="grid grid-cols-2 items-center">
                   <span className="font-bold">Position:</span>
                   <select
-                    placeholder="Position"
                     className="input input-bordered"
                     defaultValue={employee.position}
                     {...register("position")}
@@ -128,7 +127,6 @@ const EmployeeProfile = () => {
                 <div className="grid grid-cols-2 items-center">
                   <span className="font-bold">Department:</span>
                   <select
-                    placeholder="Department"
                     className="input input-bordered"
                     defaultValue={employee.department}
                     {...register("department")}
@@ -220,7 +218,6 @@ const EmployeeProfile = () => {
                   <div className="grid grid-cols-2 items-center">
                     <span className="font-bold">Gender:</span>
                     <select
-                      placeholder="Gender"
                       className="input input-bordered"
                       defaultValue={employee.gender}
                       {...register("gender")}
