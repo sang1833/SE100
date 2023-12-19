@@ -67,7 +67,7 @@ export const DepartmentRow = ({ item, itemIndex }: DepartmentRowProps) => {
       <tr>
         <td>{itemIndex + 1}</td>
         <td>{item.name}</td>
-        <td>{item.code}</td>
+        <td>{item.department_code}</td>
         <td>{item.nameBoss}</td>
         <td>{item.numberEmployee}</td>
 
@@ -76,7 +76,9 @@ export const DepartmentRow = ({ item, itemIndex }: DepartmentRowProps) => {
         <th className="flex gap-1">
           <button
             className="btn btn-ghost btn-xs text-green-800 border border-green-800"
-            onClick={() => navigate(`/position/${item.name}/${item.code}`)}
+            onClick={() =>
+              navigate(`/position/${item.name}/${item.department_code}`)
+            }
           >
             <MdOutlineFindInPage className="h-5 w-6" />
           </button>

@@ -16,6 +16,7 @@ import authReducer from "./reducers/auth_reducers";
 import notifyReducer from "./reducers/notify_reducers";
 import currentReducer from "./reducers/current_reducers";
 import departmentReducer from "./reducers/department_reducers";
+import modalSlice from "./reducers/modalSlice";
 
 // Define your root reducer
 const rootReducer = combineReducers({
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   notify: notifyReducer,
   current: currentReducer,
   department: departmentReducer,
+  modal: modalSlice,
 });
 
 // Define your persist config
