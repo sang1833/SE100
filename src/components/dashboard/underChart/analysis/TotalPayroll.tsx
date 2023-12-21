@@ -33,7 +33,7 @@ const data = {
 const TotalPayroll = () => {
   return (
     <div className="w-full">
-      <div className="flex justify-between w-full min-w-[24rem]">
+      <div className="flex justify-between w-full">
         <h3 className="text-lg font-semibold py-4">Total Payroll this month</h3>
         <p className="text-lg p-4 flex gap-2">
           <span className="">1.000.000</span>
@@ -41,7 +41,7 @@ const TotalPayroll = () => {
         </p>
       </div>
       <div className="flex justify-center items-center">
-        <div className="max-w-[14rem]">
+        <div className="">
           <Doughnut data={data} />
         </div>
       </div>

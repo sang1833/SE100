@@ -1,8 +1,6 @@
-import { useEffect } from "react";
 import { MdOutlineDeleteForever } from "react-icons/md";
 
 import { DepartmentType } from "./Department";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 interface DeleteDepartmentProps {
@@ -11,7 +9,6 @@ interface DeleteDepartmentProps {
 
 const DeleteDepartmentItem = ({ item }: DeleteDepartmentProps) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   // const code = item.code;
   // console.log("code", code);
 
@@ -70,7 +67,7 @@ const DeleteDepartmentItem = ({ item }: DeleteDepartmentProps) => {
     <>
       <button
         className="btn btn-ghost btn-xs text-red-600 border border-red-600"
-        // onClick={() => navigate(`delete/${item.code}`)}
+        onClick={() => navigate(`delete/${item.department_code}`)}
       >
         <MdOutlineDeleteForever className="h-5 w-5" />
       </button>

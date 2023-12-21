@@ -1,5 +1,4 @@
 import { PayrollTable } from "@/components/payroll/department/PayrollTable";
-import PayrollAnalysis from "./department/PayrollAnalysis";
 
 const Payroll = () => {
   return (
@@ -15,11 +14,8 @@ const Payroll = () => {
         </section>
       </div>
       <section className="flex justify-between gap-2">
-        <div className="w-2/3">
+        <div className="w-full">
           <PayrollTable />
-        </div>
-        <div className="w-1/3">
-          <PayrollAnalysis />
         </div>
       </section>
     </div>

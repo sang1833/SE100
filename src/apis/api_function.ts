@@ -83,7 +83,7 @@ export const UpdatePosition = (
 //Delete Position
 export const DeletePosition = (id: string) => {
   return mainApi.delete(apiEndpoints.DELETE_POSITION, {
-    params: { id: id },
+    params: { userId: id },
   });
 };
 
@@ -108,4 +108,14 @@ export const CreateNewEmployee = (departmentCode: string, data: any) => {
   return mainApi.post(apiEndpoints.CREATE_NEW_EMPLOYEE, data, {
     params: { departmentCode: departmentCode },
   });
+};
+
+//get setting
+export const GetSetting = () => {
+  return mainApi.get(apiEndpoints.GET_SETTING);
+};
+
+//update setting
+export const UpdateSetting = (data: any) => {
+  return mainApi.put(apiEndpoints.UPDATE_SETTING, data);
 };

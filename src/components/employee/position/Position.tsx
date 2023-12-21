@@ -3,17 +3,22 @@ import AddPositionModal from "./AddPositionModal";
 import ChangePositionModal from "./ChangePositionModal";
 import { Navigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { GetPositionByDepartmentCode } from "@/apis/api_function";
+// import { GetPositionByDepartmentCode } from "@/apis/api_function";
 import { PositionRow } from "./PositionRow";
 import { MdKeyboardBackspace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { PositionDTO } from "../department/Department";
 
 const positionArray = [
   {
-    id: 1,
+    posiition_ID: 1,
     title: "...",
-    code: "...",
-    salary_coeffcient: 2,
+    position_code: "...",
+    salary_coeffcient: 0,
+    employee_DTOs: [],
+    numberEmployee: 0,
   },
 ];
 
@@ -23,10 +28,12 @@ const Position = () => {
   const departmentCode = location.pathname.split("/")[3];
   const name = location.pathname.split("/")[2];
   // const departmentName = name.replace(/%20/g, " ");
+  const departments = useSelector(
+    (state: RootState) => state.department.listDepartment
+  );
   const departmentName = decodeURIComponent(name.replace(/%20/g, " "));
-  const [showCreateModal, setShowCreateModal] = useState(false);
 
-  const [positions, setPositions] = useState(positionArray);
+  const [positions, setPositions] = useState<PositionDTO[]>(positionArray);
 
   function showModal(type: string) {
     const modal = document.getElementById(type) as HTMLDialogElement;
@@ -35,22 +42,25 @@ const Position = () => {
     }
   }
 
-  function closeModal() {
-    setShowCreateModal(false);
-  }
-
   useEffect(() => {
     async function getPosition() {
-      try {
-        const res = await GetPositionByDepartmentCode(departmentCode);
-        console.log(res);
-        setPositions(res.data);
-      } catch (error) {
-        console.log(error);
-      }
+      const positions = departments?.filter(
+        (item) => item.department_code === departmentCode
+      );
+
+      const mappedPositions = positions[0].position_DTOs.map((item) => ({
+        posiition_ID: item.posiition_ID,
+        title: item.title,
+        position_code: item.position_code,
+        salary_coeffcient: item.salary_coeffcient,
+        employee_DTOs: item.employee_DTOs,
+        numberEmployee: item.numberEmployee,
+      }));
+
+      setPositions(mappedPositions);
     }
     getPosition();
-  }, [departmentCode, showCreateModal]);
+  }, [positionArray, departments, departmentCode]);
 
   if (name === "...") return <Navigate to="/employee/department" />;
   return (
@@ -94,13 +104,17 @@ const Position = () => {
             <tbody>
               {/* rows */}
               {positions?.map((item, index) => (
-                <PositionRow key={item.id} item={item} index={index} />
+                <PositionRow
+                  key={item.posiition_ID}
+                  item={item}
+                  index={index}
+                />
               ))}
             </tbody>
           </table>
         </div>
       </section>
-      <AddPositionModal departmentId={departmentCode} closeModal={closeModal} />
+      <AddPositionModal departmentId={departmentCode} />
       <ChangePositionModal />
     </div>
   );

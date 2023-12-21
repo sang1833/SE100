@@ -40,7 +40,7 @@ const Department = () => {
     (state: RootState) => state.department.listDepartment
   );
   const [department, setDepartment] = useState<DepartmentType[]>(
-    listDepartment as DepartmentType[]
+    listDepartment || []
   );
   // const departmentRef = useRef<DepartmentType[]>([]);
   // const [loading, setLoading] = useState(false);

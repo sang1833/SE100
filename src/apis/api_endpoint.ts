@@ -49,7 +49,7 @@ export const newPositionBody = (title: string, code: string, coef: number) => ({
 export const UPDATE_POSITION = "/Position/updateOne";
 
 //Delete Position
-export const DELETE_POSITION = "/Position/deleteOne";
+export const DELETE_POSITION = "/Position/remove-position";
 
 //import to excel
 export const IMPORT_TO_EXCEL = "/user/importToExcel";
@@ -86,4 +86,25 @@ export const createNewEmployeeBody = (
   gender: gender,
   cmnd: cmnd,
   address: address,
+});
+
+// setting
+export const GET_SETTING = "/Setting/get";
+
+// update setting
+export const UPDATE_SETTING = "/Setting/updateOne";
+export const updateSettingBody = (
+  company_name: string,
+  company_code: string,
+  start_time_hour: number,
+  start_time_minute: number,
+  salary_per_coef: number,
+  payment_date: number
+) => ({
+  company_name: company_name,
+  company_code: company_code,
+  start_time_hour: start_time_hour,
+  start_time_minute: start_time_minute,
+  salary_per_coef: salary_per_coef,
+  payment_date: payment_date,
 });

@@ -12,17 +12,17 @@ interface DeleteDepartmentProps {
 
 const DeleteDepartmentItem = ({ item }: DeleteDepartmentProps) => {
   const dispatch = useDispatch();
-  const code = item.code;
+  const department_code = item.department_code;
   // console.log("code", code);
 
   useEffect(() => {
     dispatch({
       type: "CHANGE",
       payload: {
-        dataPage: code,
+        dataPage: department_code,
       },
     });
-  }, [code, dispatch]);
+  }, [department_code, dispatch]);
 
   // function showModal() {
   //   const modal = document.getElementById(
@@ -68,7 +68,9 @@ const DeleteDepartmentItem = ({ item }: DeleteDepartmentProps) => {
 
   return (
     <>
-      <Link to={`change/${item.id}/${item.name}/${item.code}`}>
+      <Link
+        to={`change/${item.department_ID}/${item.name}/${item.department_code}`}
+      >
         <button
           className="btn btn-ghost btn-xs border border-gray-600"
           // onClick={() => navigate(`change/${item.id}/${item.name}/${item.code}`)}

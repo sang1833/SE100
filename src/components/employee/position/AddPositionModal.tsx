@@ -1,4 +1,4 @@
-import { NewPosition } from "@/apis/api_function";
+import { GetDepartment, NewPosition } from "@/apis/api_function";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -13,7 +13,6 @@ interface FormValues {
 
 interface Props {
   departmentId: string;
-  closeModal: () => void;
 }
 
 const schema = yup.object().shape({
@@ -22,7 +21,7 @@ const schema = yup.object().shape({
   coefficient: yup.number().required(),
 });
 
-const PositionModal = ({ departmentId, closeModal }: Props) => {
+const PositionModal = ({ departmentId }: Props) => {
   const dispatch = useDispatch();
   const {
     register,
@@ -48,8 +47,19 @@ const PositionModal = ({ departmentId, closeModal }: Props) => {
       if (res.status === 200) {
         setLoading(false);
         dispatch({ type: "SET_SUCCESS", payload: "Add position success" });
-        closeModal();
-        window.location.reload();
+
+        async function getDepartment() {
+          const res = await GetDepartment();
+          const data = res.data;
+          console.log("GetDepartment", data);
+          dispatch({
+            type: "ADD_DEPARTMENTS",
+            payload: { listDepartment: data },
+          });
+        }
+        getDepartment();
+
+        // window.location.reload();
         document.getElementById("btn-close")?.click();
       }
     } catch (error) {
