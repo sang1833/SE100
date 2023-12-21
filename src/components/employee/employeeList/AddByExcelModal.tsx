@@ -138,7 +138,10 @@ const AddByExcelModal = () => {
                 >
                   <option selected>Department</option>
                   {departments.map((department) => (
-                    <option key={department.id} value={department.id}>
+                    <option
+                      key={department.department_ID}
+                      value={department.department_ID}
+                    >
                       {department.name}
                     </option>
                   ))}

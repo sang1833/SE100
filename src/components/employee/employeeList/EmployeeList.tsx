@@ -26,7 +26,7 @@ const EmployeeList = () => {
   const [employee, setEmployee] = useState<EmployeeProps[]>([]);
   const [department, setDepartment] = useState<DepartmentType[]>([]);
   const [currentDepartment, setCurrentDepartment] = useState(
-    department[0]?.code
+    department[0]?.department_code
   );
 
   // function showModal(type: string) {
@@ -94,7 +94,11 @@ const EmployeeList = () => {
                 Department
               </option> */}
               {department?.map((item: DepartmentType) => (
-                <option key={item.code} value={item.code} className="w-full">
+                <option
+                  key={item.department_code}
+                  value={item.department_code}
+                  className="w-full"
+                >
                   {item.name}
                 </option>
               ))}

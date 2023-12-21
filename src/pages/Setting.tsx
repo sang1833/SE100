@@ -167,6 +167,11 @@ const Setting = () => {
                     disabled={disabled}
                     {...register("payment_date")}
                   />
+                  {errors.payment_date && (
+                    <p className="text-red-500">
+                      {errors.payment_date.message}
+                    </p>
+                  )}
                   {/* <MdOutlineCalendarMonth className="absolute right-2 text-2xl" /> */}
                   {/* </div> */}
                 </div>
