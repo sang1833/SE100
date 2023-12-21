@@ -12,17 +12,17 @@ interface DeleteDepartmentProps {
 const DeleteDepartmentItem = ({ item }: DeleteDepartmentProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const code = item.code;
+  // const code = item.code;
   // console.log("code", code);
 
-  useEffect(() => {
-    dispatch({
-      type: "CHANGE",
-      payload: {
-        dataPage: code,
-      },
-    });
-  }, [code, dispatch]);
+  // useEffect(() => {
+  //   dispatch({
+  //     type: "CHANGE",
+  //     payload: {
+  //       dataPage: code,
+  //     },
+  //   });
+  // }, [code, dispatch]);
 
   // function showModal() {
   //   const modal = document.getElementById(
@@ -70,7 +70,7 @@ const DeleteDepartmentItem = ({ item }: DeleteDepartmentProps) => {
     <>
       <button
         className="btn btn-ghost btn-xs text-red-600 border border-red-600"
-        onClick={() => navigate(`delete/${item.code}`)}
+        // onClick={() => navigate(`delete/${item.code}`)}
       >
         <MdOutlineDeleteForever className="h-5 w-5" />
       </button>

@@ -40,8 +40,6 @@ const AddDepartmentModal = () => {
   }
 
   return (
-    <div>
-      {/* Open the modal using document.getElementById('ID').showModal() method */}
       <dialog
         id="add_department_modal"
         className="modal modal-bottom sm:modal-middle"
@@ -117,7 +115,6 @@ const AddDepartmentModal = () => {
           </div>
         </div>
       </dialog>
-    </div>
   );
 };
 

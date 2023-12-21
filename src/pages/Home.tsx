@@ -20,6 +20,7 @@ import {
   MdSettings,
 } from "react-icons/md";
 import Loading from "@/utils/Loading";
+import ModalLayout from "@/common/modal/ModalLayout";
 
 const Home = () => {
   const [clpSidebar, setClpSidebar] = useState(false);
@@ -53,6 +54,7 @@ const Home = () => {
 
   return currentUser ? (
     <section className="w-full flex bg-[#fafafa]">
+      <ModalLayout />
       <div className="h-[100vh] flex fixed z-[1]">
         <Sidebar
           collapsed={clpSidebar}
