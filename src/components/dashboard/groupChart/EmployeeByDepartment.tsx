@@ -47,7 +47,7 @@ const EmployeeByDepartment = () => {
   return (
     <div>
       <div className="flex justify-between">
-        <h3 className="text-lg font-semibold py-4">Top 5 Department</h3>
+        <h3 className="text-lg font-semibold py-4">Employees by Department</h3>
         {/* <p className="text-lg p-4">300</p> */}
       </div>
       <div className="flex justify-center items-center">
