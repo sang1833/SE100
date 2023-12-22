@@ -3,22 +3,30 @@ import AddPositionModal from "./AddPositionModal";
 import ChangePositionModal from "./ChangePositionModal";
 import { Navigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import { GetPositionByDepartmentCode } from "@/apis/api_function";
+import { GetPositionByDepartmentCode } from "@/apis/api_function";
 import { PositionRow } from "./PositionRow";
 import { MdKeyboardBackspace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { PositionDTO } from "../department/Department";
+
+export interface PositionDTO {
+  id: number;
+  title: string;
+  code: string;
+  salary_coeffcient: number;
+  // employee_DTOs: EmployeeDTO[];
+  emp_count: number;
+}
 
 const positionArray = [
   {
-    posiition_ID: 1,
+    id: 1,
     title: "...",
-    position_code: "...",
+    code: "...",
     salary_coeffcient: 0,
-    employee_DTOs: [],
-    numberEmployee: 0,
+    // employee_DTOs: [],
+    emp_count: 0,
   },
 ];
 
@@ -27,13 +35,14 @@ const Position = () => {
   const navigate = useNavigate();
   const departmentCode = location.pathname.split("/")[3];
   const name = location.pathname.split("/")[2];
-  // const departmentName = name.replace(/%20/g, " ");
   const departments = useSelector(
     (state: RootState) => state.department.listDepartment
   );
   const departmentName = decodeURIComponent(name.replace(/%20/g, " "));
 
   const [positions, setPositions] = useState<PositionDTO[]>(positionArray);
+  const [numberOfPage, setNumberOfPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
 
   function showModal(type: string) {
     const modal = document.getElementById(type) as HTMLDialogElement;
@@ -44,20 +53,15 @@ const Position = () => {
 
   useEffect(() => {
     async function getPosition() {
-      const positions = departments?.filter(
-        (item) => item.department_code === departmentCode
+      const res = await GetPositionByDepartmentCode(
+        departmentCode,
+        currentPage,
+        numberOfPage
       );
 
-      const mappedPositions = positions[0].position_DTOs.map((item) => ({
-        posiition_ID: item.posiition_ID,
-        title: item.title,
-        position_code: item.position_code,
-        salary_coeffcient: item.salary_coeffcient,
-        employee_DTOs: item.employee_DTOs,
-        numberEmployee: item.numberEmployee,
-      }));
+      const data = res.data;
 
-      setPositions(mappedPositions);
+      setPositions(data);
     }
     getPosition();
   }, [positionArray, departments, departmentCode]);
@@ -88,8 +92,8 @@ const Position = () => {
           <p>Add Positions</p>
         </button>
       </section>
-      <section className="bg-white border rounded-lg">
-        <div className="overflow-x-auto">
+      <section className="">
+        <div className="overflow-x-auto bg-white border rounded-lg">
           <table className="table">
             {/* head */}
             <thead>
@@ -105,14 +109,54 @@ const Position = () => {
             <tbody>
               {/* rows */}
               {positions?.map((item, index) => (
-                <PositionRow
-                  key={item.posiition_ID}
-                  item={item}
-                  index={index}
-                />
+                <PositionRow key={item.id} item={item} index={index} />
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="grid grid-cols-3 p-4">
+          <div className="grid grid-cols-2">
+            <p>Show 1 to {numberOfPage} of 57</p>
+            <div className="flex gap-2">
+              <p>Rows per pages: </p>
+              <select
+                className="select select-bordered select-xs"
+                onChange={(e) => {
+                  setNumberOfPage(Number(e.target.value));
+                  console.log("numberOfPage", numberOfPage);
+                }}
+                value={numberOfPage}
+              >
+                {Array.from({ length: 15 }, (_, i) => i + 1).map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="join grid grid-cols-2 col-start-3">
+            <button
+              className="join-item btn btn-outline btn-sm"
+              onClick={() => {
+                setCurrentPage((prev) => {
+                  return prev - 1;
+                });
+              }}
+            >
+              Previous
+            </button>
+            <button
+              className="join-item btn btn-outline btn-sm"
+              onClick={() => {
+                setCurrentPage((prev) => {
+                  return prev + 1;
+                });
+              }}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </section>
       <AddPositionModal departmentId={departmentCode} />

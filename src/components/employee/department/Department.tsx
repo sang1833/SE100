@@ -8,22 +8,22 @@ import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import { RootState } from "@/store/store";
 
-export interface EmployeeDTO {
-  emp_ID: number;
-  avatar: string;
-  fullName: string;
-  email: string;
-  gender: boolean;
-}
+// export interface EmployeeDTO {
+//   emp_ID: number;
+//   avatar: string;
+//   fullName: string;
+//   email: string;
+//   gender: boolean;
+// }
 
-export interface PositionDTO {
-  posiition_ID: number;
-  title: string;
-  position_code: string;
-  salary_coeffcient: number;
-  employee_DTOs: EmployeeDTO[];
-  numberEmployee: number;
-}
+// export interface PositionDTO {
+//   posiition_ID: number;
+//   title: string;
+//   position_code: string;
+//   salary_coeffcient: number;
+//   employee_DTOs: EmployeeDTO[];
+//   numberEmployee: number;
+// }
 
 export interface DepartmentType {
   department_ID: number;
@@ -31,7 +31,8 @@ export interface DepartmentType {
   department_code: string;
   nameBoss: string;
   numberEmployee: number;
-  position_DTOs: PositionDTO[];
+  numberPosition: number;
+  // position_DTOs: PositionDTO[];
 }
 
 const Department = () => {
@@ -42,6 +43,8 @@ const Department = () => {
   const [department, setDepartment] = useState<DepartmentType[]>(
     listDepartment || []
   );
+  const [numberOfPage, setNumberOfPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
   // const departmentRef = useRef<DepartmentType[]>([]);
   // const [loading, setLoading] = useState(false);
 
@@ -56,7 +59,9 @@ const Department = () => {
     const getDepartment = async () => {
       // setLoading(true);
       try {
-        const res = await GetDepartment();
+        const res = await GetDepartment(currentPage, numberOfPage);
+        console.log("currentPage", currentPage, "numberOfPage", numberOfPage);
+        console.log("res.data department", res.data);
         if (res.data === 0) {
           dispatch({
             type: "NOTIFY",
@@ -87,13 +92,15 @@ const Department = () => {
           },
         });
         // setLoading(false);
+        setCurrentPage(1);
+        setNumberOfPage(10);
         console.log(error);
       }
     };
     // departmentRef.current = listDepartment;
 
     getDepartment();
-  }, [dispatch]);
+  }, [dispatch, currentPage, numberOfPage]);
 
   // if (loading)
   //   return (
@@ -112,8 +119,8 @@ const Department = () => {
           <p>Add Departments</p>
         </button>
       </section>
-      <section className="bg-white border rounded-lg">
-        <div className="overflow-x-auto">
+      <section className="">
+        <div className="overflow-x-auto bg-white border rounded-lg">
           <table className="table">
             {/* head */}
             <thead>
@@ -135,6 +142,50 @@ const Department = () => {
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="grid grid-cols-3 p-4">
+          <div className="grid grid-cols-2">
+            <p>Show 1 to {numberOfPage} of 57</p>
+            <div className="flex gap-2">
+              <p>Rows per pages: </p>
+              <select
+                className="select select-bordered select-xs"
+                onChange={(e) => {
+                  setNumberOfPage(Number(e.target.value));
+                  console.log("numberOfPage", numberOfPage);
+                }}
+                value={numberOfPage}
+              >
+                {Array.from({ length: 15 }, (_, i) => i + 1).map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="join grid grid-cols-2 col-start-3">
+            <button
+              className="join-item btn btn-outline btn-sm"
+              onClick={() => {
+                setCurrentPage((prev) => {
+                  return prev - 1;
+                });
+              }}
+            >
+              Previous
+            </button>
+            <button
+              className="join-item btn btn-outline btn-sm"
+              onClick={() => {
+                setCurrentPage((prev) => {
+                  return prev + 1;
+                });
+              }}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </section>
       <AddDepartmentModal />

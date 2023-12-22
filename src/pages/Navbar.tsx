@@ -3,7 +3,7 @@ import SearchBar from "../components/navbar/SearchBar";
 import AvatarGroup from "../components/navbar/AvatarGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import DropdownComponent from "@/components/navbar/Notify";
+import DropdownComponent from "@/components/navbar/NotifyIcon";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const Navbar = () => {
             placeholder="Search"
             className="input input-bordered w-24 md:w-auto"
           /> */}
-          <SearchBar />
+          {/* <SearchBar /> */}
         </section>
         <section className="flex-none gap-2">
           <div className="flex items-center">

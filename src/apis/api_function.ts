@@ -12,8 +12,10 @@ export const Login = (email: string, password: string) => {
 };
 
 //Get Department
-export const GetDepartment = () => {
-  return mainApi.get(apiEndpoints.GET_DEPARTMENT);
+export const GetDepartment = (page: number, limit: number) => {
+  return mainApi.get(apiEndpoints.GET_DEPARTMENT, {
+    params: { page: page, limit: limit },
+  });
 };
 
 //Create Department
@@ -41,9 +43,13 @@ export const DeleteDepartment = (code: string) => {
 };
 
 //Get Position by department id
-export const GetPositionByDepartmentCode = (departmentCode: string) => {
+export const GetPositionByDepartmentCode = (
+  departmentCode: string,
+  page: number,
+  per_page: number
+) => {
   return mainApi.get(apiEndpoints.GET_POSITION_BY_DEPARTMENT_ID, {
-    params: { departmentCode: departmentCode },
+    params: { departmentCode: departmentCode, page: page, per_page: per_page },
   });
   // return axios.get(baseURL, {
   //   params: { departmentCode: departmentCode },

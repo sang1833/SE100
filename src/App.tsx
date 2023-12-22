@@ -33,6 +33,7 @@ import DeleteDepartmentPage from "./components/employee/department/delete/Delete
 import ChangeDepartmentPage from "./components/employee/department/change/ChangePage";
 import DeletePositionPage from "./components/employee/position/page/DeletePage";
 import ChangePositionPage from "./components/employee/position/page/ChangePage";
+import Notify from "./pages/Notify";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -75,6 +76,7 @@ const router = createBrowserRouter(
           element={<ChangePositionPage />}
         />
         <Route path="setting" element={<Setting />} />
+        <Route path="notify" element={<Notify />} />
       </Route>
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />

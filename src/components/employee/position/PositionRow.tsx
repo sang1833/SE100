@@ -4,7 +4,7 @@ import {
   MdOutlineFindInPage,
 } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { PositionDTO } from "../department/Department";
+import { PositionDTO } from "./Position";
 
 interface PositionRowProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

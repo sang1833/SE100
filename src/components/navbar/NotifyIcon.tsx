@@ -1,4 +1,5 @@
 import { BellAlertIcon } from "@heroicons/react/20/solid";
+import { Link } from "react-router-dom";
 
 function DropdownComponent() {
   return (
@@ -11,13 +12,13 @@ function DropdownComponent() {
         className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-80"
       >
         <li>
-          <a>
-            <div role="alert" className="alert alert-info">
+          <Link to={"/notify"}>
+            <div role="alert" className="alert">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                className="stroke-current shrink-0 w-6 h-6"
+                className="stroke-info shrink-0 w-6 h-6"
               >
                 <path
                   strokeLinecap="round"
@@ -26,9 +27,9 @@ function DropdownComponent() {
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 ></path>
               </svg>
-              <span>New software update available.</span>
+              <span>12 unread notifications. Tap to see.</span>
             </div>
-          </a>
+          </Link>
         </li>
         <li>
           <a>Item 2</a>
