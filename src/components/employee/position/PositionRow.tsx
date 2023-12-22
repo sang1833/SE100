@@ -1,4 +1,8 @@
-import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
+import {
+  MdOutlineDeleteForever,
+  MdOutlineEdit,
+  MdOutlineFindInPage,
+} from "react-icons/md";
 import { Link } from "react-router-dom";
 import { PositionDTO } from "../department/Department";
 
@@ -14,8 +18,16 @@ export const PositionRow = ({ item, index }: PositionRowProps) => {
       <td>{index + 1}</td>
       <td>{item.position_code}</td>
       <td>{item.title}</td>
+      <td></td>
       <td>{item.salary_coeffcient}</td>
       <th className="flex gap-1">
+        <Link
+          to={`employee/${item.posiition_ID}/${item.title}/${item.position_code}/${item.salary_coeffcient}`}
+        >
+          <button className="btn btn-ghost btn-xs border border-green-700 text-green-700">
+            <MdOutlineFindInPage className="h-5 w-5" />
+          </button>
+        </Link>
         <Link
           to={`change/${item.posiition_ID}/${item.title}/${item.position_code}/${item.salary_coeffcient}`}
         >

@@ -97,6 +97,7 @@ const Position = () => {
                 <th>#</th>
                 <th>Code</th>
                 <th>Title</th>
+                <th>Number of Employee</th>
                 <th>Coefficient</th>
                 <th>Action</th>
               </tr>

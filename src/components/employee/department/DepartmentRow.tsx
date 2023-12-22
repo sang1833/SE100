@@ -70,6 +70,7 @@ export const DepartmentRow = ({ item, itemIndex }: DepartmentRowProps) => {
         <td>{item.department_code}</td>
         <td>{item.nameBoss}</td>
         <td>{item.numberEmployee}</td>
+        <td></td>
 
         {/* <td>{item.numberEmployee}</td>
       <td>{item.lastUpdate.toString().split("T")[0]}</td> */}

@@ -123,6 +123,7 @@ const Department = () => {
                 <th>Code</th>
                 <th>Boss</th>
                 <th>Number of Employees</th>
+                <th>Number of Positions</th>
                 <th>Action</th>
               </tr>
             </thead>
