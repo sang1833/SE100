@@ -115,26 +115,6 @@ const Position = () => {
           </table>
         </div>
         <div className="grid grid-cols-3 p-4">
-          <div className="grid grid-cols-2">
-            <p>Show 1 to {numberOfPage} of 57</p>
-            <div className="flex gap-2">
-              <p>Rows per pages: </p>
-              <select
-                className="select select-bordered select-xs"
-                onChange={(e) => {
-                  setNumberOfPage(Number(e.target.value));
-                  console.log("numberOfPage", numberOfPage);
-                }}
-                value={numberOfPage}
-              >
-                {Array.from({ length: 15 }, (_, i) => i + 1).map((value) => (
-                  <option key={value} value={value}>
-                    {value}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
           <div className="join grid grid-cols-2 col-start-3">
             <button
               className="join-item btn btn-outline btn-sm"

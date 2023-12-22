@@ -18,7 +18,7 @@ export const PositionRow = ({ item, index }: PositionRowProps) => {
       <td>{index + 1}</td>
       <td>{item.code}</td>
       <td>{item.title}</td>
-      <td></td>
+      <td>{item.emp_count}</td>
       <td>{item.salary_coeffcient}</td>
       <th className="flex gap-1">
         <Link

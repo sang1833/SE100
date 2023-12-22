@@ -144,7 +144,7 @@ const Department = () => {
           </table>
         </div>
         <div className="grid grid-cols-3 p-4">
-          <div className="grid grid-cols-2">
+          {/* <div className="grid grid-cols-2">
             <p>Show 1 to {numberOfPage} of 57</p>
             <div className="flex gap-2">
               <p>Rows per pages: </p>
@@ -163,7 +163,7 @@ const Department = () => {
                 ))}
               </select>
             </div>
-          </div>
+          </div> */}
           <div className="join grid grid-cols-2 col-start-3">
             <button
               className="join-item btn btn-outline btn-sm"
