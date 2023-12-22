@@ -16,26 +16,26 @@ export const PositionRow = ({ item, index }: PositionRowProps) => {
   return (
     <tr>
       <td>{index + 1}</td>
-      <td>{item.position_code}</td>
+      <td>{item.code}</td>
       <td>{item.title}</td>
       <td></td>
       <td>{item.salary_coeffcient}</td>
       <th className="flex gap-1">
         <Link
-          to={`employee/${item.posiition_ID}/${item.title}/${item.position_code}/${item.salary_coeffcient}`}
+          to={`employee/${item.id}/${item.title}/${item.code}/${item.salary_coeffcient}`}
         >
           <button className="btn btn-ghost btn-xs border border-green-700 text-green-700">
             <MdOutlineFindInPage className="h-5 w-5" />
           </button>
         </Link>
         <Link
-          to={`change/${item.posiition_ID}/${item.title}/${item.position_code}/${item.salary_coeffcient}`}
+          to={`change/${item.id}/${item.title}/${item.code}/${item.salary_coeffcient}`}
         >
           <button className="btn btn-ghost btn-xs border border-gray-600">
             <MdOutlineEdit className="h-5 w-5" />
           </button>
         </Link>
-        <Link to={`delete/${item.posiition_ID}`}>
+        <Link to={`delete/${item.id}`}>
           <button className="btn btn-ghost btn-xs text-red-600 border border-red-600">
             <MdOutlineDeleteForever className="h-5 w-5" />
           </button>
