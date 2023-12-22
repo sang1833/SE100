@@ -25,7 +25,7 @@ const attendance = [
 const Attendance = () => {
   return (
     <div>
-      <h3 className="text-lg font-semibold py-4">Employees Today</h3>
+      <h3 className="text-lg font-semibold py-4">Attendance Today</h3>
       <div className="grid grid-cols-1 gap-2">
         {attendance.map((item) => (
           <div

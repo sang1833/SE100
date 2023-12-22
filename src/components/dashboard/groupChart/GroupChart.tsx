@@ -1,6 +1,6 @@
 import Attendance from "./Attendance";
 import TotalEmployee from "./TotalEmployee";
-import Salary from "./Salary";
+import EmployeeByDepartment from "./EmployeeByDepartment";
 
 export const GroupChart = () => {
   return (
@@ -12,7 +12,7 @@ export const GroupChart = () => {
         <TotalEmployee />
       </div>
       <div className="bg-white p-4 border rounded-xl">
-        <Salary />
+        <EmployeeByDepartment />
       </div>
     </div>
   );
