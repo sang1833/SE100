@@ -108,3 +108,6 @@ export const updateSettingBody = (
   salary_per_coef: salary_per_coef,
   payment_date: payment_date,
 });
+
+//dashboard
+export const GET_DASHBOARD = "/DashBoard";

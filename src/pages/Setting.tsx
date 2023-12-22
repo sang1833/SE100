@@ -152,14 +152,13 @@ const Setting = () => {
                     {...register("salary_per_coef")}
                   />
                 </div>
+                {errors.salary_per_coef && (
+                  <p className="text-red-500">
+                    {errors.salary_per_coef.message}
+                  </p>
+                )}
                 <div className="flex justify-between gap-2 items-center">
                   <p className="text-2xl">Payment date: </p>
-                  {/* <div className="relative input input-bordered w-full max-w-[14rem] flex justify-center items-center"> */}
-                  {/* <DatePicker
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date as Date)}
-                    disabled={disabled}
-                  /> */}
                   <input
                     type="number"
                     className="input input-bordered w-full max-w-[14rem]"
@@ -167,14 +166,12 @@ const Setting = () => {
                     disabled={disabled}
                     {...register("payment_date")}
                   />
-                  {errors.payment_date && (
-                    <p className="text-red-500">
-                      {errors.payment_date.message}
-                    </p>
-                  )}
                   {/* <MdOutlineCalendarMonth className="absolute right-2 text-2xl" /> */}
                   {/* </div> */}
                 </div>
+                {errors.payment_date && (
+                  <p className="text-red-500">{errors.payment_date.message}</p>
+                )}
               </section>
               <section className="flex justify-center mt-8 gap-4">
                 <button

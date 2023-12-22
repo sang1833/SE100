@@ -125,3 +125,8 @@ export const GetSetting = () => {
 export const UpdateSetting = (data: any) => {
   return mainApi.put(apiEndpoints.UPDATE_SETTING, data);
 };
+
+//dashboard
+export const GetDashboard = () => {
+  return mainApi.get(apiEndpoints.GET_DASHBOARD);
+};

@@ -60,11 +60,15 @@ const Position = () => {
       );
 
       const data = res.data;
+      if (data.length === 0) {
+        setCurrentPage(1);
+        return;
+      }
 
       setPositions(data);
     }
     getPosition();
-  }, [positionArray, departments, departmentCode]);
+  }, [positionArray, departments, departmentCode, currentPage, numberOfPage]);
 
   if (name === "...") return <Navigate to="/employee/department" />;
   return (

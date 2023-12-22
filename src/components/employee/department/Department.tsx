@@ -35,16 +35,28 @@ export interface DepartmentType {
   // position_DTOs: PositionDTO[];
 }
 
+export interface DepartmentInforType {
+  list_dep: DepartmentType[];
+  current_page: number;
+  perpage: number;
+  pages: number;
+}
+
 const Department = () => {
   const dispatch = useDispatch();
-  const listDepartment = useSelector(
-    (state: RootState) => state.department.listDepartment
-  );
+  const listDepartment = useSelector((state: RootState) => state.department);
   const [department, setDepartment] = useState<DepartmentType[]>(
-    listDepartment || []
+    listDepartment.list_dep || []
   );
   const [numberOfPage, setNumberOfPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(
+    listDepartment.current_page || 1
+  );
+  if (listDepartment.pages) {
+    if (currentPage > listDepartment.pages) {
+      setCurrentPage(listDepartment.pages);
+    }
+  }
   // const departmentRef = useRef<DepartmentType[]>([]);
   // const [loading, setLoading] = useState(false);
 
@@ -74,12 +86,16 @@ const Department = () => {
           return;
         }
         const data = res.data;
-        setDepartment(data);
+        if (data.length === 0) {
+          setCurrentPage(1);
+          return;
+        }
+        setDepartment(data.list_dep);
         // departmentRef.current = data;
         console.log("data", data);
         dispatch({
           type: "ADD_DEPARTMENTS",
-          payload: { listDepartment: data },
+          payload: data,
         });
 
         // setLoading(false);
@@ -169,7 +185,9 @@ const Department = () => {
               className="join-item btn btn-outline btn-sm"
               onClick={() => {
                 setCurrentPage((prev) => {
-                  return prev - 1;
+                  if (prev > listDepartment.pages && listDepartment.pages)
+                    return prev - 1;
+                  return prev;
                 });
               }}
             >
@@ -179,7 +197,9 @@ const Department = () => {
               className="join-item btn btn-outline btn-sm"
               onClick={() => {
                 setCurrentPage((prev) => {
-                  return prev + 1;
+                  if (prev < listDepartment.pages && listDepartment.pages)
+                    return prev + 1;
+                  return prev;
                 });
               }}
             >

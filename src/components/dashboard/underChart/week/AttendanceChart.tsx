@@ -1,3 +1,4 @@
+import { RootState } from "@/store/store";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,6 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 
 ChartJS.register(
   CategoryScale,
@@ -41,27 +43,30 @@ const labels = [
   "Sunday",
 ];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "On time",
-      data: labels.map(() => Math.floor(Math.random() * 10)),
-      backgroundColor: "rgb(0, 204, 153)",
-    },
-    {
-      label: "Late",
-      data: labels.map(() => Math.floor(Math.random() * 10)),
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-    {
-      label: "Absent",
-      data: labels.map(() => Math.floor(Math.random() * 10)),
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-  ],
-};
-
 export default function AttendanceChart() {
+  const attendances = useSelector(
+    (state: RootState) => state.dashboard.data.attendance_ByWeek
+  );
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "On time",
+        data: attendances.map((attendance) => attendance.on_time),
+        backgroundColor: "rgb(0, 204, 153)",
+      },
+      {
+        label: "Late",
+        data: attendances.map((attendance) => attendance.late_coming),
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
+      {
+        label: "Absent",
+        data: attendances.map((attendance) => attendance.absent),
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+    ],
+  };
   return <Bar options={options} data={data} />;
 }

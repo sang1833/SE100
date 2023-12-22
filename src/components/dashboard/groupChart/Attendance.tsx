@@ -1,28 +1,33 @@
+import { RootState } from "@/store/store";
 import { BsXCircle, BsClock } from "react-icons/bs";
 import { MdChecklistRtl } from "react-icons/md";
-
-const attendance = [
-  {
-    id: 1,
-    name: "Attendance",
-    icon: <MdChecklistRtl className="w-6 h-6 " />,
-    number: 400,
-  },
-  {
-    id: 2,
-    name: "Late Coming",
-    icon: <BsClock className="w-6 h-6 " />,
-    number: 400,
-  },
-  {
-    id: 3,
-    name: "Absent",
-    icon: <BsXCircle className="w-6 h-6 " />,
-    number: 400,
-  },
-];
+import { useSelector } from "react-redux";
 
 const Attendance = () => {
+  const attendanceToday = useSelector(
+    (state: RootState) => state.dashboard.data.employees_Today
+  );
+  const attendance = [
+    {
+      id: 1,
+      name: "On time",
+      icon: <MdChecklistRtl className="w-6 h-6 " />,
+      number: attendanceToday.on_time,
+    },
+    {
+      id: 2,
+      name: "Late Coming",
+      icon: <BsClock className="w-6 h-6 " />,
+      number: attendanceToday.late_coming,
+    },
+    {
+      id: 3,
+      name: "Absent",
+      icon: <BsXCircle className="w-6 h-6 " />,
+      number: attendanceToday.absent,
+    },
+  ];
+
   return (
     <div>
       <h3 className="text-lg font-semibold py-4">Attendance Today</h3>

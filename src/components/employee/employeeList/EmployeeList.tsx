@@ -45,8 +45,8 @@ const EmployeeList = () => {
   useEffect(() => {
     async function getDepartment() {
       try {
-        const res = await GetDepartment();
-        setDepartment(res.data);
+        // const res = await GetDepartment();
+        // setDepartment(res.data);
       } catch (error) {
         console.log(error);
       }
