@@ -1,5 +1,5 @@
 import { BsXCircle, BsClock } from "react-icons/bs";
-import { MdOutlineLocalHotel, MdChecklistRtl } from "react-icons/md";
+import { MdChecklistRtl } from "react-icons/md";
 
 const attendance = [
   {
