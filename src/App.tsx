@@ -20,8 +20,8 @@ import AdminProfile from "./pages/AdminProfile";
 import Dashboard from "./pages/Dashboard";
 import ChangePassword from "./pages/ChangePassword";
 import EmployeeList from "./components/employee/employeeList/EmployeeList";
-import EmployeeProfile from "./components/employee/employeeProfile/EmployeeProfile";
-import CreateEmployee from "./components/employee/employeeCreate/CreateEmployee";
+import EmployeeProfile from "./components/employee/employeeList/employeeProfile/EmployeeProfile";
+import CreateEmployee from "./components/employee/employeeList/employeeCreate/CreateEmployee";
 import Position from "./components/employee/position/Position";
 import Account from "./pages/Account";
 import Attendance from "./pages/Attendance";
@@ -34,6 +34,7 @@ import ChangeDepartmentPage from "./components/employee/department/change/Change
 import DeletePositionPage from "./components/employee/position/page/DeletePage";
 import ChangePositionPage from "./components/employee/position/page/ChangePage";
 import Notify from "./pages/Notify";
+import EmployeePosition from "./components/employee/employeePosition/EmployeePosition";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -66,7 +67,8 @@ const router = createBrowserRouter(
           <Route path="company" element={<PayrollCompany />} />
         </Route>
         <Route path="account" element={<Account />} />
-        <Route path="position/:name/:code" element={<Position />} />
+        <Route path="position/:name/:code" element={<Position />}></Route>
+        <Route path="position/:name/:code/:id" element={<EmployeePosition />} />
         <Route
           path="position/:name/:code/delete/:id"
           element={<DeletePositionPage />}

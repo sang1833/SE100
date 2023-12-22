@@ -20,14 +20,14 @@ interface Employee {
   gender: string;
 }
 
-const employee: Employee = {
-  fullName: "John Doe",
-  email: "johndoe@example.com",
-  phoneNumber: "123-456-7890",
-  address: "1234 Main St",
-  age: "30",
-  gender: "Male",
-};
+// const employee: Employee = {
+//   fullName: "John Doe",
+//   email: "johndoe@example.com",
+//   phoneNumber: "123-456-7890",
+//   address: "1234 Main St",
+//   age: "30",
+//   gender: "Male",
+// };
 
 const schema = yup.object().shape({
   fullName: yup.string().required(),
@@ -81,8 +81,8 @@ const CreateEmployee = () => {
 
   async function submit(data: Employee) {
     // handle submitting the form
+    console.log("data", data);
 
-    console.log("dt", data);
     // try {
     //   if (file == null) {
     //     console.log("null");
@@ -123,7 +123,6 @@ const CreateEmployee = () => {
                     type="text"
                     placeholder="Position"
                     className="input input-bordered"
-                    defaultValue={employee.fullName}
                     {...register("fullName")}
                   />
                   {errors.fullName && (
@@ -138,9 +137,13 @@ const CreateEmployee = () => {
                     type="text"
                     placeholder="Email"
                     className="input input-bordered"
-                    defaultValue={employee.email}
                     {...register("email")}
                   />
+                  {errors.email && (
+                    <p className="text-do-color text-sm mt-2">
+                      Your password must be at least 6 characters as well.
+                    </p>
+                  )}
                 </div>
                 <div className="grid grid-cols-2 items-center">
                   <span className="font-bold">Phone:</span>
@@ -148,9 +151,13 @@ const CreateEmployee = () => {
                     type="text"
                     placeholder="Phone"
                     className="input input-bordered"
-                    defaultValue={employee.phoneNumber}
                     {...register("phoneNumber")}
                   />
+                  {errors.phoneNumber && (
+                    <p className="text-do-color text-sm mt-2">
+                      Your password must be at least 6 characters as well.
+                    </p>
+                  )}
                 </div>
                 <div className="grid grid-cols-2 items-center">
                   <span className="font-bold">Date of Birth:</span>
@@ -174,9 +181,13 @@ const CreateEmployee = () => {
                     type="text"
                     placeholder="Address"
                     className="input input-bordered"
-                    defaultValue={employee.address}
                     {...register("address")}
                   />
+                  {errors.address && (
+                    <p className="text-do-color text-sm mt-2">
+                      Your password must be at least 6 characters as well.
+                    </p>
+                  )}
                 </div>
                 <div className="grid grid-cols-2 items-center">
                   <span className="font-bold">Age:</span>
@@ -184,8 +195,13 @@ const CreateEmployee = () => {
                     type="text"
                     placeholder="Age"
                     className="input input-bordered"
-                    value={employee.age}
+                    {...register("age")}
                   />
+                  {errors.age && (
+                    <p className="text-do-color text-sm mt-2">
+                      Your password must be at least 6 characters as well.
+                    </p>
+                  )}
                 </div>
               </div>
               {/* avatar */}
@@ -208,10 +224,7 @@ const CreateEmployee = () => {
                 </div>
                 <div className="grid grid-cols-2 items-center mx-2">
                   <span className="font-bold">Gender:</span>
-                  <select
-                    className="input input-bordered"
-                    defaultValue={employee.gender}
-                  >
+                  <select className="input input-bordered">
                     <option value="female">Female</option>
                     <option value="male">Male</option>
                     <option value="other">Other</option>

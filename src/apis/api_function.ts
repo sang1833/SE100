@@ -110,9 +110,9 @@ export const GetEmployeeByDepartmentCode = (departmentCode: string) => {
 
 //create new employee
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const CreateNewEmployee = (departmentCode: string, data: any) => {
+export const CreateNewEmployee = (position_id: string, data: any) => {
   return mainApi.post(apiEndpoints.CREATE_NEW_EMPLOYEE, data, {
-    params: { departmentCode: departmentCode },
+    params: { position_id: position_id },
   });
 };
 
