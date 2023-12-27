@@ -3,7 +3,7 @@ import { GetEmployeeByPositionId } from "@/apis/api_function";
 import { useDispatch } from "react-redux";
 import React from "react";
 // import { RootState } from "@/store/store";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   MdOutlineAttachMoney,
   MdOutlineDeleteForever,

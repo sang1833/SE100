@@ -1,26 +1,6 @@
-import React, { useState, FormEvent } from "react";
+import React from "react";
 
 const ChangePassword: React.FC = () => {
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // Validate the form inputs
-    if (newPassword !== confirmPassword) {
-      setErrorMessage("Passwords do not match");
-      return;
-    }
-
-    setCurrentPassword("");
-    setNewPassword("");
-    setConfirmPassword("");
-    setErrorMessage("");
-  };
-
   return (
     <div>
       <h1 className="font-bold text-2xl text-gray-900 mt-8">Reset Password</h1>
