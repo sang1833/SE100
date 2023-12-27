@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import { GetEmployeeByPositionId } from "@/apis/api_function";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import React from "react";
-import { RootState } from "@/store/store";
-import { useParams } from "react-router-dom";
+// import { RootState } from "@/store/store";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  MdOutlineAttachMoney,
+  MdOutlineDeleteForever,
+  MdOutlineEdit,
+} from "react-icons/md";
 
 // "id": 999999999,
 //       "email": "admin@gmail.com",
@@ -35,6 +40,7 @@ export interface EmployeeInforType {
 }
 
 const EmployeePosition = () => {
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id, name } = useParams();
   // const listEmployee = useSelector((state: RootState) => state.employee);
@@ -81,7 +87,7 @@ const EmployeePosition = () => {
         }
         setEmployee(data.list_emp);
         // employeeRef.current = data;
-        console.log("data", data);
+        console.log("setEmployee", employee);
         dispatch({
           type: "ADD_EMPLOYEES",
           payload: data,
@@ -131,18 +137,53 @@ const EmployeePosition = () => {
             <thead>
               <tr>
                 <th>#</th>
+                <th>Mail</th>
                 <th>Name</th>
-                <th>Code</th>
-                <th>Boss</th>
-                <th>Number of Employees</th>
-                <th>Number of Positions</th>
+                <th>Phone</th>
+                <th>Birth day</th>
+                <th>Gender</th>
+                <th>Id</th>
+                <th>Address</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {employee.map((item, index) => (
                 <React.Fragment key={item?.id}>
-                  {/* <EmployeeRow item={item} itemIndex={index} /> */}
+                  <tr key={item.id}>
+                    <td>{item.id}</td>
+                    <td>{item.email}</td>
+                    <td>{item.fullName}</td>
+                    <td>{item.phoneNumber}</td>
+                    <td>{item.birth_day}</td>
+                    <td>{item.gender ? "Male" : "Female"}</td>
+                    <td>{item.cmnd}</td>
+                    <td>{item.address}</td>
+
+                    <th className="flex gap-1">
+                      <button
+                        className="btn btn-ghost btn-xs border text-green-800 border-green-800"
+                        key={item.id}
+                        // onClick={() => navigate(`/employee/${item.id}`)}
+                      >
+                        <MdOutlineAttachMoney className="h-5 w-5" />
+                      </button>
+                      <button
+                        className="btn btn-ghost btn-xs border text-tim-color border-tim-color-1"
+                        key={item.id}
+                        // onClick={() => navigate(`/employee/${item.id}`)}
+                      >
+                        <MdOutlineEdit className="h-5 w-5" />
+                      </button>
+                      <button
+                        className="btn btn-ghost btn-xs text-red-600 border border-red-600"
+                        key={item.id}
+                        // onClick={() => showModal("delete_profile_modal")}
+                      >
+                        <MdOutlineDeleteForever className="h-5 w-5" />
+                      </button>
+                    </th>
+                  </tr>
                 </React.Fragment>
               ))}
             </tbody>

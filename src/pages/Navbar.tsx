@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import SearchBar from "../components/navbar/SearchBar";
-import AvatarGroup from "../components/navbar/AvatarGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import DropdownComponent from "@/components/navbar/NotifyIcon";
@@ -25,9 +23,9 @@ const Navbar = () => {
         </section>
         <section className="flex-none gap-2">
           <div className="flex items-center">
-            <div className="">
+            {/* <div className="">
               <AvatarGroup />
-            </div>
+            </div> */}
             <div className="">
               <DropdownComponent />
             </div>
