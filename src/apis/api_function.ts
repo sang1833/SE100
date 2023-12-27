@@ -108,6 +108,17 @@ export const GetEmployeeByDepartmentCode = (departmentCode: string) => {
   });
 };
 
+//get Employee by position id
+export const GetEmployeeByPositionId = (
+  positionId: string,
+  page: number,
+  per_page: number
+) => {
+  return mainApi.get(apiEndpoints.GET_EMPLOYEE_BY_POSITION_ID, {
+    params: { positionId: positionId, page: page, per_page: per_page },
+  });
+};
+
 //create new employee
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const CreateNewEmployee = (position_id: string, data: any) => {

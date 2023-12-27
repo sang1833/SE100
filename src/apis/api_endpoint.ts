@@ -63,6 +63,9 @@ export const importToExcelBody = (file: File, departmentId: string) => {
 //get Employee by department code
 export const GET_EMPLOYEE_BY_DEPARTMENT_CODE = "/Employee/getByDepartmentCode";
 
+//get Employee by position id
+export const GET_EMPLOYEE_BY_POSITION_ID = "/Employee/getByPositionID";
+
 //get Employee role
 export const GET_EMPLOYEE_BY_ROLE = "/Employee/getRole";
 

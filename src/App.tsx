@@ -77,6 +77,7 @@ const router = createBrowserRouter(
           path="position/:name/:code/change/:id/:title/:code/:coefficient"
           element={<ChangePositionPage />}
         />
+
         <Route path="setting" element={<Setting />} />
         <Route path="notify" element={<Notify />} />
       </Route>

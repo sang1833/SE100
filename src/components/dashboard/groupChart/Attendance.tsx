@@ -12,13 +12,13 @@ const Attendance = () => {
       id: 1,
       name: "On time",
       icon: <MdChecklistRtl className="w-6 h-6 " />,
-      number: attendanceToday.on_time,
+      number: attendanceToday.attendance,
     },
     {
       id: 2,
       name: "Late Coming",
       icon: <BsClock className="w-6 h-6 " />,
-      number: attendanceToday.late_coming,
+      number: attendanceToday.late,
     },
     {
       id: 3,

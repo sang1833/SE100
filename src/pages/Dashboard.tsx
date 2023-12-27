@@ -8,8 +8,8 @@ import { addDashboard } from "@/store/reducers/dashboard_reducers";
 export interface AttendanceType {
   thu: number;
   ngay: number;
-  on_time: number;
-  late_coming: number;
+  attendance: number;
+  late: number;
   absent: number;
 }
 

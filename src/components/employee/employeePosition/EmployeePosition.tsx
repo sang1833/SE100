@@ -1,30 +1,34 @@
 import { useEffect, useState } from "react";
-import { GetDepartment } from "@/apis/api_function";
+import { GetEmployeeByPositionId } from "@/apis/api_function";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import { RootState } from "@/store/store";
 import { useParams } from "react-router-dom";
 
-// export interface EmployeeDTO {
-//   emp_ID: number;
-//   avatar: string;
-//   fullName: string;
-//   email: string;
-//   gender: boolean;
-// }
+// "id": 999999999,
+//       "email": "admin@gmail.com",
+//       "fullName": "admin",
+//       "phoneNumber": "string",
+//       "avatar": "string",
+//       "birth_day": "2023-12-26T11:50:03.9484762Z",
+//       "gender": true,
+//       "cmnd": "string",
+//       "address": "string"
 
-export interface DepartmentType {
-  department_ID: number;
-  name: string;
-  department_code: string;
-  nameBoss: string;
-  numberEmployee: number;
-  numberPosition: number;
-  // position_DTOs: PositionDTO[];
+export interface EmployeeType {
+  id: number;
+  email: string;
+  fullName: string;
+  phoneNumber: string;
+  avatar: string;
+  birth_day: string;
+  gender: boolean;
+  cmnd: string;
+  address: string;
 }
 
-export interface DepartmentInforType {
-  list_dep: DepartmentType[];
+export interface EmployeeInforType {
+  list_emp: EmployeeType[];
   current_page: number;
   perpage: number;
   pages: number;
@@ -32,21 +36,17 @@ export interface DepartmentInforType {
 
 const EmployeePosition = () => {
   const dispatch = useDispatch();
-  const { name } = useParams();
-  const listDepartment = useSelector((state: RootState) => state.department);
-  const [department, setDepartment] = useState<DepartmentType[]>(
-    listDepartment.list_dep || []
-  );
+  const { id, name } = useParams();
+  // const listEmployee = useSelector((state: RootState) => state.employee);
+  const [employee, setEmployee] = useState<EmployeeType[]>([]);
   const [numberOfPage, setNumberOfPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(
-    listDepartment.current_page || 1
-  );
-  if (listDepartment.pages) {
-    if (currentPage > listDepartment.pages) {
-      setCurrentPage(listDepartment.pages);
-    }
-  }
-  // const departmentRef = useRef<DepartmentType[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  // if (listEmployee.pages) {
+  //   if (currentPage > listEmployee.pages) {
+  //     setCurrentPage(listEmployee.pages);
+  //   }
+  // }
+  // const employeeRef = useRef<EmployeeType[]>([]);
   // const [loading, setLoading] = useState(false);
 
   function showModal(type: string) {
@@ -57,12 +57,12 @@ const EmployeePosition = () => {
   }
 
   useEffect(() => {
-    const getDepartment = async () => {
+    const getEmployee = async () => {
       // setLoading(true);
       try {
-        const res = await GetDepartment(currentPage, numberOfPage);
+        const res = await GetEmployeeByPositionId(id || "1", 1, 10);
         console.log("currentPage", currentPage, "numberOfPage", numberOfPage);
-        console.log("res.data department", res.data);
+        console.log("res.data employee", res.data);
         if (res.data === 0) {
           dispatch({
             type: "NOTIFY",
@@ -79,11 +79,11 @@ const EmployeePosition = () => {
           setCurrentPage(1);
           return;
         }
-        setDepartment(data.list_dep);
-        // departmentRef.current = data;
+        setEmployee(data.list_emp);
+        // employeeRef.current = data;
         console.log("data", data);
         dispatch({
-          type: "ADD_DEPARTMENTS",
+          type: "ADD_EMPLOYEES",
           payload: data,
         });
 
@@ -102,9 +102,9 @@ const EmployeePosition = () => {
         console.log(error);
       }
     };
-    // departmentRef.current = listDepartment;
+    // employeeRef.current = listEmployee;
 
-    getDepartment();
+    getEmployee();
   }, [dispatch, currentPage, numberOfPage]);
 
   // if (loading)
@@ -119,9 +119,9 @@ const EmployeePosition = () => {
         <h1 className="font-bold text-2xl text-gray-900">Employee in {name}</h1>
         <button
           className="btn bg-tim-color hover:text-black text-white"
-          onClick={() => showModal("add_department_modal")}
+          onClick={() => showModal("add_employee_modal")}
         >
-          <p>Add Departments</p>
+          <p>Add Employees</p>
         </button>
       </section>
       <section className="">
@@ -140,9 +140,9 @@ const EmployeePosition = () => {
               </tr>
             </thead>
             <tbody>
-              {department.map((item, index) => (
-                <React.Fragment key={item.department_ID}>
-                  {/* <DepartmentRow item={item} itemIndex={index} /> */}
+              {employee.map((item, index) => (
+                <React.Fragment key={item?.id}>
+                  {/* <EmployeeRow item={item} itemIndex={index} /> */}
                 </React.Fragment>
               ))}
             </tbody>
@@ -170,11 +170,11 @@ const EmployeePosition = () => {
             </div>
           </div> */}
           <div className="join grid grid-cols-2 col-start-3">
-            <button
+            {/* <button
               className="join-item btn btn-outline btn-sm"
               onClick={() => {
                 setCurrentPage((prev) => {
-                  if (prev > listDepartment.pages && listDepartment.pages)
+                  if (prev > listEmployee.pages && listEmployee.pages)
                     return prev - 1;
                   return prev;
                 });
@@ -186,14 +186,14 @@ const EmployeePosition = () => {
               className="join-item btn btn-outline btn-sm"
               onClick={() => {
                 setCurrentPage((prev) => {
-                  if (prev < listDepartment.pages && listDepartment.pages)
+                  if (prev < listEmployee.pages && listEmployee.pages)
                     return prev + 1;
                   return prev;
                 });
               }}
             >
               Next
-            </button>
+            </button> */}
           </div>
         </div>
       </section>

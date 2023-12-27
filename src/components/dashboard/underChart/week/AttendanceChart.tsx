@@ -53,12 +53,12 @@ export default function AttendanceChart() {
     datasets: [
       {
         label: "On time",
-        data: attendances.map((attendance) => attendance.on_time),
+        data: attendances.map((attendance) => attendance.attendance),
         backgroundColor: "rgb(0, 204, 153)",
       },
       {
         label: "Late",
-        data: attendances.map((attendance) => attendance.late_coming),
+        data: attendances.map((attendance) => attendance.late),
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
       {
