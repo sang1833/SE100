@@ -46,7 +46,7 @@ const EmployeeList = () => {
     async function getDepartment() {
       try {
         const res = await GetDepartment(1, 100);
-        setDepartment(res.data);
+        setDepartment(res.data.list_dep);
       } catch (error) {
         console.log(error);
       }
