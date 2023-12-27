@@ -137,6 +137,7 @@ const EmployeePosition = () => {
             <thead>
               <tr>
                 <th>#</th>
+                <th>Image</th>
                 <th>Mail</th>
                 <th>Name</th>
                 <th>Phone</th>
@@ -151,14 +152,32 @@ const EmployeePosition = () => {
               {employee.map((item, index) => (
                 <React.Fragment key={item?.id}>
                   <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.email}</td>
-                    <td>{item.fullName}</td>
+                    <td>{index + 1}</td>
+                    <td>
+                      <div className="avatar">
+                        <div className="w-12 rounded-full">
+                          <img
+                            src={
+                              item.avatar && item.avatar !== "string"
+                                ? item.avatar
+                                : "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
+                            }
+                            alt="avatar"
+                          />
+                        </div>
+                      </div>
+                    </td>
+                    <td className="max-w-[16rem] break-all">{item.email}</td>
+                    <td className="max-w-[10rem] break-all">{item.fullName}</td>
                     <td>{item.phoneNumber}</td>
-                    <td>{item.birth_day}</td>
+                    <td>{`${new Date(item.birth_day).getDate()}-${
+                      new Date(item.birth_day).getMonth() + 1
+                    }-${new Date(item.birth_day).getFullYear()}`}</td>
                     <td>{item.gender ? "Male" : "Female"}</td>
                     <td>{item.cmnd}</td>
-                    <td>{item.address}</td>
+                    <td className="max-w-[14rem] break-words">
+                      {item.address}
+                    </td>
 
                     <th className="flex gap-1">
                       <button
