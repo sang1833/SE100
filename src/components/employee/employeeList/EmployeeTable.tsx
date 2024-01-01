@@ -1,7 +1,7 @@
 import {
   MdOutlineDeleteForever,
   MdOutlineEdit,
-  MdOutlineAttachMoney,
+  MdMailOutline,
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
@@ -21,6 +21,7 @@ const EmployeeTable = ({ employee }: EmployeeTableProps) => {
           <thead>
             <tr>
               <th>#</th>
+              <th>Avatar</th>
               <th>Email</th>
               <th>Name</th>
               <th>Phone</th>
@@ -32,29 +33,45 @@ const EmployeeTable = ({ employee }: EmployeeTableProps) => {
           </thead>
           <tbody>
             {/* rows */}
-            {employee.map((item) => (
+            {employee.map((item, index) => (
               <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.email}</td>
-                <td>{item.fullName}</td>
+                <td>{index + 1}</td>
+                <td>
+                  <div className="avatar">
+                    <div className="w-12 rounded-full">
+                      <img
+                        src={
+                          item.avatar && item.avatar !== "string"
+                            ? item.avatar
+                            : "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
+                        }
+                        alt="avatar"
+                      />
+                    </div>
+                  </div>
+                </td>
+                <td className="max-w-[16rem] break-all">{item.email}</td>
+                <td className="max-w-[10rem] break-all">{item.fullName}</td>
                 <td>{item.phoneNumber}</td>
-                <td>{item.birth_day}</td>
-                <td>{item.gender}</td>
+                <td>{`${new Date(item.birth_day).getDate()}-${
+                  new Date(item.birth_day).getMonth() + 1
+                }-${new Date(item.birth_day).getFullYear()}`}</td>
+                <td>{item.gender ? "Male" : "Female"}</td>
                 <td>{item.cmnd}</td>
-                <td>{item.address}</td>
+                <td className="max-w-[14rem] break-words">{item.address}</td>
 
                 <th className="flex gap-1">
                   <button
                     className="btn btn-ghost btn-xs border text-green-800 border-green-800"
                     key={item.id}
-                    onClick={() => navigate(`/employee/${item.id}`)}
+                    // onClick={() => navigate(`/employee/${item.id}`)}
                   >
-                    <MdOutlineAttachMoney className="h-5 w-5" />
+                    <MdMailOutline className="h-5 w-5" />
                   </button>
                   <button
                     className="btn btn-ghost btn-xs border text-tim-color border-tim-color-1"
                     key={item.id}
-                    onClick={() => navigate(`/employee/${item.id}`)}
+                    // onClick={() => navigate(`/employee/${item.id}`)}
                   >
                     <MdOutlineEdit className="h-5 w-5" />
                   </button>

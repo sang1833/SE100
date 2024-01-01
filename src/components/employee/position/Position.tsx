@@ -7,8 +7,8 @@ import { GetPositionByDepartmentCode } from "@/apis/api_function";
 import { PositionRow } from "./PositionRow";
 import { MdKeyboardBackspace } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+// import { useSelector } from "react-redux";
+// import { RootState } from "@/store/store";
 
 export interface PositionDTO {
   id: number;
@@ -35,9 +35,9 @@ const Position = () => {
   const navigate = useNavigate();
   const departmentCode = location.pathname.split("/")[3];
   const name = location.pathname.split("/")[2];
-  const departments = useSelector(
-    (state: RootState) => state.department.listDepartment
-  );
+  // const departments = useSelector(
+  //   (state: RootState) => state.department.listDepartment
+  // );
   const departmentName = decodeURIComponent(name.replace(/%20/g, " "));
 
   const [positions, setPositions] = useState<PositionDTO[]>(positionArray);
@@ -68,7 +68,7 @@ const Position = () => {
       setPositions(data);
     }
     getPosition();
-  }, [positionArray, departments, departmentCode, currentPage, numberOfPage]);
+  }, [positionArray, departmentCode, currentPage, numberOfPage]);
 
   if (name === "...") return <Navigate to="/employee/department" />;
   return (

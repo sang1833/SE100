@@ -5,8 +5,11 @@ import { useState, useEffect, SetStateAction } from "react";
 import {
   GetDepartment,
   GetEmployeeByDepartmentCode,
+  GetPositionByDepartmentCode,
+  GetEmployeeByPositionId,
 } from "@/apis/api_function";
 import { DepartmentType } from "../department/Department";
+import { PositionDTO } from "../position/Position";
 import EmployeeTable from "./EmployeeTable";
 
 export interface EmployeeProps {
@@ -23,11 +26,12 @@ export interface EmployeeProps {
 
 const EmployeeList = () => {
   const navigate = useNavigate();
-  const [employee, setEmployee] = useState<EmployeeProps[]>([]);
+  const [employees, setEmployees] = useState<EmployeeProps[]>([]);
   const [department, setDepartment] = useState<DepartmentType[]>([]);
-  const [currentDepartment, setCurrentDepartment] = useState(
-    department[0]?.department_code
-  );
+  const [position, setPosition] = useState<PositionDTO[]>([]);
+  const [currentDepartment, setCurrentDepartment] = useState("");
+  const [currentPosition, setCurrentPosition] = useState("");
+  const [isPosition, setIsPosition] = useState(false);
 
   // function showModal(type: string) {
   //   const modal = document.getElementById(type) as HTMLDialogElement;
@@ -39,7 +43,25 @@ const EmployeeList = () => {
   function getCurrentDepartment(event: {
     target: { value: SetStateAction<string> };
   }) {
+    setIsPosition(false);
     setCurrentDepartment(event.target.value);
+  }
+
+  function getCurrentPosition(event: {
+    target: { value: SetStateAction<string> };
+  }) {
+    setIsPosition(true);
+    setCurrentPosition(event.target.value);
+  }
+
+  async function GetPositionByDepartment(dep: string) {
+    try {
+      const res = await GetPositionByDepartmentCode(dep, 1, 20);
+      setPosition(res.data);
+      console.log("res.data position", res.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
@@ -52,19 +74,34 @@ const EmployeeList = () => {
       }
     }
     getDepartment();
-  }, []);
+  }, [currentPosition]);
+
+  async function getEmployee() {
+    try {
+      if (isPosition) {
+        const res = await GetEmployeeByPositionId(currentPosition, 1, 100);
+        setEmployees(res.data.list_emp);
+        return;
+      }
+      const res = await GetEmployeeByDepartmentCode(currentDepartment);
+      setEmployees(res.data.list_emp);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
-    async function getEmployee() {
-      try {
-        const res = await GetEmployeeByDepartmentCode(currentDepartment);
-        setEmployee(res.data);
-      } catch (error) {
-        console.log(error);
-      }
+    if (department.length === 0 || !department) {
+      // console.log("th1", department);
+      return;
+    } else if (currentDepartment === "" && department.length > 0) {
+      // console.log("th2", department);
+      setCurrentDepartment(department[0].department_code);
+    } else if (currentDepartment !== "" && department.length > 0) {
+      GetPositionByDepartment(currentDepartment);
+      getEmployee();
     }
-    getEmployee();
-  }, [currentDepartment]);
+  }, [currentDepartment, department]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -106,26 +143,28 @@ const EmployeeList = () => {
             <select
               id="position"
               className="select select-bordered w-full max-w-xs"
-              onChange={getCurrentDepartment}
+              onChange={getCurrentPosition}
             >
-              <option disabled selected>
-                Position
-              </option>
-              {/* {department?.map((item: DepartmentType) => (
-                <option key={item.code} value={item.code}>
-                  {item.name}
+              <option disabled>Position</option>
+              {position?.map((item: PositionDTO) => (
+                <option key={item.id} value={item.id}>
+                  {item.title}
                 </option>
-              ))} */}
+              ))}
             </select>
           </div>
         </div>
       </section>
-      {employee.length === 0 ? (
+      {employees.length === 0 ? (
         <div className="flex justify-center items-center">
-          <p className="text-gray-400">Please choose a department</p>
+          <p className="text-gray-400">
+            {isPosition
+              ? "There is no employee in this position"
+              : "There is no employee in this department"}
+          </p>
         </div>
       ) : (
-        <EmployeeTable employee={employee} />
+        <EmployeeTable employee={employees} />
       )}
 
       <DeleteProfile />

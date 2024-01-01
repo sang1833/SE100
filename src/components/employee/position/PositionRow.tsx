@@ -21,7 +21,7 @@ export const PositionRow = ({ item, index }: PositionRowProps) => {
       <td>{item.emp_count}</td>
       <td>{item.salary_coeffcient}</td>
       <th className="flex gap-1">
-        <Link to={`${item.id}`}>
+        <Link to={`${item.id}/${item.title}`}>
           <button className="btn btn-ghost btn-xs border border-green-700 text-green-700">
             <MdOutlineFindInPage className="h-5 w-5" />
           </button>

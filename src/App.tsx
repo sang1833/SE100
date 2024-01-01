@@ -68,7 +68,10 @@ const router = createBrowserRouter(
         </Route>
         <Route path="account" element={<Account />} />
         <Route path="position/:name/:code" element={<Position />}></Route>
-        <Route path="position/:name/:code/:id" element={<EmployeePosition />} />
+        <Route
+          path="position/:name/:code/:id/:pName"
+          element={<EmployeePosition />}
+        />
         <Route
           path="position/:name/:code/delete/:id"
           element={<DeletePositionPage />}

@@ -3,11 +3,12 @@ import { GetEmployeeByPositionId } from "@/apis/api_function";
 import { useDispatch } from "react-redux";
 import React from "react";
 // import { RootState } from "@/store/store";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
-  MdOutlineAttachMoney,
   MdOutlineDeleteForever,
   MdOutlineEdit,
+  MdMailOutline,
+  MdKeyboardBackspace,
 } from "react-icons/md";
 
 // "id": 999999999,
@@ -40,9 +41,9 @@ export interface EmployeeInforType {
 }
 
 const EmployeePosition = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { id, name } = useParams();
+  const { id, pName } = useParams();
   // const listEmployee = useSelector((state: RootState) => state.employee);
   const [employee, setEmployee] = useState<EmployeeType[]>([]);
   const [numberOfPage, setNumberOfPage] = useState(10);
@@ -121,8 +122,21 @@ const EmployeePosition = () => {
   //   );
   return (
     <div className="flex flex-col gap-4">
+      <div className="flex justify-start">
+        <button
+          onClick={() => {
+            navigate(-1);
+          }}
+          className="flex btn btn-link items-center gap-2"
+        >
+          <MdKeyboardBackspace />
+          <p>Back</p>
+        </button>
+      </div>
       <section className="flex justify-between">
-        <h1 className="font-bold text-2xl text-gray-900">Employee in {name}</h1>
+        <h1 className="font-bold text-2xl text-gray-900">
+          Employee in {pName}
+        </h1>
         <button
           className="btn bg-tim-color hover:text-black text-white"
           onClick={() => showModal("add_employee_modal")}
@@ -185,7 +199,7 @@ const EmployeePosition = () => {
                         key={item.id}
                         // onClick={() => navigate(`/employee/${item.id}`)}
                       >
-                        <MdOutlineAttachMoney className="h-5 w-5" />
+                        <MdMailOutline className="h-5 w-5" />
                       </button>
                       <button
                         className="btn btn-ghost btn-xs border text-tim-color border-tim-color-1"
