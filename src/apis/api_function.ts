@@ -1,5 +1,6 @@
-import { mainApi } from "./main_api";
+import { baseURL, mainApi } from "./main_api";
 import * as apiEndpoints from "./api_endpoint";
+import axios from "axios";
 // import axios from "axios";
 // import { baseURL } from "./main_api";
 
@@ -125,6 +126,16 @@ export const CreateNewEmployee = (position_id: string, data: any) => {
   return mainApi.post(apiEndpoints.CREATE_NEW_EMPLOYEE, data, {
     params: { position_id: position_id },
   });
+};
+
+// export const ResetPassword = (emp_id: number) => {
+//   return mainApi.post(apiEndpoints.RESET_PASSWORD, {
+//     params: { emp_id: emp_id },
+//   });
+// };
+
+export const ResetPassword = (emp_id: number) => {
+  return axios.post(`${baseURL}/Mail/reset_password?emp_id=${emp_id}`);
 };
 
 //get setting

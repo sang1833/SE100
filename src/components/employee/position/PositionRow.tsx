@@ -1,5 +1,5 @@
 import {
-  MdOutlineDeleteForever,
+  // MdOutlineDeleteForever,
   MdOutlineEdit,
   MdOutlineFindInPage,
 } from "react-icons/md";
@@ -33,11 +33,11 @@ export const PositionRow = ({ item, index }: PositionRowProps) => {
             <MdOutlineEdit className="h-5 w-5" />
           </button>
         </Link>
-        <Link to={`delete/${item.id}`}>
+        {/* <Link to={`delete/${item.id}`}>
           <button className="btn btn-ghost btn-xs text-red-600 border border-red-600">
             <MdOutlineDeleteForever className="h-5 w-5" />
           </button>
-        </Link>
+        </Link> */}
       </th>
     </tr>
   );

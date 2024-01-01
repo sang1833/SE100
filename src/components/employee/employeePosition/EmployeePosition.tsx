@@ -6,7 +6,7 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   MdOutlineDeleteForever,
-  MdOutlineEdit,
+  // MdOutlineEdit,
   MdMailOutline,
   MdKeyboardBackspace,
 } from "react-icons/md";
@@ -22,7 +22,7 @@ import {
 //       "address": "string"
 
 export interface EmployeeType {
-  id: number;
+  ID: number;
   email: string;
   fullName: string;
   phoneNumber: string;
@@ -164,8 +164,8 @@ const EmployeePosition = () => {
             </thead>
             <tbody>
               {employee.map((item, index) => (
-                <React.Fragment key={item?.id}>
-                  <tr key={item.id}>
+                <React.Fragment key={item?.ID}>
+                  <tr key={item.ID}>
                     <td>{index + 1}</td>
                     <td>
                       <div className="avatar">
@@ -196,21 +196,21 @@ const EmployeePosition = () => {
                     <th className="flex gap-1">
                       <button
                         className="btn btn-ghost btn-xs border text-green-800 border-green-800"
-                        key={item.id}
+                        key={item.ID}
                         // onClick={() => navigate(`/employee/${item.id}`)}
                       >
                         <MdMailOutline className="h-5 w-5" />
                       </button>
-                      <button
+                      {/* <button
                         className="btn btn-ghost btn-xs border text-tim-color border-tim-color-1"
                         key={item.id}
                         // onClick={() => navigate(`/employee/${item.id}`)}
                       >
                         <MdOutlineEdit className="h-5 w-5" />
-                      </button>
+                      </button> */}
                       <button
                         className="btn btn-ghost btn-xs text-red-600 border border-red-600"
-                        key={item.id}
+                        key={item.ID}
                         // onClick={() => showModal("delete_profile_modal")}
                       >
                         <MdOutlineDeleteForever className="h-5 w-5" />

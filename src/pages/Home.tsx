@@ -11,7 +11,6 @@ import {
 import Navbar from "./Navbar";
 import { FaHome } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
-
 import {
   MdArrowCircleRight,
   MdArrowCircleLeft,
@@ -180,6 +179,7 @@ const Home = () => {
           <div className="mx-2">
             <Outlet />
           </div>
+          <ModalLayout />
         </Suspense>
       </main>
     </section>

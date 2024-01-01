@@ -91,6 +91,9 @@ export const createNewEmployeeBody = (
   address: address,
 });
 
+//reset password
+export const RESET_PASSWORD = "/Mail/reset_password";
+
 // setting
 export const GET_SETTING = "/Setting/get";
 

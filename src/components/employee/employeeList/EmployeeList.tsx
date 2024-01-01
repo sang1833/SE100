@@ -11,9 +11,10 @@ import {
 import { DepartmentType } from "../department/Department";
 import { PositionDTO } from "../position/Position";
 import EmployeeTable from "./EmployeeTable";
+import Loading from "@/utils/Loading";
 
 export interface EmployeeProps {
-  id: number;
+  ID: number;
   email: string;
   fullName: string;
   phoneNumber: string;
@@ -32,6 +33,7 @@ const EmployeeList = () => {
   const [currentDepartment, setCurrentDepartment] = useState("");
   const [currentPosition, setCurrentPosition] = useState("");
   const [isPosition, setIsPosition] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // function showModal(type: string) {
   //   const modal = document.getElementById(type) as HTMLDialogElement;
@@ -56,9 +58,11 @@ const EmployeeList = () => {
 
   async function GetPositionByDepartment(dep: string) {
     try {
+      setLoading(true);
       const res = await GetPositionByDepartmentCode(dep, 1, 20);
       setPosition(res.data);
       console.log("res.data position", res.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -77,6 +81,7 @@ const EmployeeList = () => {
   }, [currentPosition]);
 
   async function getEmployee() {
+    setLoading(true);
     try {
       if (isPosition) {
         const res = await GetEmployeeByPositionId(currentPosition, 1, 100);
@@ -88,6 +93,7 @@ const EmployeeList = () => {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -155,7 +161,8 @@ const EmployeeList = () => {
           </div>
         </div>
       </section>
-      {employees.length === 0 ? (
+      {loading && <Loading />}
+      {!loading && employees.length === 0 ? (
         <div className="flex justify-center items-center">
           <p className="text-gray-400">
             {isPosition
