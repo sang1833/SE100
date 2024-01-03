@@ -158,7 +158,7 @@ const EmployeePosition = () => {
         </h1>
         <button
           className="btn bg-tim-color hover:text-black text-white"
-          onClick={() => showModal("add_employee_modal")}
+          onClick={() => navigate("/employee/create")}
         >
           <p>Add Employees</p>
         </button>

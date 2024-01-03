@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
+  ],
   theme: {
     extend: {
       colors: {
@@ -32,7 +35,11 @@ export default {
     },
   },
   // eslint-disable-next-line no-undef
-  plugins: [require("@tailwindcss/typography"), require("daisyui")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/forms"),
+    require("daisyui"),
+  ],
 
   // daisyUI config (optional - here are the default values)
   daisyui: {

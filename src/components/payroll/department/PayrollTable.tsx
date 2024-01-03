@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import TableInfor from "./TableInfor";
+import Datepicker from "react-tailwindcss-datepicker";
 
 interface DepartmentsInterface {
   id: number;
@@ -8,10 +9,16 @@ interface DepartmentsInterface {
 
 export const PayrollTable = () => {
   // const [showTable, setShowTable] = useState(false);
-  const [year, setYear] = useState("");
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
   const [departments, setDepartments] = useState<DepartmentsInterface[]>([]);
+  const [value, setValue] = useState({
+    startDate: new Date(),
+    endDate: new Date(new Date().getFullYear(), 11, 31),
+  });
+
+  const handleValueChange = (newValue: any) => {
+    console.log("newValue:", newValue);
+    setValue(newValue);
+  };
 
   useEffect(() => {
     console.log("year", departments);
@@ -23,7 +30,7 @@ export const PayrollTable = () => {
         <div className="min-w-[4rem]">
           <span>Filter by: </span>
         </div>
-        <div className="flex gap-2 w-full w-max-[5rem]">
+        <div className="flex gap-2 w-full">
           <select className="select select-bordered w-full min-w-fit max-w-[10rem]">
             <option disabled selected>
               Department
@@ -32,25 +39,14 @@ export const PayrollTable = () => {
               <option value={department.id}>{department.name}</option>
             ))}
           </select>
-          <select
-            onChange={(e) => {
-              setFrom(e.target.value);
-            }}
-            className="select select-bordered w-full min-w-fit max-w-[10rem]"
-          >
-            <option disabled selected>
-              From
-            </option>
-            <option>2023</option>
-            <option>2022</option>
-          </select>
-          <select className="select select-bordered w-full min-w-fit max-w-[10rem]">
-            <option disabled selected>
-              To
-            </option>
-            <option>11</option>
-            <option>12</option>
-          </select>
+          <div className="max-w-lg my-auto">
+            <Datepicker
+              useRange={false}
+              value={value}
+              onChange={handleValueChange}
+              showShortcuts={true}
+            />
+          </div>
 
           {/*  */}
           <button className="btn bg-tim-color hover:text-black text-white ">
