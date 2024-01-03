@@ -15,7 +15,7 @@ function ModalLayout() {
 
       {/* Put this part before </body> tag */}
       <dialog
-        id="add_department_modal"
+        id="modal_layout"
         className="modal modal-bottom sm:modal-middle"
         open={isOpen}
       >

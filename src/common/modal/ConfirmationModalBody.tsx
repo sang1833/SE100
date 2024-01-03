@@ -51,7 +51,7 @@ function ConfirmationModalBody({ extraObject }: { extraObject: any }) {
 
   return (
     <>
-      <p className=" text-xl mt-8 text-center">{message}</p>
+      <p className=" text-xl my-8 text-center">{message}</p>
       <form method="dialog">
         {/* if there is a button in form, it will close the modal */}
         <button

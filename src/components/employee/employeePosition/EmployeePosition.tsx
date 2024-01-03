@@ -10,6 +10,11 @@ import {
   MdMailOutline,
   MdKeyboardBackspace,
 } from "react-icons/md";
+import { openModal } from "@/store/reducers/modalSlice";
+import {
+  CONFIRMATION_MODAL_CLOSE_TYPES,
+  MODAL_BODY_TYPES,
+} from "@/utils/globalConstantUtil";
 
 // "id": 999999999,
 //       "email": "admin@gmail.com",
@@ -114,6 +119,20 @@ const EmployeePosition = () => {
     getEmployee();
   }, [dispatch, currentPage, numberOfPage]);
 
+  const sendMailToEmployee = (id: number) => {
+    dispatch(
+      openModal({
+        title: "Send mail to employee",
+        bodyType: MODAL_BODY_TYPES.CONFIRMATION,
+        extraObject: {
+          message: `Do you want to send reset password email to this employee?`,
+          type: CONFIRMATION_MODAL_CLOSE_TYPES.EMAIL_SEND,
+          _id: id,
+        },
+      })
+    );
+  };
+
   // if (loading)
   //   return (
   //     <div>
@@ -197,7 +216,7 @@ const EmployeePosition = () => {
                       <button
                         className="btn btn-ghost btn-xs border text-green-800 border-green-800"
                         key={item.ID}
-                        // onClick={() => navigate(`/employee/${item.id}`)}
+                        onClick={() => sendMailToEmployee(item.ID)}
                       >
                         <MdMailOutline className="h-5 w-5" />
                       </button>

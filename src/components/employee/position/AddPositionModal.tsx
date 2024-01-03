@@ -49,7 +49,7 @@ const PositionModal = ({ departmentId }: Props) => {
         dispatch({ type: "SET_SUCCESS", payload: "Add position success" });
 
         async function getDepartment() {
-          const res = await GetDepartment();
+          const res = await GetDepartment(1, 20);
           const data = res.data;
           console.log("GetDepartment", data);
           dispatch({
