@@ -1,13 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { CONFIRMATION_MODAL_CLOSE_TYPES } from "@/utils/globalConstantUtil";
 import { ResetPassword } from "@/apis/api_function";
 import { notify } from "@/store/reducers/notify_reducers";
 import { closeModal } from "@/store/reducers/modalSlice";
+import { set } from "react-hook-form";
 
 function ConfirmationModalBody({ extraObject }: { extraObject: any }) {
   const dispatch = useDispatch();
-
+  const [loading, setLoading] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const { message, type, _id, index, list } = extraObject;
 
@@ -16,6 +20,7 @@ function ConfirmationModalBody({ extraObject }: { extraObject: any }) {
   };
 
   const proceedWithYes = async () => {
+    setLoading(true);
     if (type) {
       try {
         let response;
@@ -44,6 +49,7 @@ function ConfirmationModalBody({ extraObject }: { extraObject: any }) {
       } catch (error) {
         console.log("error delete");
       }
+      setLoading(false);
 
       closeModalHandler();
     }
@@ -51,32 +57,40 @@ function ConfirmationModalBody({ extraObject }: { extraObject: any }) {
 
   return (
     <>
-      <p className=" text-xl my-8 text-center">{message}</p>
-      <form method="dialog">
-        {/* if there is a button in form, it will close the modal */}
-        <button
-          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-          onClick={closeModalHandler}
-        >
-          ✕
-        </button>
-      </form>
-
-      <form method="dialog">
-        {/* if there is a button in form, it will close the modal */}
-        <div className="flex justify-center gap-1">
-          <button className="btn btn-error" onClick={closeModalHandler}>
-            Close
-          </button>
-          <button
-            className="btn bg-tim-color text-white hover:text-black"
-            onClick={proceedWithYes}
-          >
-            {/* <span className="loading loading-infinity loading-md"></span> */}
-            Submit
-          </button>
+      {loading ? (
+        <div className="flex justify-center items-center">
+          <span className="loading loading-lg"></span>
         </div>
-      </form>
+      ) : (
+        <>
+          <p className=" text-xl my-8 text-center">{message}</p>
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+              onClick={closeModalHandler}
+            >
+              ✕
+            </button>
+          </form>
+
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <div className="flex justify-center gap-1">
+              <button className="btn btn-error" onClick={closeModalHandler}>
+                Close
+              </button>
+              <button
+                className="btn bg-tim-color text-white hover:text-black"
+                onClick={proceedWithYes}
+              >
+                {/* <span className="loading loading-infinity loading-md"></span> */}
+                Submit
+              </button>
+            </div>
+          </form>
+        </>
+      )}
     </>
   );
 }

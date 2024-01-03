@@ -80,23 +80,22 @@ const EmployeeList = () => {
     getDepartment();
   }, [currentPosition]);
 
-  async function getEmployee() {
-    setLoading(true);
-    try {
-      if (isPosition) {
-        const res = await GetEmployeeByPositionId(currentPosition, 1, 100);
-        setEmployees(res.data.list_emp);
-        return;
-      }
-      const res = await GetEmployeeByDepartmentCode(currentDepartment);
-      setEmployees(res.data.list_emp);
-    } catch (error) {
-      console.log(error);
-    }
-    setLoading(false);
-  }
-
   useEffect(() => {
+    async function getEmployee() {
+      setLoading(true);
+      try {
+        if (isPosition) {
+          const res = await GetEmployeeByPositionId(currentPosition, 1, 100);
+          setEmployees(res.data.list_emp);
+          return;
+        }
+        const res = await GetEmployeeByDepartmentCode(currentDepartment);
+        setEmployees(res.data.list_emp);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    }
     if (department.length === 0 || !department) {
       // console.log("th1", department);
       return;
@@ -107,7 +106,7 @@ const EmployeeList = () => {
       GetPositionByDepartment(currentDepartment);
       getEmployee();
     }
-  }, [currentDepartment, department]);
+  }, [currentDepartment, currentPosition, department, isPosition]);
 
   return (
     <div className="flex flex-col gap-4">

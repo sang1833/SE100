@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,40 +6,40 @@ import * as yup from "yup";
 // import { DateTimePicker } from "@/utils/DateTimePicker";
 import DatePicker from "react-datepicker";
 import { MdKeyboardBackspace } from "react-icons/md";
-
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 import { uploadFirebaseImage } from "@/apis/firebase";
+import { CreateNewEmployee } from "@/apis/api_function";
+import { notify } from "@/store/reducers/notify_reducers";
+import { useDispatch } from "react-redux";
+import { DepartmentType } from "../../department/Department";
+import { PositionDTO } from "../../position/Position";
+import {
+  GetDepartment,
+  GetPositionByDepartmentCode,
+} from "@/apis/api_function";
 
 interface Employee {
-  fullName: string;
   email: string;
+  fullName: string;
   phoneNumber: string;
-  address: string;
-  age: string;
   gender: string;
+  cmnd: string;
+  address: string;
 }
-
-// const employee: Employee = {
-//   fullName: "John Doe",
-//   email: "johndoe@example.com",
-//   phoneNumber: "123-456-7890",
-//   address: "1234 Main St",
-//   age: "30",
-//   gender: "Male",
-// };
 
 const schema = yup.object().shape({
   fullName: yup.string().required(),
   email: yup.string().email().required(),
   phoneNumber: yup.string().required(),
-  address: yup.string().required(),
-  age: yup.string().required(),
   gender: yup.string().required(),
+  cmnd: yup.string().required(),
+  address: yup.string().required(),
 });
 
 const CreateEmployee = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -51,6 +51,60 @@ const CreateEmployee = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [file, setFile] = useState<File | undefined>(undefined); // file state
   const [image, setImage] = useState<string | undefined>(undefined);
+  const [loading, setLoading] = useState(false);
+  const [department, setDepartment] = useState<DepartmentType[]>([]);
+  const [position, setPosition] = useState<PositionDTO[]>([]);
+  const [currentDepartment, setCurrentDepartment] = useState("");
+  const [currentPosition, setCurrentPosition] = useState("");
+
+  function getCurrentDepartment(event: {
+    target: { value: SetStateAction<string> };
+  }) {
+    setCurrentDepartment(event.target.value);
+  }
+
+  function getCurrentPosition(event: {
+    target: { value: SetStateAction<string> };
+  }) {
+    setCurrentPosition(event.target.value);
+  }
+
+  async function GetPositionByDepartment(dep: string) {
+    try {
+      setLoading(true);
+      const res = await GetPositionByDepartmentCode(dep, 1, 20);
+      setPosition(res.data);
+      console.log("res.data position", res.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    async function getDepartment() {
+      try {
+        const res = await GetDepartment(1, 100);
+        setDepartment(res.data.list_dep);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getDepartment();
+  }, [currentPosition]);
+
+  useEffect(() => {
+    if (department.length === 0 || !department) {
+      // console.log("th1", department);
+      return;
+    } else if (currentDepartment === "" && department.length > 0) {
+      // console.log("th2", department);
+      setCurrentDepartment(department[0].department_code);
+    } else if (currentDepartment !== "" && department.length > 0) {
+      GetPositionByDepartment(currentDepartment);
+    }
+  }, [currentDepartment, currentPosition, department]);
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     setFile(file);
@@ -68,34 +122,58 @@ const CreateEmployee = () => {
     // handle submitting the form
     console.log("file", file);
     if (file == null) {
-      console.log("null");
       return;
     }
     try {
       const url = await uploadFirebaseImage(file);
-      console.log("url", url);
+      return url;
     } catch (error) {
       console.log(error);
+      return "string";
     }
   }
 
   async function submit(data: Employee) {
     // handle submitting the form
-    console.log("data", data);
+    if (file == null) {
+      setLoading(false);
+      return;
+    } else if (currentPosition === "") {
+      setCurrentPosition(position[0]?.id.toString());
+    }
 
-    // try {
-    //   if (file == null) {
-    //     console.log("null");
-    //     return;
-    //   }
-    //   const url = await uploadFirebaseImage(file);
-    //   console.log("url", url);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    // if (errors) {
-    //   alert("Please check your input");
-    // }
+    setLoading(true);
+    const imgAvatar = await submitImage();
+
+    const employee = {
+      ...data,
+      gender: data.gender === "Male" ? true : false,
+      birth_day: startDate,
+      avatar: imgAvatar,
+    };
+
+    try {
+      const response = await CreateNewEmployee(currentPosition, employee);
+      if (response) {
+        dispatch(
+          notify({
+            message: "Add employee success!",
+            type: "success",
+          })
+        );
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        notify({
+          message: "Add employee failed!",
+          type: "error",
+        })
+      );
+    }
+
+    setLoading(false);
   }
 
   return (
@@ -118,16 +196,52 @@ const CreateEmployee = () => {
             <div className="flex justify-between">
               <div className="grid grid-cols-2 gap-2">
                 <div className="grid grid-cols-2 items-center">
-                  <span className="font-bold">Name:</span>
+                  <span className="font-bold">Department:</span>
+                  <select
+                    id="department"
+                    className="select select-bordered w-full max-w-xs"
+                    onChange={getCurrentDepartment}
+                  >
+                    {/* <option disabled selected>
+                Department
+              </option> */}
+                    {department?.map((item: DepartmentType) => (
+                      <option
+                        key={item.department_code}
+                        value={item.department_code}
+                        className="w-full"
+                      >
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="grid grid-cols-2 items-center">
+                  <span className="font-bold">Position:</span>
+                  <select
+                    id="position"
+                    className="select select-bordered w-full max-w-xs"
+                    onChange={getCurrentPosition}
+                  >
+                    <option disabled>Position</option>
+                    {position?.map((item: PositionDTO) => (
+                      <option key={item.id} value={item.id}>
+                        {item.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="grid grid-cols-2 items-center">
+                  <span className="font-bold">Full name:</span>
                   <input
                     type="text"
-                    placeholder="Position"
+                    placeholder="Full name"
                     className="input input-bordered"
                     {...register("fullName")}
                   />
                   {errors.fullName && (
                     <p className="text-do-color text-sm mt-2">
-                      Your password must be at least 6 characters as well.
+                      Your name must be at least 6 characters as well.
                     </p>
                   )}
                 </div>
@@ -141,7 +255,7 @@ const CreateEmployee = () => {
                   />
                   {errors.email && (
                     <p className="text-do-color text-sm mt-2">
-                      Your password must be at least 6 characters as well.
+                      Your email must be at least 6 characters as well.
                     </p>
                   )}
                 </div>
@@ -155,7 +269,7 @@ const CreateEmployee = () => {
                   />
                   {errors.phoneNumber && (
                     <p className="text-do-color text-sm mt-2">
-                      Your password must be at least 6 characters as well.
+                      Your phone must be at least 6 characters as well.
                     </p>
                   )}
                 </div>
@@ -168,12 +282,14 @@ const CreateEmployee = () => {
                       value={employee.dateOfBirth}
                     /> */}
 
-                  <div className="border border-gray-300 rounded-md p-2">
-                    <DatePicker
-                      selected={startDate}
-                      onChange={(date) => setStartDate(date as Date)}
-                    />
-                  </div>
+                  {/* <div className="border border-gray-300 rounded-md p-2"> */}
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date as Date)}
+                    className="input input-bordered max-w-[218px]"
+                    // {...register("birth_day")}
+                  />
+                  {/* </div> */}
                 </div>
                 <div className="grid grid-cols-2 items-center">
                   <span className="font-bold">Address:</span>
@@ -185,21 +301,21 @@ const CreateEmployee = () => {
                   />
                   {errors.address && (
                     <p className="text-do-color text-sm mt-2">
-                      Your password must be at least 6 characters as well.
+                      Your address must be at least 6 characters as well.
                     </p>
                   )}
                 </div>
                 <div className="grid grid-cols-2 items-center">
-                  <span className="font-bold">Age:</span>
+                  <span className="font-bold">Id:</span>
                   <input
                     type="text"
-                    placeholder="Age"
+                    placeholder="Id"
                     className="input input-bordered"
-                    {...register("age")}
+                    {...register("cmnd")}
                   />
-                  {errors.age && (
+                  {errors.cmnd && (
                     <p className="text-do-color text-sm mt-2">
-                      Your password must be at least 6 characters as well.
+                      Your id must be at least 6 characters as well.
                     </p>
                   )}
                 </div>
@@ -224,10 +340,12 @@ const CreateEmployee = () => {
                 </div>
                 <div className="grid grid-cols-2 items-center mx-2">
                   <span className="font-bold">Gender:</span>
-                  <select className="input input-bordered">
-                    <option value="female">Female</option>
-                    <option value="male">Male</option>
-                    <option value="other">Other</option>
+                  <select
+                    className="input input-bordered"
+                    {...register("gender")}
+                  >
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
                   </select>
                 </div>
               </div>
@@ -236,9 +354,13 @@ const CreateEmployee = () => {
               <button
                 className="btn bg-tim-color text-white hover:text-black"
                 type="submit"
-                onClick={submitImage}
+                disabled={loading}
               >
-                Submit
+                {loading ? (
+                  <span className="loading loading-lg"></span>
+                ) : (
+                  <span>Submit</span>
+                )}
               </button>
             </div>
           </form>
