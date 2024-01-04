@@ -1,8 +1,5 @@
 import { createReducer, createAction } from "@reduxjs/toolkit";
-import {
-  DepartmentType,
-  DepartmentInforType,
-} from "../../components/employee/department/Department";
+import { DepartmentInforType } from "../../components/employee/department/Department";
 // State
 
 // interface IDepartmentState {

@@ -7,13 +7,12 @@ import { CONFIRMATION_MODAL_CLOSE_TYPES } from "@/utils/globalConstantUtil";
 import { ResetPassword } from "@/apis/api_function";
 import { notify } from "@/store/reducers/notify_reducers";
 import { closeModal } from "@/store/reducers/modalSlice";
-import { set } from "react-hook-form";
 
 function ConfirmationModalBody({ extraObject }: { extraObject: any }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   // eslint-disable-next-line no-unused-vars
-  const { message, type, _id, index, list } = extraObject;
+  const { message, type, _id } = extraObject;
 
   const closeModalHandler = () => {
     dispatch(closeModal());

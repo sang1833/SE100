@@ -22,6 +22,20 @@ export const PayrollTable = () => {
 
   useEffect(() => {
     console.log("year", departments);
+    setDepartments([
+      {
+        id: 1,
+        name: "Department 1",
+      },
+      {
+        id: 2,
+        name: "Department 2",
+      },
+      {
+        id: 3,
+        name: "Department 3",
+      },
+    ]);
   }, []);
 
   return (

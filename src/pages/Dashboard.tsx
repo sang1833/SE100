@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { GetDashboard } from "@/apis/api_function";
 import GroupChart from "../components/dashboard/groupChart/GroupChart";
 import UnderChart from "../components/dashboard/underChart/UnderChart";
@@ -32,13 +32,13 @@ export interface Data {
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const [data, setData] = useState<Data>();
+  // const [data, setData] = useState<Data>();
 
   useEffect(() => {
     async function getDashboard() {
       const res = await GetDashboard();
       const dataRes: Data = res.data;
-      setData(dataRes);
+      // setData(dataRes);
       dispatch(addDashboard({ data: dataRes }));
     }
     getDashboard();

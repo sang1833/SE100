@@ -1,5 +1,5 @@
 import NotifyComponent from "@/components/notify/NotifyComponent";
-import { useState } from "react";
+// import { useState } from "react";
 
 const users = [
   {
@@ -17,7 +17,7 @@ const users = [
 ];
 
 const Notify = () => {
-  const [limit, setLimit] = useState(5);
+  // const [limit, setLimit] = useState(5);
 
   return (
     <>

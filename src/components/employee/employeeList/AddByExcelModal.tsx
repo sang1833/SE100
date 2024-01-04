@@ -17,7 +17,7 @@ const AddByExcelModal = () => {
 
   useEffect(() => {
     async function getDepartment() {
-      const res = await GetDepartment();
+      const res = await GetDepartment(1, 100);
       if (res.data.list_dto.length === 0) {
         dispatch({
           type: "NOTIFY",

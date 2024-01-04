@@ -10,8 +10,8 @@ const initialState: IDashboardState = {
     employees_Today: {
       thu: 0,
       ngay: 0,
-      on_time: 0,
-      late_coming: 0,
+      attendance: 0,
+      late: 0,
       absent: 0,
     },
     total_Employee: {
@@ -40,8 +40,8 @@ const dashboardReducer = createReducer(initialState, (builder) => {
         employees_Today: {
           thu: 0,
           ngay: 0,
-          on_time: 0,
-          late_coming: 0,
+          attendance: 0,
+          late: 0,
           absent: 0,
         },
         total_Employee: {

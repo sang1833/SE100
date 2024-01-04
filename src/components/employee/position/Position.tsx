@@ -41,7 +41,7 @@ const Position = () => {
   const departmentName = decodeURIComponent(name.replace(/%20/g, " "));
 
   const [positions, setPositions] = useState<PositionDTO[]>(positionArray);
-  const [numberOfPage, setNumberOfPage] = useState(10);
+  const numberOfPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
   function showModal(type: string) {

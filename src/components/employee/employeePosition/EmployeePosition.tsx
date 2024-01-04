@@ -61,12 +61,12 @@ const EmployeePosition = () => {
   // const employeeRef = useRef<EmployeeType[]>([]);
   // const [loading, setLoading] = useState(false);
 
-  function showModal(type: string) {
-    const modal = document.getElementById(type) as HTMLDialogElement;
-    if (modal !== null) {
-      modal.showModal();
-    }
-  }
+  // function showModal(type: string) {
+  //   const modal = document.getElementById(type) as HTMLDialogElement;
+  //   if (modal !== null) {
+  //     modal.showModal();
+  //   }
+  // }
 
   useEffect(() => {
     const getEmployee = async () => {
