@@ -85,7 +85,7 @@ const EmployeeTable = ({ employee }: EmployeeTableProps) => {
                 <th className="flex gap-1">
                   <button
                     className="btn btn-ghost btn-xs border text-green-800 border-green-800"
-                    onClick={() => sendMailToEmployee(item.ID)}
+                    onClick={() => sendMailToEmployee(item.ID || item.id)}
                   >
                     <MdMailOutline className="h-5 w-5" />
                   </button>

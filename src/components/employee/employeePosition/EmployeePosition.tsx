@@ -28,6 +28,7 @@ import {
 
 export interface EmployeeType {
   ID: number;
+  id: number;
   email: string;
   fullName: string;
   phoneNumber: string;
@@ -73,7 +74,6 @@ const EmployeePosition = () => {
       // setLoading(true);
       try {
         const res = await GetEmployeeByPositionId(id || "1", 1, 10);
-        console.log("currentPage", currentPage, "numberOfPage", numberOfPage);
         console.log("res.data employee", res.data);
         if (res.data === 0) {
           dispatch({
@@ -215,7 +215,6 @@ const EmployeePosition = () => {
                     <th className="flex gap-1">
                       <button
                         className="btn btn-ghost btn-xs border text-green-800 border-green-800"
-                        key={item.ID}
                         onClick={() => sendMailToEmployee(item.ID)}
                       >
                         <MdMailOutline className="h-5 w-5" />
@@ -229,7 +228,7 @@ const EmployeePosition = () => {
                       </button> */}
                       <button
                         className="btn btn-ghost btn-xs text-red-600 border border-red-600"
-                        key={item.ID}
+                        key={item.ID || item.id}
                         // onClick={() => showModal("delete_profile_modal")}
                       >
                         <MdOutlineDeleteForever className="h-5 w-5" />
