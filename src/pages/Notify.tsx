@@ -21,7 +21,12 @@ const Notify = () => {
 
   return (
     <>
-      <div className="flex gap-2 items-center">
+      <div className="flex flex-col gap-4 mb-4">
+        <section className="flex justify-between">
+          <h1 className="font-bold text-2xl text-gray-900">Notification</h1>
+        </section>
+      </div>
+      {/* <div className="flex gap-2 items-center">
         <p>Limit: </p>
         <select
           className="select select-bordered select-sm"
@@ -37,7 +42,7 @@ const Notify = () => {
             </option>
           ))}
         </select>
-      </div>
+      </div> */}
       {users.map((user) => (
         <NotifyComponent user={user} />
       ))}
