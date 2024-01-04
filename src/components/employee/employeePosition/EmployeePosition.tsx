@@ -120,6 +120,7 @@ const EmployeePosition = () => {
   }, [dispatch, currentPage, numberOfPage]);
 
   const sendMailToEmployee = (id: number) => {
+    console.log("id", id);
     dispatch(
       openModal({
         title: "Send mail to employee",
@@ -215,7 +216,9 @@ const EmployeePosition = () => {
                     <th className="flex gap-1">
                       <button
                         className="btn btn-ghost btn-xs border text-green-800 border-green-800"
-                        onClick={() => sendMailToEmployee(item.ID)}
+                        onClick={() =>
+                          sendMailToEmployee(item.id ? item.id : item.ID)
+                        }
                       >
                         <MdMailOutline className="h-5 w-5" />
                       </button>
@@ -228,7 +231,7 @@ const EmployeePosition = () => {
                       </button> */}
                       <button
                         className="btn btn-ghost btn-xs text-red-600 border border-red-600"
-                        key={item.ID || item.id}
+                        key={item.id}
                         // onClick={() => showModal("delete_profile_modal")}
                       >
                         <MdOutlineDeleteForever className="h-5 w-5" />
