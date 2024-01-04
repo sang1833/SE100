@@ -15,6 +15,7 @@ import Loading from "@/utils/Loading";
 
 export interface EmployeeProps {
   ID: number;
+  id: number;
   email: string;
   fullName: string;
   phoneNumber: string;
