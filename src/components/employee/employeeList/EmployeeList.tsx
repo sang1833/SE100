@@ -130,7 +130,7 @@ const EmployeeList = () => {
           <div className="mx-2 flex gap-2">
             <select
               id="department"
-              className="select select-bordered w-full max-w-xs"
+              className="select select-bordered w-full max-w-sm"
               onChange={getCurrentDepartment}
             >
               {/* <option disabled selected>

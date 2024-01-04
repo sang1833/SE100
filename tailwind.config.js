@@ -35,11 +35,7 @@ export default {
     },
   },
   // eslint-disable-next-line no-undef
-  plugins: [
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/forms"),
-    require("daisyui"),
-  ],
+  plugins: [require("@tailwindcss/typography"), require("daisyui")],
 
   // daisyUI config (optional - here are the default values)
   daisyui: {

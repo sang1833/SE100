@@ -152,3 +152,10 @@ export const UpdateSetting = (data: any) => {
 export const GetDashboard = () => {
   return mainApi.get(apiEndpoints.GET_DASHBOARD);
 };
+
+//get attendance list
+export const GetAttendanceList = (date: string, department_code: string) => {
+  return mainApi.get(apiEndpoints.GET_ATTENDANCE_LIST, {
+    params: { date: date, department_code: department_code },
+  });
+};

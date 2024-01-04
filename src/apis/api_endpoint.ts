@@ -117,3 +117,6 @@ export const updateSettingBody = (
 
 //dashboard
 export const GET_DASHBOARD = "/DashBoard";
+
+//get attendance list
+export const GET_ATTENDANCE_LIST = "/Attendance/getList";
