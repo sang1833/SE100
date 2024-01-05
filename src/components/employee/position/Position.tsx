@@ -86,8 +86,8 @@ const Position = () => {
       </div>
       <section className="flex justify-between mt-4">
         <h1 className="font-bold text-2xl text-gray-900 flex gap-2">
-          <p>Positions in</p>
-          <p>{departmentName}</p>
+          <p className="font-bold text-2xl ">Positions in</p>
+          <p className="font-bold text-2xl">{departmentName}</p>
         </h1>
         <button
           className="btn bg-tim-color hover:text-black text-white"

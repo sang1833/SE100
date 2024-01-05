@@ -1,27 +1,15 @@
 import NotifyComponent from "@/components/notify/NotifyComponent";
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
 // import { useState } from "react";
-
-const users = [
-  {
-    fullName: "Nguyễn Văn A",
-    time: "8:00",
-    status: 1,
-    avatar: "https://i.pravatar.cc/300?img=1",
-  },
-  {
-    fullName: "Nguyễn Văn B",
-    time: "8:00",
-    status: 0,
-    avatar: "https://i.pravatar.cc/300?img=2",
-  },
-];
 
 const Notify = () => {
   // const [limit, setLimit] = useState(5);
+  const { data } = useSelector((state: RootState) => state.attendance);
 
   return (
-    <>
-      <div className="flex flex-col gap-4 mb-4">
+    <div className="min-h-screen">
+      <div className="flex flex-col gap-4 mb-4 ">
         <section className="flex justify-between">
           <h1 className="font-bold text-2xl text-gray-900">Notification</h1>
         </section>
@@ -43,10 +31,10 @@ const Notify = () => {
           ))}
         </select>
       </div> */}
-      {users.map((user) => (
+      {data.map((user) => (
         <NotifyComponent user={user} />
       ))}
-    </>
+    </div>
   );
 };
 export default Notify;

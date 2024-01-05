@@ -43,6 +43,7 @@ export const AttendanceTable = () => {
       }
     }
     getDepartment();
+    setFilterByState("all");
   }, [sortByTime]);
 
   useEffect(() => {
@@ -152,7 +153,7 @@ export const AttendanceTable = () => {
             />
           </div>
         </div>
-        <div className="flex">
+        {/* <div className="flex">
           <select
             className="select select-bordered w-full max-w-xs"
             onChange={(e) => setFilterByState(e.target.value)}
@@ -165,7 +166,7 @@ export const AttendanceTable = () => {
             <option value={"Late"}>Late</option>
             <option value={"Absent"}>Absent</option>
           </select>
-        </div>
+        </div> */}
       </section>
 
       <section className="bg-white border rounded-lg">
@@ -208,11 +209,9 @@ export const AttendanceTable = () => {
                       </div>
                     </td>
                     <td>{item.employee_name}</td>
-                    <td>{`
-                    ${new Date(item.time).getHours()}:${new Date(
+                    <td>{`${new Date(item.time).getHours()}:${new Date(
                       item.time
-                    ).getMinutes()}
-                    `}</td>
+                    ).getMinutes()}`}</td>
                     <td>{item.attendance_state}</td>
                     <td>{item.department_name}</td>
                     {/* <th className="flex gap-1">

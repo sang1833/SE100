@@ -18,6 +18,7 @@ import currentReducer from "./reducers/current_reducers";
 import departmentReducer from "./reducers/department_reducers";
 import modalSlice from "./reducers/modalSlice";
 import dashboardReducer from "./reducers/dashboard_reducers";
+import attendanceReducer from "./reducers/attendance_reducers";
 
 // Define your root reducer
 const rootReducer = combineReducers({
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   department: departmentReducer,
   modal: modalSlice,
   dashboard: dashboardReducer,
+  attendance: attendanceReducer,
 });
 
 // Define your persist config
