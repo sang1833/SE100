@@ -1,13 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState, startTransition, Suspense } from "react";
 import { Outlet, Link, Navigate, useNavigate } from "react-router-dom";
-import {
-  Sidebar,
-  Menu,
-  MenuItem,
-  SubMenu,
-  sidebarClasses,
-} from "react-pro-sidebar";
+import { Sidebar, Menu, MenuItem, sidebarClasses } from "react-pro-sidebar";
 import Navbar from "./Navbar";
 import { FaHome, FaSchool } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
