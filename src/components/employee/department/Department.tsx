@@ -125,7 +125,7 @@ const Department = () => {
   //     </div>
   //   );
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 pb-60">
       <section className="flex justify-between">
         <h1 className="font-bold text-2xl text-gray-900">Departments</h1>
         <button

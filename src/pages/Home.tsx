@@ -9,7 +9,7 @@ import {
   sidebarClasses,
 } from "react-pro-sidebar";
 import Navbar from "./Navbar";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaSchool } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
 import {
   MdArrowCircleRight,
@@ -91,7 +91,21 @@ const Home = () => {
             >
               <p>Dashboard</p>
             </MenuItem>
-            <SubMenu
+            <MenuItem
+              icon={<FaSchool />}
+              component={<Link to="/employee/department" />}
+              className="text-white hover:text-tim-color"
+            >
+              <p>Department</p>
+            </MenuItem>
+            <MenuItem
+              icon={<FaPeopleGroup />}
+              component={<Link to="/employee/list" />}
+              className="text-white hover:text-tim-color"
+            >
+              <p>Employee List</p>
+            </MenuItem>
+            {/* <SubMenu
               label="Employees"
               className="text-white hover:text-black hover:bg-tim-color"
               icon={<FaPeopleGroup />}
@@ -108,7 +122,7 @@ const Home = () => {
               >
                 <p>Employee List</p>
               </MenuItem>
-            </SubMenu>
+            </SubMenu> */}
             <MenuItem
               icon={<MdCheckCircle />}
               component={<Link to="/attendance" />}

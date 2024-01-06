@@ -1,0 +1,12 @@
+.running-text {
+  animation: running-text 5s linear forwards;
+}
+
+@keyframes running-text {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
