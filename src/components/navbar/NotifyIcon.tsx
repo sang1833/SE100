@@ -25,6 +25,7 @@ function DropdownComponent() {
   useEffect(() => {
     const fetchData = async () => {
       const a = await connect();
+      console.log("a:", a);
       // dispatch(attendance(message));
       // console.log("message:", message.data);
     };
