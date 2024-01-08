@@ -159,3 +159,14 @@ export const GetAttendanceList = (date: string, department_code: string) => {
     params: { date: date, department_code: department_code },
   });
 };
+
+//get payroll department
+export const GetPayrollDepartment = (
+  department_code: string,
+  start: string,
+  end: string
+) => {
+  return mainApi.get(apiEndpoints.GET_PAYROLL_DEPARTMENT, {
+    params: { department_code: department_code, start: start, end: end },
+  });
+};

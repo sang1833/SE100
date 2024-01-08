@@ -113,9 +113,9 @@ function DropdownComponent() {
           tabIndex={0}
           className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-80"
         >
-          {message.slice(0, 5).map((item) => {
+          {message.slice(0, 5).map((item, index) => {
             return (
-              <li>
+              <li key={index}>
                 <Link to={"/notify"}>
                   <div
                     role="alert"

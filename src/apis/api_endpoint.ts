@@ -120,3 +120,6 @@ export const GET_DASHBOARD = "/DashBoard";
 
 //get attendance list
 export const GET_ATTENDANCE_LIST = "/Attendance/getList";
+
+//get payroll department
+export const GET_PAYROLL_DEPARTMENT = "/Payroll/getPayrollDepartment";
