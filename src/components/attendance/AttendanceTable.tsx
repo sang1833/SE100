@@ -209,9 +209,10 @@ export const AttendanceTable = () => {
                       </div>
                     </td>
                     <td>{item.employee_name}</td>
-                    <td>{`${new Date(item.time).getHours()}:${new Date(
-                      item.time
-                    ).getMinutes()}`}</td>
+                    <td>
+                      {new Date(item.time).getUTCHours()}:
+                      {new Date(item.time).getUTCMinutes()}
+                    </td>
                     <td>{item.attendance_state}</td>
                     <td>{item.department_name}</td>
                     {/* <th className="flex gap-1">

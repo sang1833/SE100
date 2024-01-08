@@ -46,7 +46,7 @@ function DropdownComponent() {
       newConnection.on("GetListNoti", (message) => {
         const parsedMessage = JSON.parse(message);
         setMessage(parsedMessage);
-        // console.log("message:", parsedMessage);
+        console.log("message:", parsedMessage);
         dispatch(
           attendance({ numberOfNotify: numberOfNotify, data: parsedMessage })
         );
@@ -92,9 +92,9 @@ function DropdownComponent() {
           <p className="running-text">
             {message[0]?.employee_name} coming at{" "}
             {`
-                      ${new Date(message[0]?.time).getHours()}:${new Date(
+                      ${new Date(message[0]?.time).getUTCHours()}:${new Date(
                         message[0]?.time
-                      ).getMinutes()}
+                      ).getUTCMinutes()}
                       `}
             .
           </p>
@@ -139,13 +139,10 @@ function DropdownComponent() {
                       ></path>
                     </svg>
                     <span>
-                      {item.employee_name} coming at{" "}
                       {`
-                      ${new Date(item.time).getHours()}:${new Date(
-                        item.time
-                      ).getMinutes()}
-                      `}
-                      .
+${item.employee_name} coming at
+  ${new Date(item.time).getUTCHours()}:${new Date(item.time).getUTCMinutes()}
+`}
                     </span>
                   </div>
                 </Link>
