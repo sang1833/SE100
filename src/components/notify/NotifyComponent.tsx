@@ -15,7 +15,7 @@ const NotifyComponent = ({ user }: any) => {
 
   return (
     <div className="py-2">
-      <div className="flex justify-start items-center max-w-xs gap-2 ">
+      <div className="flex justify-start items-center max-w-3xl gap-2 ">
         <div className="avatar">
           <div className="w-12 rounded">
             <img
@@ -28,25 +28,27 @@ const NotifyComponent = ({ user }: any) => {
             />
           </div>
         </div>
-        <div className="grid grid-cols-1">
-          <div className="flex justify-start gap-2">
-            <h2 className="font-bold">{user.fullName}</h2>
-            <div className="chat-time">{`
-           ${new Date(user.time).getDate()}/${
-             new Date(user.time).getMonth() + 1
-           }/${new Date(user.time).getFullYear()} -
-                    ${new Date(user.time).getHours()}:${new Date(
-                      user.time
-                    ).getMinutes()}
-                    `}</div>
+        <div className="grid grid-cols-2 w-full">
+          <div className="flex justify-start flex-col gap-2">
+            <h2 className="font-bold">{user.employee_name}</h2>
+
+            <div
+              className={`badge badge-primary  text-white ${
+                user.status === 1 ? badgeGreen : badgeRed
+              }`}
+            >
+              {user.status === 1 ? "On time" : "Late"}
+            </div>
           </div>
-          <div
-            className={`badge badge-primary  text-white ${
-              user.status === 1 ? badgeGreen : badgeRed
-            }`}
-          >
-            {user.status === 1 ? "On time" : "Late"}
-          </div>
+
+          <div className="chat-time">{`
+             ${new Date(user.time).getDate()}/${
+               new Date(user.time).getMonth() + 1
+             }/${new Date(user.time).getFullYear()} -
+                      ${new Date(user.time).getHours()}:${new Date(
+                        user.time
+                      ).getMinutes()}
+                      `}</div>
         </div>
       </div>
     </div>
