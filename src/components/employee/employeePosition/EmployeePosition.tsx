@@ -5,7 +5,7 @@ import React from "react";
 // import { RootState } from "@/store/store";
 import { useParams, useNavigate } from "react-router-dom";
 import {
-  MdOutlineDeleteForever,
+  // MdOutlineDeleteForever,
   // MdOutlineEdit,
   MdMailOutline,
   MdKeyboardBackspace,
@@ -229,13 +229,13 @@ const EmployeePosition = () => {
                       >
                         <MdOutlineEdit className="h-5 w-5" />
                       </button> */}
-                      <button
+                      {/* <button
                         className="btn btn-ghost btn-xs text-red-600 border border-red-600"
                         key={item.id}
                         // onClick={() => showModal("delete_profile_modal")}
                       >
                         <MdOutlineDeleteForever className="h-5 w-5" />
-                      </button>
+                      </button> */}
                     </th>
                   </tr>
                 </React.Fragment>

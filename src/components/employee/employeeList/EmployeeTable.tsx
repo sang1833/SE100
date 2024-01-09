@@ -1,5 +1,5 @@
 import {
-  MdOutlineDeleteForever,
+  // MdOutlineDeleteForever,
   // MdOutlineEdit,
   MdMailOutline,
 } from "react-icons/md";
@@ -98,12 +98,12 @@ const EmployeeTable = ({ employee }: EmployeeTableProps) => {
                   >
                     <MdOutlineEdit className="h-5 w-5" />
                   </button> */}
-                  <button
+                  {/* <button
                     className="btn btn-ghost btn-xs text-red-600 border border-red-600"
                     // onClick={() => showModal("delete_profile_modal")}
                   >
                     <MdOutlineDeleteForever className="h-5 w-5" />
-                  </button>
+                  </button> */}
                 </th>
               </tr>
             ))}
