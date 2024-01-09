@@ -92,7 +92,10 @@ export const PayrollTable = () => {
         Coefficient: item.coefficient,
         "Day of work": item.day_of_work,
         "Bonus/Penalty": item.bonus_penalty,
-        Salary: item.salary,
+        Salary: new Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(item.salary),
       };
     });
     const fileName = "Payroll" + "_" + value.startDate + "_" + value.endDate;

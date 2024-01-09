@@ -76,8 +76,12 @@ const EmployeeList = ({ payrolls }: PayrollListInterface) => {
                   <td>{item.coefficient}</td>
                   <td>{item.day_of_work}</td>
                   <td>{item.bonus_penalty}</td>
-                  <td>{item.salary}</td>
-
+                  <td className=" font-medium">
+                    {new Intl.NumberFormat("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    }).format(item.salary)}
+                  </td>
                   {/* <th className="flex gap-1">
                     <button
                       className="btn btn-ghost btn-xs border text-green-800 border-green-800"
