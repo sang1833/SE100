@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import DropdownComponent from "@/components/navbar/NotifyIcon";
@@ -44,12 +44,12 @@ const Navbar = () => {
               tabIndex={0}
               className="mt-3 z-[1] p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
             >
-              <li>
+              {/* <li>
                 <Link to={"/adminprofile"}>Profile</Link>
               </li>
               <li>
                 <Link to={"/changepassword"}>Password</Link>
-              </li>
+              </li> */}
               <li>
                 <a onClick={handleLogout}>Logout</a>
               </li>
