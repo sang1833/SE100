@@ -72,8 +72,8 @@ const EmployeeTable = ({ employee }: EmployeeTableProps) => {
                     </div>
                   </div>
                 </td>
-                <td className="max-w-[16rem] break-all">{item.email}</td>
-                <td className="max-w-[10rem] break-all">{item.fullName}</td>
+                <td className="max-w-[16rem] break-normal">{item.email}</td>
+                <td className="max-w-[10rem] break-normal">{item.fullName}</td>
                 <td>{item.phoneNumber}</td>
                 <td>{`${new Date(item.birth_day).getDate()}-${
                   new Date(item.birth_day).getMonth() + 1
