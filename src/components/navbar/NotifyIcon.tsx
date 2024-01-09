@@ -103,7 +103,7 @@ function DropdownComponent() {
       <div className="dropdown dropdown-end">
         <label tabIndex={0} className=" btn btn-ghost normal-case text-lg m-1">
           <div className="indicator">
-            {numberOfNotify > 0 && (
+            {numberOfNotify > 0 && message.length > 0 && (
               <span className="indicator-item badge badge-secondary"></span>
             )}
             <BellAlertIcon className="w-6 h-6" />
