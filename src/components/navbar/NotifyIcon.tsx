@@ -54,7 +54,7 @@ function DropdownComponent() {
           parsedMessage.length > 0 &&
           parsedMessage[0].time !== data[0].time
         ) {
-          dispatch(addNotify(parsedMessage[0]));
+          dispatch(addNotify());
         }
       });
       newConnection.onclose(() => {

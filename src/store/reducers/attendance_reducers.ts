@@ -16,7 +16,15 @@ interface AttendanceState {
 // Initial State
 const initialState = {
   numberOfNotify: 0,
-  data: [],
+  data: [
+    {
+      employee_name: "Someone",
+      avatar: "",
+      time: "01/01/2024",
+      attendance_state: "",
+      department_name: "",
+    },
+  ],
 } as AttendanceState;
 
 // Actions
