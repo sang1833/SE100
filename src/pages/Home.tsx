@@ -14,12 +14,13 @@ import {
 } from "react-icons/md";
 import Loading from "@/utils/Loading";
 import ModalLayout from "@/common/modal/ModalLayout";
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const [clpSidebar, setClpSidebar] = useState(false);
   const navigate = useNavigate();
-  // const currentUser = useSelector((state: RootState) => state.auth._id);
-  const currentUser = true;
+  const currentUser = useSelector((state: RootState) => state.auth.email);
   const [arrow, setArrow] = useState(false);
 
   function handleSidebar() {

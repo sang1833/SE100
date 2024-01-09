@@ -34,51 +34,77 @@ export default function LoginPage() {
     resolver: yupResolver(schema),
   });
 
-  async function woosalSubmit(data: FormValues) {
-    // handle submitting the form
-    if (loading) return;
-    setLoading(true);
+  // async function woosalSubmit(data: FormValues) {
+  //   // handle submitting the form
+  //   if (loading) return;
+  //   setLoading(true);
 
-    try {
-      const response = await Login(data.email, data.password);
-      if (response.status === 400) {
-        console.log(response.data);
-      }
-      const responseData = await response.data.user;
-      const result = {
-        _id: responseData._id,
-        email: responseData.email,
-        password: responseData.password,
-        address: responseData.address,
-        age: responseData.age,
-        idNumber: responseData.idNumber,
-        gender: responseData.gender,
-        role: responseData.role,
-        avatar: responseData.avatar,
-        createAt: responseData.createAt,
-      };
-      if (result.role === "Nhân viên") {
-        dispatch({
-          type: "NOTIFY",
-          payload: {
-            type: "error",
-            message: "You don't have permission to access this page",
-          },
-        });
-        setLoading(false);
-        return;
-      }
-      console.log("rd", result);
-      dispatch({ type: "LOGIN", payload: result });
-      setLoading(false);
+  //   try {
+  //     const response = await Login(data.email, data.password);
+  //     if (response.status === 400) {
+  //       console.log(response.data);
+  //     }
+  //     const responseData = await response.data.user;
+  //     const result = {
+  //       _id: responseData._id,
+  //       email: responseData.email,
+  //       password: responseData.password,
+  //       address: responseData.address,
+  //       age: responseData.age,
+  //       idNumber: responseData.idNumber,
+  //       gender: responseData.gender,
+  //       role: responseData.role,
+  //       avatar: responseData.avatar,
+  //       createAt: responseData.createAt,
+  //     };
+  //     if (result.role === "Nhân viên") {
+  //       dispatch({
+  //         type: "NOTIFY",
+  //         payload: {
+  //           type: "error",
+  //           message: "You don't have permission to access this page",
+  //         },
+  //       });
+  //       setLoading(false);
+  //       return;
+  //     }
+  //     console.log("rd", result);
+  //     dispatch({ type: "LOGIN", payload: result });
+  //     setLoading(false);
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.log(error);
+  //     dispatch({
+  //       type: "NOTIFY",
+  //       payload: { type: "error", message: "Please check your input" },
+  //     });
+  //     setLoading(false);
+  //   }
+  // }
+
+  function woosalSubmit(data: FormValues) {
+    if (data.email === "admin@gmail.com" && data.password === "123456") {
+      dispatch({
+        type: "LOGIN",
+        payload: {
+          _id: "1",
+          email: "admin@gmail.com",
+          password: "123456",
+          address: "Hà Nội",
+          age: "22",
+        },
+      });
+
+      dispatch({
+        type: "NOTIFY",
+        payload: { type: "success", message: "Login successfully" },
+      });
       navigate("/");
-    } catch (error) {
-      console.log(error);
+    } else {
       dispatch({
         type: "NOTIFY",
         payload: { type: "error", message: "Please check your input" },
       });
-      setLoading(false);
     }
   }
 
