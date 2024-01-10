@@ -34,10 +34,10 @@ const NotifyComponent = ({ user }: any) => {
 
             <div
               className={`badge badge-primary  text-white ${
-                user.status === 1 ? badgeGreen : badgeRed
+                user.attendance_state === "Late" ? badgeRed : badgeGreen
               }`}
             >
-              {user.status === 1 ? "On time" : "Late"}
+              {user.attendance_state === "Late" ? "Late" : "On time"}
             </div>
           </div>
 
