@@ -75,7 +75,9 @@ const EmployeeTable = ({ employee }: EmployeeTableProps) => {
                 <td className="max-w-[16rem] break-normal">{item.email}</td>
                 <td className="max-w-[10rem] break-normal">{item.fullName}</td>
                 <td>{item.phoneNumber}</td>
-                <td>{`${new Date(item.birth_day).getDate()}-${
+                <td className="min-w-[7rem]">{`${new Date(
+                  item.birth_day
+                ).getDate()}-${
                   new Date(item.birth_day).getMonth() + 1
                 }-${new Date(item.birth_day).getFullYear()}`}</td>
                 <td>{item.gender ? "Male" : "Female"}</td>
