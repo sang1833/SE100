@@ -5,7 +5,7 @@ import { DepartmentType } from "./Department";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineFindInPage } from "react-icons/md";
 import DeleteDepartment from "./DeleteDepartment";
-import ChangeDepartment from "./ChangeDepartment";
+// import ChangeDepartment from "./ChangeDepartment";
 
 // import ChangeDepartmentModal from "./ChangeDepartmentModal";
 // import LoadingPage from "@/utils/Loading";
@@ -85,7 +85,7 @@ export const DepartmentRow = ({ item, itemIndex }: DepartmentRowProps) => {
           </button>
 
           <DeleteDepartment item={item} />
-          <ChangeDepartment item={item} />
+          {/* <ChangeDepartment item={item} /> */}
         </th>
       </tr>
     </>
