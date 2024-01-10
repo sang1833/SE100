@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Login } from "./../apis/api_function";
+// import { Login } from "./../apis/api_function";
 // import { IAuthState } from "./../types/Interface";
 
 interface FormValues {
@@ -83,6 +83,7 @@ export default function LoginPage() {
   // }
 
   function woosalSubmit(data: FormValues) {
+    setLoading(true);
     if (data.email === "admin@gmail.com" && data.password === "123456") {
       dispatch({
         type: "LOGIN",
@@ -106,6 +107,7 @@ export default function LoginPage() {
         payload: { type: "error", message: "Please check your input" },
       });
     }
+    setLoading(false);
   }
 
   function togglePasswordVisibility(
