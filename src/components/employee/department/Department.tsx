@@ -74,7 +74,7 @@ const Department = () => {
         const res = await GetDepartment(currentPage, numberOfPage);
         console.log("currentPage", currentPage, "numberOfPage", numberOfPage);
         console.log("res.data department", res.data);
-        if (res.data === 0) {
+        if (res.status !== 200) {
           dispatch({
             type: "NOTIFY",
             payload: {
@@ -85,13 +85,13 @@ const Department = () => {
           // setLoading(false);
           return;
         }
-        // let data = res.data;
-        const data = res.data.map((department: any) => {
-          return {
-            ...department,
-            department_ID: BigInt(department.department_ID),
-          };
-        });
+        const data = res.data;
+        // const data = res.data.map((department: any) => {
+        //   return {
+        //     ...department,
+        //     department_ID: BigInt(department.department_ID),
+        //   };
+        // });
 
         if (data.length === 0) {
           setCurrentPage(1);
@@ -108,13 +108,13 @@ const Department = () => {
 
         // setLoading(false);
       } catch (error) {
-        dispatch({
-          type: "NOTIFY",
-          payload: {
-            type: "error",
-            message: "Server error!",
-          },
-        });
+        // dispatch({
+        //   type: "NOTIFY",
+        //   payload: {
+        //     type: "error",
+        //     message: "Server error!",
+        //   },
+        // });
         // setLoading(false);
         setCurrentPage(1);
         setNumberOfPage(10);
