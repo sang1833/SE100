@@ -9,7 +9,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 import { uploadFirebaseImage } from "@/apis/firebase";
-import { CreateNewEmployee } from "@/apis/api_function";
 import { notify } from "@/store/reducers/notify_reducers";
 import { useDispatch } from "react-redux";
 import { DepartmentType } from "../../department/Department";
@@ -17,6 +16,8 @@ import { PositionDTO } from "../../position/Position";
 import {
   GetDepartment,
   GetPositionByDepartmentCode,
+  CreateNewEmployee,
+  ResetPassword,
 } from "@/apis/api_function";
 
 interface Employee {
@@ -56,6 +57,18 @@ const CreateEmployee = () => {
   const [position, setPosition] = useState<PositionDTO[]>([]);
   const [currentDepartment, setCurrentDepartment] = useState("");
   const [currentPosition, setCurrentPosition] = useState("");
+
+  // useEffect(() => {
+  //   if (currentPosition === "") {
+  //     setCurrentPosition(position[0]?.id.toString());
+  //   }
+  // }, [position]);
+
+  // useEffect(() => {
+  //   if (currentDepartment === "") {
+  //     setCurrentDepartment(department[0]?.department_code);
+  //   }
+  // }, [department]);
 
   function getCurrentDepartment(event: {
     target: { value: SetStateAction<string> };
@@ -134,6 +147,7 @@ const CreateEmployee = () => {
   }
 
   async function submit(data: Employee) {
+    setLoading(true);
     // handle submitting the form
     if (file == null) {
       dispatch(
@@ -144,11 +158,17 @@ const CreateEmployee = () => {
       );
       setLoading(false);
       return;
-    } else if (currentPosition === "") {
-      setCurrentPosition(position[0]?.id.toString());
+    }
+    if (currentPosition === "") {
+      // setCurrentPosition(position[0]?.id.toString());
+      setTimeout(() => {
+        setCurrentPosition(position[0]?.id.toString());
+      }, 500);
+    }
+    if (currentDepartment === "") {
+      setCurrentDepartment(department[0]?.department_code);
     }
 
-    setLoading(true);
     const imgAvatar = await submitImage();
 
     const employee = {
@@ -159,8 +179,14 @@ const CreateEmployee = () => {
     };
 
     try {
-      const response = await CreateNewEmployee(currentPosition, employee);
+      let response;
+      if (currentPosition === "") {
+        response = await CreateNewEmployee(position[0].id.toString(), employee);
+      } else {
+        response = await CreateNewEmployee(currentPosition, employee);
+      }
       if (response) {
+        // const res = await ResetPassword(response.data.employee_ID);
         dispatch(
           notify({
             message: "Add employee success!",
