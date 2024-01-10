@@ -17,7 +17,6 @@ import {
   GetDepartment,
   GetPositionByDepartmentCode,
   CreateNewEmployee,
-  ResetPassword,
 } from "@/apis/api_function";
 
 interface Employee {
@@ -186,7 +185,6 @@ const CreateEmployee = () => {
         response = await CreateNewEmployee(currentPosition, employee);
       }
       if (response) {
-        // const res = await ResetPassword(response.data.employee_ID);
         dispatch(
           notify({
             message: "Add employee success!",
