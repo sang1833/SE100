@@ -1,8 +1,13 @@
 import { useDispatch } from "react-redux";
 import { removeNotify } from "@/store/reducers/attendance_reducers";
 import { useEffect } from "react";
+import { DataInterface } from "../navbar/NotifyIcon";
 
-const NotifyComponent = ({ user }: any) => {
+interface Props {
+  user: DataInterface;
+}
+
+const NotifyComponent = ({ user }: Props) => {
   const dispatch = useDispatch();
   const badgeGreen = "bg-green-700 border-green-700";
   const badgeRed = "bg-orange-600 border-orange-600";
@@ -45,9 +50,9 @@ const NotifyComponent = ({ user }: any) => {
              ${new Date(user.time).getDate()}/${
                new Date(user.time).getMonth() + 1
              }/${new Date(user.time).getFullYear()} -
-                      ${new Date(user.time).getHours()}:${new Date(
-                        user.time
-                      ).getMinutes()}
+             ${new Date(user.time).getUTCHours()}:${new Date(
+               user.time
+             ).getUTCMinutes()}
                       `}</div>
         </div>
       </div>

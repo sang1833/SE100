@@ -7,7 +7,7 @@ import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
 import { attendance, addNotify } from "@/store/reducers/attendance_reducers";
 import "./runningText.css";
 
-interface DataInterface {
+export interface DataInterface {
   employee_name: string;
   avatar: string;
   time: string;

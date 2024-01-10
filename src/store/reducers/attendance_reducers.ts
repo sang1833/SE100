@@ -1,12 +1,13 @@
 import { createReducer, createAction } from "@reduxjs/toolkit";
+import { DataInterface } from "@/components/navbar/NotifyIcon";
 
-interface DataInterface {
-  employee_name: string;
-  avatar: string;
-  time: string;
-  attendance_state: string;
-  department_name: string;
-}
+// interface DataInterface {
+//   employee_name: string;
+//   avatar: string;
+//   time: string;
+//   attendance_state: string;
+//   department_name: string;
+// }
 
 interface AttendanceState {
   numberOfNotify: number;
