@@ -136,6 +136,12 @@ const CreateEmployee = () => {
   async function submit(data: Employee) {
     // handle submitting the form
     if (file == null) {
+      dispatch(
+        notify({
+          message: "Please choose image!",
+          type: "error",
+        })
+      );
       setLoading(false);
       return;
     } else if (currentPosition === "") {
@@ -162,15 +168,24 @@ const CreateEmployee = () => {
           })
         );
         setLoading(false);
+
+        navigate(-1);
       }
-    } catch (error) {
-      console.log(error);
-      dispatch(
-        notify({
-          message: "Add employee failed!",
-          type: "error",
-        })
-      );
+    } catch (error: any) {
+      if ((error.response.status = 400)) {
+        dispatch(
+          notify({
+            message: "Email existed!",
+            type: "error",
+          })
+        );
+      } else
+        dispatch(
+          notify({
+            message: "Add employee failed!",
+            type: "error",
+          })
+        );
     }
 
     setLoading(false);
@@ -255,7 +270,7 @@ const CreateEmployee = () => {
                   />
                   {errors.email && (
                     <p className="text-do-color text-sm mt-2">
-                      Your email must be at least 6 characters as well.
+                      Your email must valid.
                     </p>
                   )}
                 </div>
@@ -306,10 +321,10 @@ const CreateEmployee = () => {
                   )}
                 </div>
                 <div className="grid grid-cols-2 items-center">
-                  <span className="font-bold">Id:</span>
+                  <span className="font-bold">Id number:</span>
                   <input
                     type="text"
-                    placeholder="Id"
+                    placeholder="Id number"
                     className="input input-bordered"
                     {...register("cmnd")}
                   />

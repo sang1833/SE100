@@ -13,10 +13,16 @@ export const Login = (email: string, password: string) => {
 };
 
 //Get Department
-export const GetDepartment = (page: number, limit: number) => {
+export const GetDepartmentAll = (page: number, per_page: number) => {
   return mainApi.get(apiEndpoints.GET_DEPARTMENT, {
-    params: { page: page, limit: limit },
+    params: { page: page, per_page: per_page },
   });
+};
+
+export const GetDepartment = (page: number, per_page: number) => {
+  return axios.get(
+    `${baseURL}/Department/getAll?page=${page}&per_page=${per_page}`
+  );
 };
 
 //Create Department

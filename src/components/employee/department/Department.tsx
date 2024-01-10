@@ -26,7 +26,7 @@ import { RootState } from "@/store/store";
 // }
 
 export interface DepartmentType {
-  department_ID: number;
+  department_ID: BigInt;
   name: string;
   department_code: string;
   nameBoss: string;
@@ -85,11 +85,19 @@ const Department = () => {
           // setLoading(false);
           return;
         }
-        const data = res.data;
+        // let data = res.data;
+        const data = res.data.map((department: any) => {
+          return {
+            ...department,
+            department_ID: BigInt(department.department_ID),
+          };
+        });
+
         if (data.length === 0) {
           setCurrentPage(1);
           return;
         }
+
         setDepartment(data.list_dep);
         // departmentRef.current = data;
         console.log("data", data);
@@ -152,7 +160,7 @@ const Department = () => {
             </thead>
             <tbody>
               {department.map((item, index) => (
-                <React.Fragment key={item.department_ID}>
+                <React.Fragment key={item.department_code}>
                   <DepartmentRow item={item} itemIndex={index} />
                 </React.Fragment>
               ))}
