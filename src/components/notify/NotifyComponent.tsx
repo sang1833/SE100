@@ -20,7 +20,7 @@ const NotifyComponent = ({ user }: Props) => {
 
   return (
     <div className="py-2">
-      <div className="flex justify-start items-center max-w-3xl gap-2 ">
+      <div className="flex justify-start items-center gap-2 ">
         <div className="avatar">
           <div className="w-12 rounded">
             <img
@@ -33,7 +33,7 @@ const NotifyComponent = ({ user }: Props) => {
             />
           </div>
         </div>
-        <div className="grid grid-cols-2 w-full">
+        <div className="grid grid-cols-6 min-w-full">
           <div className="flex justify-start flex-col gap-2">
             <h2 className="font-bold">{user.employee_name}</h2>
 
@@ -46,7 +46,7 @@ const NotifyComponent = ({ user }: Props) => {
             </div>
           </div>
 
-          <div className="chat-time">{`
+          <div className="chat-time col-start-6 flex items-end">{`
              ${new Date(user.time).getDate()}/${
                new Date(user.time).getMonth() + 1
              }/${new Date(user.time).getFullYear()} -
