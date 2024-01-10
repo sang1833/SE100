@@ -26,7 +26,7 @@ import { RootState } from "@/store/store";
 // }
 
 export interface DepartmentType {
-  department_ID: BigInt;
+  department_ID: number;
   name: string;
   department_code: string;
   nameBoss: string;
